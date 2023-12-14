@@ -1,0 +1,38 @@
+:root {
+  --bottom: 20px;
+  --cart-bg: #ffffff;
+}
+
+.cart {
+  &-icon {
+    position: fixed;
+    bottom: var(--bottom);
+    right: 5.5vw;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    color: var(--text-color);
+    font-size: 24px;
+    cursor: pointer;
+    transition: 0.2s ease-in;
+    z-index: 100;
+    background-color: var(--cart-bg);
+
+    &:hover {
+      transform: scale(1.15);
+    }
+    &:active {
+      background-color: #00000025;
+    }
+  }
+}
+
+@media screen and (max-width: 500px) {
+  :root {
+    --bottom: 70px;
+    --cart-color: ;
+  }
+}

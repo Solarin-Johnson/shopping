@@ -1,5 +1,5 @@
 :root {
-  --display-height: 600px;
+  --display-height: 500px;
   --menu-width: auto;
   --menu-position: none;
   --menu-bottom: 0;
@@ -16,10 +16,11 @@
   padding: 10px 5vw;
   height: 60px;
   display: grid;
-  background-color: #fff;
+  background-color: var(--bg-color);
   transition: 0.3s ease;
   z-index: 1;
   align-items: center;
+  color: var(--text-color);
   grid-template-columns: repeat(2, auto);
 
   div:last-child {
@@ -30,12 +31,12 @@
     top: -90px;
   }
   .menu {
+    background-color: var(--bg-color);
     width: var(--menu-width);
     position: var(--menu-position);
     bottom: var(--menu-bottom);
     padding: var(--menu-padding);
     align-items: center;
-    color: #4e4e4e;
     display: grid;
     grid-template-columns: repeat(4, auto);
     justify-content: space-evenly;
@@ -67,11 +68,11 @@
 
 @media screen and (max-width: 500px) {
   :root {
-    --display-height: 1000px;
+    --display-height: 800px;
     --menu-width: 100vw;
     --menu-position: fixed;
     // --menu-font-size: clamp(10px, 1.5vw, 16px);
     --column-gap: none;
-    --menu-padding: 5px 0 15px;
+    --menu-padding: 15px 0;
   }
 }

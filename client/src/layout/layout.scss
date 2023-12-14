@@ -1,19 +1,13 @@
-
-
-
 .collections {
   background: linear-gradient(
     to bottom,
-    transparent,
     #ffffffc5,
     #ffffffc5,
     #ffffffc5,
     #ffffffe7,
     #fffffff1
   );
-  backdrop-filter: blur(50px);
+  backdrop-filter: blur(45px);
   display: grid;
   min-height: 1200px;
-  margin-top: calc(var(--display-height) - 10px);
 }
-

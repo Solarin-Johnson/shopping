@@ -1,8 +1,119 @@
+:root {
+  --display-columns: repeat(2, 1fr);
+  --display-rows: auto;
+}
 .display {
-  top: 60px;
-  position: fixed;
-  z-index: -1;
+  //   top: 80px;
+  //   position: fixed;
+  //   z-index: -1;
+  margin-top: 70px;
   height: var(--display-height);
-  width: 100vw;
-  //   background-color: #ff91af;
+  padding: 40px 5vw 10px;
+  width: calc(100% - 10vw);
+  display: grid;
+  grid-template-columns: var(--display-columns);
+  grid-template-rows: var(--display-rows);
+  justify-items: end;
+  column-gap: clamp(20px, 5vw, 100px);
+  align-items: center;
+
+  &-image {
+    justify-self: start !important;
+  }
+  &-image,
+  &-card {
+    height: 85%;
+    min-height: 450px;
+    width: 40vw;
+    max-width: 400px;
+  }
+  &-image {
+    background-color: #ff91af;
+    border-radius: 6px;
+  }
+
+  &-card {
+    display: grid;
+    align-content: start;
+    justify-items: start;
+    grid-template-columns: 1fr;
+    // grid-template-rows: repeat(5, auto);
+    &-label {
+      display: grid;
+      grid-template-columns: repeat(2, auto);
+      justify-content: start;
+      column-gap: 20px;
+      font-weight: 400;
+    }
+    &-tag,
+    &-avail {
+      padding: 3px 20px;
+      border-radius: 4px;
+      background-color: #ff91af;
+    }
+    &-avail {
+      background-color: #ffdf00;
+    }
+    &-name {
+      padding-top: 15px;
+      font-size: 28px;
+      font-weight: 500;
+    }
+    &-price {
+      padding-top: 5px;
+      font-size: 22px;
+      font-weight: 500;
+    }
+    &-desc {
+      padding-top: 15px;
+      font-size: 15px;
+      font-weight: 400;
+    }
+    &-btn {
+      padding-top: 15px;
+      display: grid;
+      grid-template-columns: repeat(2, auto);
+      column-gap: 30px;
+      font-size: 24px;
+      align-items: center;
+      i {
+        cursor: pointer;
+      }
+      .favorite,
+      .wishlist {
+        color: #525252;
+      }
+      .wishlist {
+        font-size: 22px;
+      }
+      #liked {
+        color: #e80000;
+      }
+      #wished {
+        color: #4dd447;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .display {
+    justify-items: center;
+    column-gap: none;
+    align-items: start;
+    row-gap: 20px;
+    &-image {
+      justify-self: center !important;
+      min-height: 300px;
+    }
+
+    &-image,
+    &-card {
+      width: 100%;
+    }
+  }
+  :root {
+    --display-columns: 1fr;
+    --display-rows: 350px 1fr;
+  }
 }
