@@ -28,12 +28,24 @@ export function DisplayCard({
 }) {
   const [fav, setFav] = useState(favourite);
   const [wished, setWished] = useState(wish);
+  const [notify, setNotify] = useState(false);
   const like = () => {
     setFav(!fav);
+    setNotify(`Product ${!fav ? "added to" : "removed from"} Favorites`);
+    stopInterval();
   };
   const wishlist = () => {
     setWished(!wished);
+    setNotify(`Product ${!wished ? "added to" : "removed from"} Wishlist`);
+    stopInterval();
   };
+
+  const stopInterval = () => {
+    setTimeout(() => {
+      setNotify(false);
+    }, 4000);
+  };
+
   return (
     <>
       <div className="display-card-label">
@@ -55,6 +67,7 @@ export function DisplayCard({
           <i class="fa-solid fa-cart-shopping"></i>
         </div>
       </div>
+      {notify && <div className="display-card-notify">{notify}</div>}
     </>
   );
 }

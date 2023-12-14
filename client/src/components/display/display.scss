@@ -93,6 +93,15 @@
         color: #4dd447;
       }
     }
+    &-notify {
+      margin-top: 15px;
+      background-color: #d9d9d9;
+      border-radius: 10px;
+      border-top-left-radius: 0;
+      font-weight: 500;
+      padding: 10px;
+      font-size: clamp(14px, 2vw, 16px);
+    }
   }
 }
 
@@ -114,6 +123,6 @@
   }
   :root {
     --display-columns: 1fr;
-    --display-rows: 350px 1fr;
+    --display-rows: 380px 1fr;
   }
 }

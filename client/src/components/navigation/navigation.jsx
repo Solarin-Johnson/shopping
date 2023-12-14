@@ -8,7 +8,10 @@ export default function Navigation() {
     const handleScroll = () => {
       const currentPosition = window.scrollY;
       setScrollPosition(currentPosition);
-      setScrollUp(currentPosition > scrollPosition && currentPosition > 480);
+      setScrollUp(
+        currentPosition > scrollPosition &&
+          currentPosition > window.innerHeight - 70
+      );
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -20,7 +23,6 @@ export default function Navigation() {
     <div className="navigation" id={!scrollUp ? "" : "slide-up"}>
       <div className="logo">Fashion</div>
       <Menu />
-      
     </div>
   );
 }
