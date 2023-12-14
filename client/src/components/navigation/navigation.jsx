@@ -10,7 +10,7 @@ export default function Navigation() {
       setScrollPosition(currentPosition);
       setScrollUp(
         currentPosition > scrollPosition &&
-          currentPosition > window.innerHeight - 70
+          currentPosition > window.innerHeight - 250
       );
     };
 

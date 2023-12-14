@@ -1,0 +1,92 @@
+.collections {
+  background: linear-gradient(
+    to bottom,
+    #ffffffc5,
+    #ffffffc5,
+    #ffffffc5,
+    #ffffffe7,
+    #fffffff1
+  );
+  backdrop-filter: blur(45px);
+  //   min-height: 1000px;
+  width: 88vw;
+  padding: 35px 6vw 80px;
+  display: grid;
+  row-gap: 50px;
+
+  &-tab {
+    min-height: 0;
+    display: grid;
+    grid-template-rows: 30px auto;
+    row-gap: 30px;
+
+    &-head {
+      font-size: 22px;
+      font-weight: 500;
+      color: #4bb816;
+    }
+    &-body {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      align-content: start;
+      justify-content: space-around;
+      row-gap: 25px;
+      column-gap: 30px;
+    }
+  }
+  &-card {
+    display: grid;
+    position: relative;
+    grid-template-rows: 1fr 30px;
+    row-gap: 10px;
+    height: 300px;
+    &:nth-child(odd) {
+      .collections-card-image {
+        background-color: #fff276;
+      }
+    }
+    &:nth-child(even) {
+      .collections-card-image {
+        background-color: #ffb8c7;
+      }
+    }
+    &-image {
+      border-radius: 6px;
+    }
+    &-name {
+      align-self: center;
+      font-size: 16px;
+      font-weight: 500;
+    }
+    &-action {
+      position: absolute;
+      justify-self: end;
+      padding: 0 15px;
+      align-self: last baseline;
+      i {
+        cursor: pointer;
+      }
+    }
+    &-empty {
+      background-color: #dfdfdf;
+      border-radius: 6px;
+      display: grid;
+      grid-template-rows: repeat(2, auto);
+      justify-items: center;
+      align-items: center;
+      align-content: center;
+      row-gap: 30px;
+
+      div {
+        padding: 20px 25px;
+        font-size: 20px;
+        text-align: center;
+        font-weight: 500;
+      }
+      i {
+        font-size: 24px;
+        cursor: pointer;
+      }
+    }
+  }
+}
