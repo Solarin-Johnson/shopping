@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-
+import "./navigation.scss";
 export default function Navigation() {
   const [scrollPosition, setScrollPosition] = useState(0);
   const [scrollUp, setScrollUp] = useState(false);
@@ -18,8 +18,9 @@ export default function Navigation() {
   }, [scrollPosition, scrollUp]);
   return (
     <div className="navigation" id={!scrollUp ? "" : "slide-up"}>
-      <div className="logo"></div>
+      <div className="logo">Fashion</div>
       <Menu />
+      
     </div>
   );
 }
@@ -45,7 +46,11 @@ export function Menu() {
   return (
     <div className="menu">
       {menuArray.map((data, i) => (
-        <div onClick={selectMenu} className="menu-items" key={i}>
+        <div
+          onClick={selectMenu}
+          className={`menu-items ${i === 0 && "menu-active"}`}
+          key={i}
+        >
           <i className={data.icon}></i>
           <span>{data.name}</span>
         </div>

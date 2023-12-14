@@ -1,64 +1,5 @@
-:root {
-  --display-height: 600px;
-}
 
-.navigation {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 90vw;
-  padding: 5px 5vw;
-  height: 65px;
-  display: grid;
-  background-color: #fff;
-  transition: 0.3s ease;
-  z-index: 1;
-  align-items: center;
 
-  div:last-child {
-    justify-self: end;
-  }
-
-  &#slide-up {
-    top: -90px;
-  }
-  .menu {
-    align-items: center;
-    color: #4e4e4e;
-    display: grid;
-    grid-template-columns: repeat(5, auto);
-    &-items {
-      cursor: pointer;
-      padding-left: clamp(20px, 2.5vw, 40px);
-      display: grid;
-      grid-template-rows: repeat(2, auto);
-      justify-content: center;
-      align-content: center;
-      justify-items: center;
-      row-gap: 4px;
-      transition: 0.2s ease;
-      span,
-      i {
-        font-size: clamp(12px, 1.5vw, 16px);
-      }
-    }
-    &-active {
-      span,
-      i {
-        color: #4bb816;
-      }
-    }
-  }
-}
-
-.display {
-  top: 60px;
-  position: fixed;
-  z-index: -1;
-  height: var(--display-height);
-  width: 100vw;
-  //   background-color: #ff91af;
-}
 
 .collections {
   background: linear-gradient(
@@ -76,8 +17,3 @@
   margin-top: calc(var(--display-height) - 10px);
 }
 
-@media screen and (max-width: 600px) {
-  :root {
-    --display-height: 1000px;
-  }
-}
