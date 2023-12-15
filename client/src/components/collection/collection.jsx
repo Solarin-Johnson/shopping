@@ -3,7 +3,7 @@ import "./collection.scss";
 import { useInView } from "react-intersection-observer";
 export default function Collection() {
   const arrival = [1, 2, 3, 4, 5];
-  const best = [1, 2, 3, 4, 5, 6, 7];
+  const best = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   const featured = [1, 2, 3, 4];
   const favorite = [];
   return (
