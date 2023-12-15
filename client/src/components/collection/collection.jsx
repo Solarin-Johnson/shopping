@@ -36,7 +36,7 @@ export const EmptyCollectionCard = ({ name }) => {
   );
 };
 
-export const CollectionTab = ({ tab, products }) => {
+export const CollectionTab = ({ i, tab, products }) => {
   const [ref, inView] = useInView({
     triggerOnce: true,
   });
@@ -45,7 +45,9 @@ export const CollectionTab = ({ tab, products }) => {
       <div className="collections-tab-head">{tab}</div>
       <div className="collections-tab-body">
         {products.length > 0 ? (
-          products.map((data, i) => <CollectionCard name={"Product Name"} />)
+          products.map(
+            (data, i) => i < 6 && <CollectionCard name={"Product Name"} />
+          )
         ) : (
           <EmptyCollectionCard />
         )}

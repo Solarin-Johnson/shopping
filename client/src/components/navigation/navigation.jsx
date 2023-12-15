@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import "./navigation.scss";
-export default function Navigation() {
+import { useNavigate } from "react-router-dom";
+export default function Navigation({ type }) {
   const [scrollPosition, setScrollPosition] = useState(0);
   const [scrollUp, setScrollUp] = useState(false);
 
@@ -9,8 +10,9 @@ export default function Navigation() {
       const currentPosition = window.scrollY;
       setScrollPosition(currentPosition);
       setScrollUp(
-        currentPosition > scrollPosition &&
-          currentPosition > window.innerHeight - 190
+        currentPosition > scrollPosition && type
+          ? currentPosition > window.innerHeight - 190
+          : currentPosition > scrollPosition
       );
     };
 
@@ -28,13 +30,14 @@ export default function Navigation() {
 }
 
 export function Menu() {
+  const navigate = useNavigate();
   const menuArray = [
-    { icon: "fas fa-bolt", name: "New Arrivals" },
-    { icon: "fas fa-star", name: "Best Selling" },
-    { icon: "fas fa-trophy", name: "Featured" },
-    { icon: "fas fa-heart", name: "Favourites" },
+    { icon: "fas fa-bolt", name: "New Arrivals", path: "/arrivals" },
+    { icon: "fas fa-star", name: "Best Selling", path: "/" },
+    { icon: "fas fa-trophy", name: "Featured", path: "/" },
+    { icon: "fas fa-heart", name: "Favourites", path: "/" },
   ];
-  const selectMenu = (e, i) => {
+  const selectMenu = (e, i, path) => {
     const siblings = Array.from(e.currentTarget.parentElement.children).filter(
       (child) => child !== e.currentTarget
     );
@@ -44,32 +47,39 @@ export function Menu() {
     });
     e.currentTarget.classList.add("menu-active");
     navigateMenu(i);
+    navigate(path);
   };
 
   const navigateMenu = (i) => {
-    let element = document
-      .querySelectorAll(".collections-tab")
-      [i].getBoundingClientRect();
-    let element_alt = document.querySelectorAll(".collections")[0];
-    if (element && window.innerWidth > 500) {
-      window.scrollTo({
-        top: element.top + window.pageYOffset - 40,
-        behavior: "smooth",
-      });
-    } else if (element_alt && window.innerWidth <= 500) {
-      window.scrollTo({
-        top: element.top + window.pageYOffset - 50,
-        behavior: "smooth",
-      });
-    }
+    // let element = document
+    //   .querySelectorAll(".collections-tab")
+    //   [i].getBoundingClientRect();
+    // let element_alt = document.querySelectorAll(".collections")[0];
+    // if (element && window.innerWidth > 500) {
+    //   window.scrollTo({
+    //     top: element.top + window.pageYOffset - 40,
+    //     behavior: "smooth",
+    //   });
+    // } else if (element_alt && window.innerWidth <= 500) {
+    //   window.scrollTo({
+    //     top: element.top + window.pageYOffset - 50,
+    //     behavior: "smooth",
+    //   });
+    // }
   };
-
+  const [currentMenu, setCurrentMenu] = useState(false);
+  useEffect(() => {
+    const menu = sessionStorage.getItem("menu") || false;
+    if (menu) {
+      setCurrentMenu(JSON.parse(menu));
+    }
+  }, []);
   return (
     <div className="menu">
       {menuArray.map((data, i) => (
         <div
-          onClick={(e) => selectMenu(e, i)}
-          className={`menu-items ${i === 0 && "menu-active"}`}
+          onClick={(e) => selectMenu(e, i, data.path)}
+          className={`menu-items ${i === currentMenu && "menu-active"}`}
           key={i}
         >
           <i className={data.icon}></i>
