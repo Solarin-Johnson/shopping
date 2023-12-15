@@ -1,7 +1,8 @@
 :root {
-  --overflow-columns: 1fr;
+  --overflow-columns: repeat(auto-fill, minmax(220px, 1fr));
   --padding-gap: 0;
   --tab-height: auto;
+  --padding: 6vw;
 }
 
 .collections {
@@ -15,11 +16,10 @@
   );
   //   backdrop-filter: blur(45px);
   //   min-height: 1000px;
-  width: 88vw;
-  padding: 35px 6vw 80px;
+  width: calc(100vw - (2 * var(--padding)));
+  padding: clamp(35px, 10vw, 60px) var(--padding) 80px;
   display: grid;
-  grid-template-columns: var(--overflow-columns);
-  row-gap: 50px;
+  row-gap: clamp(50px, 10vw, 85px);
   column-gap: 6vw;
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
@@ -31,18 +31,18 @@
     display: grid;
     grid-template-rows: 30px 1fr;
     row-gap: 30px;
-
     // &::-webkit-scrollbar {
     //   display: none;
     // }
     &-head {
-      font-size: 22px;
+      font-size: clamp(22px, 2.5vw, 30px);
       font-weight: 500;
-      color: #4bb816;
+      color: #3d9412;
+      font-family: "Concert One";
     }
     &-body {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+      grid-template-columns: var(--overflow-columns);
       align-content: start;
       justify-content: space-around;
       row-gap: 25px;
@@ -115,8 +115,14 @@
 
 @media screen and (max-width: 500px) {
   :root {
-    // --overflow-columns: repeat(4, 88vw);
+    --overflow-columns: repeat(auto-fill, minmax(200px, 1fr));
     // --tab-height: 410px;
     --padding-gap: 0vw;
+  }
+}
+
+@media screen and (min-width: 1920px) {
+  :root {
+    --padding: 10vw;
   }
 }

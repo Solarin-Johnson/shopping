@@ -4,19 +4,20 @@
   --menu-position: none;
   --menu-bottom: 0;
   --menu-font-size: clamp(12px, 1.5vw, 16px);
+  --title-font-size: clamp(20px, 3vw, 32px);
   --column-gap: clamp(20px, 2.5vw, 40px);
   --menu-padding: 5px 0;
   --header-trans: #ffffff60;
   --bottom-menu-color: transparent;
-  --backdrop: blur(50px);
+  --backdrop: blur(40px);
 }
 
 .navigation {
   position: fixed;
   top: 0;
   left: 0;
-  width: 90vw;
-  padding: 10px 5vw;
+  width: 88vw;
+  padding: 10px 6vw;
   height: 60px;
   display: grid;
   background-color: var(--header-trans);
@@ -24,17 +25,22 @@
   transition: 0.3s ease;
   z-index: 1;
   align-items: center;
+  grid-template-columns: auto auto 1fr;
+  justify-items: start;
   color: var(--text-color);
-  grid-template-columns: repeat(2, auto);
-
-  div:last-child {
-    justify-self: end;
+  &-title {
+    text-align: left;
+    font-size: var(--title-font-size);
+    font-weight: 500;
+    color: var(--text-color);
+    font-family: "Concert One";
   }
 
   &#slide-up {
     top: -90px;
   }
   .menu {
+    justify-self: end;
     background-color: var(--bottom-menu-color);
     width: var(--menu-width);
     position: var(--menu-position);
@@ -80,6 +86,12 @@
     --menu-padding: 15px 0;
     --backdrop: none;
     --header-trans: #ffffff;
-    --bottom-menu-color: #ffffffff;
+    --bottom-menu-color: #ffffffeb;
+  }
+}
+
+@media screen and (min-width: 1920px) {
+  :root {
+    --display-height: 800px;
   }
 }

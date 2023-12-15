@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import "./collection.scss";
 import { useInView } from "react-intersection-observer";
 export default function Collection() {
@@ -7,10 +8,10 @@ export default function Collection() {
   const favorite = [];
   return (
     <div className="collections">
-      <CollectionTab tab={"New Arrivals"} products={arrival} />
-      <CollectionTab tab={"Best Sellings"} products={best} />
-      <CollectionTab tab={"Featured"} products={featured} />
-      <CollectionTab tab={"Favorites"} products={favorite} />
+      <CollectionTab tab={"New Arrivals"} products={arrival} preview={true} />
+      <CollectionTab tab={"Best Sellings"} products={best} preview={true} />
+      <CollectionTab tab={"Featured"} products={featured} preview={true} />
+      <CollectionTab tab={"Favorites"} products={favorite} preview={true} />
     </div>
   );
 }
@@ -36,17 +37,40 @@ export const EmptyCollectionCard = ({ name }) => {
   );
 };
 
-export const CollectionTab = ({ i, tab, products }) => {
+export const CollectionTab = ({ i, tab, products, preview }) => {
   const [ref, inView] = useInView({
     triggerOnce: true,
   });
+
+  const [browserWidth, setBrowserWidth] = useState(window.innerWidth);
+
+  const handleResize = () => {
+    setBrowserWidth(window.innerWidth);
+  };
+
+  useEffect(() => {
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   return (
     <div id="arrivals" ref={ref} className="collections-tab">
       <div className="collections-tab-head">{tab}</div>
       <div className="collections-tab-body">
         {products.length > 0 ? (
-          products.map(
-            (data, i) => i < 6 && <CollectionCard name={"Product Name"} />
+          products.map((data, i) =>
+            preview ? (
+              browserWidth > 1920 ? (
+                <CollectionCard name={"Product Name"} />
+              ) : (
+                i < 5 && <CollectionCard name={"Product Name"} />
+              )
+            ) : (
+              <CollectionCard name={"Product Name"} />
+            )
           )
         ) : (
           <EmptyCollectionCard />

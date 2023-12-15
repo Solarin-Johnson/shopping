@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "./navigation.scss";
 import { useNavigate } from "react-router-dom";
-export default function Navigation({ type }) {
+export default function Navigation({ type, title }) {
   const [scrollPosition, setScrollPosition] = useState(0);
   const [scrollUp, setScrollUp] = useState(false);
 
@@ -12,7 +12,7 @@ export default function Navigation({ type }) {
       setScrollUp(
         currentPosition > scrollPosition && type
           ? currentPosition > window.innerHeight - 190
-          : currentPosition > scrollPosition
+          : false
       );
     };
 
@@ -20,10 +20,11 @@ export default function Navigation({ type }) {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, [scrollPosition, scrollUp]);
+  }, [scrollPosition, scrollUp, type]);
   return (
     <div className="navigation" id={!scrollUp ? "" : "slide-up"}>
       <div className="logo"></div>
+      <div className="navigation-title">{title}</div>
       <Menu />
     </div>
   );

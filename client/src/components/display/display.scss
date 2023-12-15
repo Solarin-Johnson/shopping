@@ -8,8 +8,8 @@
   //   z-index: -1;
   margin-top: 70px;
   height: var(--display-height);
-  padding: 40px 5vw 10px;
-  width: calc(100% - 10vw);
+  padding: 40px calc(2 / 3 * var(--padding)) 10px;
+  width: calc(100vw - (4 / 3 * var(--padding)));
   display: grid;
   grid-template-columns: var(--display-columns);
   grid-template-rows: var(--display-rows);
@@ -25,7 +25,11 @@
     height: 85%;
     min-height: 450px;
     width: 40vw;
-    max-width: 400px;
+    max-width: 700px;
+
+    > div {
+      width: clamp(200px, 60%, 500px);
+    }
   }
   &-image {
     background-color: #ff91af;
@@ -43,39 +47,43 @@
       grid-template-columns: repeat(2, auto);
       justify-content: start;
       column-gap: 20px;
-      font-weight: 400;
+      font-weight: 500;
     }
     &-tag,
     &-avail {
-      padding: 3px 20px;
+      padding: clamp(3px, 1vw, 4px) clamp(20px, 2vw, 25px);
       border-radius: 4px;
       background-color: #ff91af;
+      font-size: clamp(15px, 3vw, 18px);
     }
     &-avail {
       background-color: #ffdf00;
     }
     &-name {
-      padding-top: 15px;
-      font-size: 28px;
+      padding-top: clamp(15px, 5vw, 35px);
+      font-size: clamp(30px, 2.2vw, 46px);
       font-weight: 500;
+      font-family: "Concert One";
     }
     &-price {
-      padding-top: 5px;
-      font-size: 22px;
+      font-size: clamp(25px, 2vw, 40px);
       font-weight: 500;
+      font-family: "Concert One";
     }
     &-desc {
-      padding-top: 15px;
-      font-size: 15px;
+      padding-top: clamp(20px, 5vw, 30px);
+      font-size: clamp(15px, 1vw, 18px);
       font-weight: 400;
     }
     &-btn {
-      padding-top: 15px;
+      padding-top: clamp(15px, 5vw, 30px);
       display: grid;
       grid-template-columns: repeat(2, auto);
       column-gap: 30px;
       font-size: 24px;
       align-items: center;
+      justify-content: start;
+      justify-items: center;
       i {
         cursor: pointer;
       }
