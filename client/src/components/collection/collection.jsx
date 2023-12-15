@@ -1,4 +1,5 @@
 import "./collection.scss";
+import { useInView } from "react-intersection-observer";
 export default function Collection() {
   const arrival = [1, 2, 3, 4, 5];
   const best = [1, 2, 3, 4, 5, 6, 7];
@@ -6,40 +7,10 @@ export default function Collection() {
   const favorite = [];
   return (
     <div className="collections">
-      <div id="arrivals" className="collections-tab">
-        <div className="collections-tab-head">New Arrivals</div>
-        <div className="collections-tab-body">
-          {arrival.map((data, i) => (
-            <CollectionCard name={"Product Name"} />
-          ))}
-        </div>
-      </div>
-      <div id="best" className="collections-tab">
-        <div className="collections-tab-head">Best Sellings</div>
-        <div className="collections-tab-body">
-          {best.map((data, i) => (
-            <CollectionCard name={"Product Name"} />
-          ))}
-        </div>
-      </div>
-      <div id="featured" className="collections-tab">
-        <div className="collections-tab-head">Featured</div>
-        <div className="collections-tab-body">
-          {featured.map((data, i) => (
-            <CollectionCard name={"Product Name"} />
-          ))}
-        </div>
-      </div>
-      <div id="favourites" className="collections-tab">
-        <div className="collections-tab-head">Favorites</div>
-        <div className="collections-tab-body">
-          {favorite.length > 0 ? (
-            favorite.map((data, i) => <CollectionCard name={"Product Name"} />)
-          ) : (
-            <EmptyCollectionCard />
-          )}
-        </div>
-      </div>
+      <CollectionTab tab={"New Arrivals"} products={arrival} />
+      <CollectionTab tab={"Best Sellings"} products={best} />
+      <CollectionTab tab={"Featured"} products={featured} />
+      <CollectionTab tab={"Favorites"} products={favorite} />
     </div>
   );
 }
@@ -61,6 +32,24 @@ export const EmptyCollectionCard = ({ name }) => {
     <div className="collections-card collections-card-empty">
       <div>Your Favorites List is Empty</div>
       <i class="fa-solid fa-plus"></i>
+    </div>
+  );
+};
+
+export const CollectionTab = ({ tab, products }) => {
+  const [ref, inView] = useInView({
+    triggerOnce: true,
+  });
+  return (
+    <div id="arrivals" ref={ref} className="collections-tab">
+      <div className="collections-tab-head">{tab}</div>
+      <div className="collections-tab-body">
+        {products.length > 0 ? (
+          products.map((data, i) => <CollectionCard name={"Product Name"} />)
+        ) : (
+          <EmptyCollectionCard />
+        )}
+      </div>
     </div>
   );
 };

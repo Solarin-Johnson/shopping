@@ -6,6 +6,9 @@
   --menu-font-size: clamp(12px, 1.5vw, 16px);
   --column-gap: clamp(20px, 2.5vw, 40px);
   --menu-padding: 5px 0;
+  --header-trans: #ffffff60;
+  --bottom-menu-color: transparent;
+  --backdrop: blur(50px);
 }
 
 .navigation {
@@ -16,7 +19,8 @@
   padding: 10px 5vw;
   height: 60px;
   display: grid;
-  background-color: var(--bg-color);
+  background-color: var(--header-trans);
+  backdrop-filter: var(--backdrop);
   transition: 0.3s ease;
   z-index: 1;
   align-items: center;
@@ -31,7 +35,7 @@
     top: -90px;
   }
   .menu {
-    background-color: var(--bg-color);
+    background-color: var(--bottom-menu-color);
     width: var(--menu-width);
     position: var(--menu-position);
     bottom: var(--menu-bottom);
@@ -74,5 +78,8 @@
     // --menu-font-size: clamp(10px, 1.5vw, 16px);
     --column-gap: none;
     --menu-padding: 15px 0;
+    --backdrop: none;
+    --header-trans: #ffffff;
+    --bottom-menu-color: #ffffffff;
   }
 }

@@ -1,3 +1,9 @@
+:root {
+  --overflow-columns: 1fr;
+  --padding-gap: 0;
+  --tab-height: auto;
+}
+
 .collections {
   background: linear-gradient(
     to bottom,
@@ -7,19 +13,28 @@
     #ffffffe7,
     #fffffff1
   );
-  backdrop-filter: blur(45px);
+  //   backdrop-filter: blur(45px);
   //   min-height: 1000px;
   width: 88vw;
   padding: 35px 6vw 80px;
   display: grid;
+  grid-template-columns: var(--overflow-columns);
   row-gap: 50px;
+  column-gap: 6vw;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  overflow-x: auto;
 
   &-tab {
+    scroll-snap-align: center;
     min-height: 0;
     display: grid;
-    grid-template-rows: 30px auto;
+    grid-template-rows: 30px 1fr;
     row-gap: 30px;
 
+    // &::-webkit-scrollbar {
+    //   display: none;
+    // }
     &-head {
       font-size: 22px;
       font-weight: 500;
@@ -27,7 +42,7 @@
     }
     &-body {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
       align-content: start;
       justify-content: space-around;
       row-gap: 25px;
@@ -38,8 +53,8 @@
     display: grid;
     position: relative;
     grid-template-rows: 1fr 30px;
-    row-gap: 10px;
-    height: 300px;
+    row-gap: 15px;
+    height: 320px;
     &:nth-child(odd) {
       .collections-card-image {
         background-color: #fff276;
@@ -52,6 +67,11 @@
     }
     &-image {
       border-radius: 6px;
+      transition: 0.4s ease;
+
+      &:hover {
+        box-shadow: inset 0 0 12px #00000020, 0 5px 10px #00000047;
+      }
     }
     &-name {
       align-self: center;
@@ -68,14 +88,16 @@
       }
     }
     &-empty {
-      background-color: #dfdfdf;
+      border: 2px dashed var(--text-color);
+      background-color: #ffffff;
       border-radius: 6px;
       display: grid;
       grid-template-rows: repeat(2, auto);
       justify-items: center;
       align-items: center;
       align-content: center;
-      row-gap: 30px;
+      row-gap: 5px;
+      height: 280px;
 
       div {
         padding: 20px 25px;
@@ -88,5 +110,13 @@
         cursor: pointer;
       }
     }
+  }
+}
+
+@media screen and (max-width: 500px) {
+  :root {
+    // --overflow-columns: repeat(4, 88vw);
+    // --tab-height: 410px;
+    --padding-gap: 0vw;
   }
 }

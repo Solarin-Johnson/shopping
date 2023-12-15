@@ -10,7 +10,7 @@ export default function Navigation() {
       setScrollPosition(currentPosition);
       setScrollUp(
         currentPosition > scrollPosition &&
-          currentPosition > window.innerHeight - 250
+          currentPosition > window.innerHeight - 190
       );
     };
 
@@ -21,7 +21,7 @@ export default function Navigation() {
   }, [scrollPosition, scrollUp]);
   return (
     <div className="navigation" id={!scrollUp ? "" : "slide-up"}>
-      <div className="logo">Fashion</div>
+      <div className="logo"></div>
       <Menu />
     </div>
   );
@@ -34,7 +34,7 @@ export function Menu() {
     { icon: "fas fa-trophy", name: "Featured" },
     { icon: "fas fa-heart", name: "Favourites" },
   ];
-  const selectMenu = (e) => {
+  const selectMenu = (e, i) => {
     const siblings = Array.from(e.currentTarget.parentElement.children).filter(
       (child) => child !== e.currentTarget
     );
@@ -43,13 +43,32 @@ export function Menu() {
       sibling.classList.remove("menu-active");
     });
     e.currentTarget.classList.add("menu-active");
+    navigateMenu(i);
+  };
+
+  const navigateMenu = (i) => {
+    let element = document
+      .querySelectorAll(".collections-tab")
+      [i].getBoundingClientRect();
+    let element_alt = document.querySelectorAll(".collections")[0];
+    if (element && window.innerWidth > 500) {
+      window.scrollTo({
+        top: element.top + window.pageYOffset - 40,
+        behavior: "smooth",
+      });
+    } else if (element_alt && window.innerWidth <= 500) {
+      window.scrollTo({
+        top: element.top + window.pageYOffset - 50,
+        behavior: "smooth",
+      });
+    }
   };
 
   return (
     <div className="menu">
       {menuArray.map((data, i) => (
         <div
-          onClick={selectMenu}
+          onClick={(e) => selectMenu(e, i)}
           className={`menu-items ${i === 0 && "menu-active"}`}
           key={i}
         >
