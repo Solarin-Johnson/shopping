@@ -7,7 +7,7 @@ export default function Home() {
   sessionStorage.setItem("menu", 5);
   return (
     <>
-      <Navigation type={true} />
+      <Navigation title={"Home"} type={true} />
       <Display />
       <Collection />
       <Cart />

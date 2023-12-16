@@ -35,7 +35,7 @@ function App() {
     },
   ])
   return <div className='container'>
-    <Background />
+    {/* <Background /> */}
     <RouterProvider router={links} />
   </div>
 }

@@ -1,18 +1,40 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 import "./display.scss";
 export default function Display() {
+  const [displayData, setDisplayData] = useState("");
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+      setDisplayData({
+        tag: "Beauty",
+        avail: "New",
+        name: "Product Name",
+        price: "$32.95",
+        desc: "Discover Peak Comfort: Our CloudSoft Pillows redefine luxury sleep. Plush and breathable, they cradle your head in perfect comfort. Elevate your sleep experience with CloudSoft - where coziness meets quality",
+        img_url: "url",
+      });
+    }, 2000);
+  });
+
   return (
     <div className="display">
       <div className="display-card">
         <DisplayCard
-          tag="Beauty"
-          avail="New"
-          name="Product Name"
-          price="$32.95"
-          desc="Discover Peak Comfort: Our CloudSoft Pillows redefine luxury sleep. Plush and breathable, they cradle your head in perfect comfort. Elevate your sleep experience with CloudSoft – where coziness meets quality"
+          tag={displayData.tag}
+          avail={displayData.avail}
+          name={displayData.name}
+          price={displayData.price}
+          desc={displayData.desc}
         />
       </div>
-      <div className="display-image"></div>
+      {displayData.img_url ? (
+        <div className="display-image"></div>
+      ) : (
+        <Skeleton className="display-image-skeleton" />
+      )}
     </div>
   );
 }
@@ -49,22 +71,44 @@ export function DisplayCard({
   return (
     <>
       <div className="display-card-label">
-        <div className="display-card-tag">{tag}</div>
-        <div className="display-card-avail">{avail}</div>
+        {tag ? (
+          <div className="display-card-tag">{tag}</div>
+        ) : (
+          <Skeleton className="display-card-label-skeleton" />
+        )}
+        {avail ? (
+          <div className="display-card-avail">{avail}</div>
+        ) : (
+          <Skeleton className="display-card-label-skeleton" />
+        )}
       </div>
-      <div className="display-card-name">{name}</div>
-      <div className="display-card-price">{price}</div>
-      <div className="display-card-desc">{desc}</div>
+      <div className="display-card-name">
+        {name || <Skeleton className="display-card-name-skeleton" />}
+      </div>
+      <div className="display-card-price">
+        {price || <Skeleton className="display-card-price-skeleton" />}
+      </div>
+      <div className="display-card-desc">
+        {desc || <Skeleton className="display-card-desc-skeleton" count={3} />}
+      </div>
       <div className="display-card-btn">
         <div className="favorite" id={fav ? "liked" : ""} onClick={like}>
-          <i class={`${fav ? "fa-solid" : "fa-regular"} fa-heart`}></i>
+          {name ? (
+            <i class={`${fav ? "fa-solid" : "fa-regular"} fa-heart`}></i>
+          ) : (
+            <Skeleton className="btn-skeleton" />
+          )}
         </div>
         <div
           className="wishlist"
           id={wished ? "wished" : ""}
           onClick={wishlist}
         >
-          <i class="fa-solid fa-cart-shopping"></i>
+          {name ? (
+            <i class="fa-solid fa-cart-shopping"></i>
+          ) : (
+            <Skeleton className="btn-skeleton" />
+          )}
         </div>
       </div>
       {notify && <div className="display-card-notify">{notify}</div>}

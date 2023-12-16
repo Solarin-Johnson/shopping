@@ -1,9 +1,19 @@
 import { useEffect, useState } from "react";
 import "./navigation.scss";
 import { useNavigate } from "react-router-dom";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
+
 export default function Navigation({ type, title }) {
   const [scrollPosition, setScrollPosition] = useState(0);
+  const [loading, setLoading] = useState(true);
   const [scrollUp, setScrollUp] = useState(false);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+  });
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -28,7 +38,9 @@ export default function Navigation({ type, title }) {
   return (
     <div className="navigation" id={!scrollUp ? "" : "slide-up"}>
       <div className="logo"></div>
-      <div className="navigation-title">{title}</div>
+      <div className="navigation-title">
+        {loading ? <Skeleton className="navigation-title-skeleton" /> : title}
+      </div>
       <Nav />
       <Menu />
     </div>
@@ -69,6 +81,13 @@ export function Nav() {
 
 export function MenuItems({ data, i }) {
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+  });
   const selectMenu = (e, i, path) => {
     // const siblings = Array.from(e.currentTarget.parentElement.children).filter(
     //   (child) => child !== e.currentTarget
@@ -94,8 +113,16 @@ export function MenuItems({ data, i }) {
       className={`menu-items ${i === currentMenu && "menu-active"}`}
       key={i}
     >
-      <i className={data.icon}></i>
-      <span>{data.name}</span>
+      {loading ? (
+        <Skeleton className="menu-items-icon-skeleton" />
+      ) : (
+        <i className={data.icon}></i>
+      )}
+      {loading ? (
+        <Skeleton className="menu-items-text-skeleton" />
+      ) : (
+        <span>{data.name}</span>
+      )}
     </div>
   );
 }
