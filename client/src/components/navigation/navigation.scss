@@ -10,6 +10,8 @@
   --header-trans: #ffffff45;
   --bottom-menu-color: transparent;
   --backdrop: blur(40px);
+  --menu-icon-size: var(--menu-font-size);
+  --nav-margin: 40px;
 }
 
 .navigation {
@@ -25,7 +27,8 @@
   transition: 0.3s ease;
   z-index: 1;
   align-items: center;
-  grid-template-columns: auto auto 1fr;
+  grid-template-columns: auto auto 1fr auto;
+  background-color: #fff;
   justify-items: start;
   color: var(--text-color);
   &-title {
@@ -34,10 +37,24 @@
     font-weight: 500;
     color: var(--text-color);
     font-family: "Concert One";
+    // white-space: nowrap;
   }
 
   &#slide-up {
     top: -90px;
+  }
+  .nav {
+    justify-self: end;
+    margin-right: var(--nav-margin);
+    padding: var(--menu-padding);
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    column-gap: 40px;
+    .menu-items {
+      span {
+        font-size: var(--menu-icon-size);
+      }
+    }
   }
   .menu {
     justify-self: end;
@@ -61,10 +78,12 @@
       justify-items: center;
       row-gap: 4px;
       transition: 0.2s ease;
-      span,
-      i {
+      span {
         font-size: var(--menu-font-size);
         text-align: center;
+      }
+      i {
+        font-size: var(--menu-icon-size);
       }
     }
     &-active {
@@ -76,17 +95,19 @@
   }
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 600px) {
   :root {
     --display-height: 800px;
     --menu-width: 100vw;
     --menu-position: fixed;
-    // --menu-font-size: clamp(10px, 1.5vw, 16px);
+    --menu-font-size: clamp(10px, 1.5vw, 16px);
+    --menu-icon-size: clamp(14px, 2vw, 17px);
     --column-gap: none;
     --menu-padding: 15px 0;
     --backdrop: none;
     --header-trans: #ffffff;
     --bottom-menu-color: #ffffffc6;
+    --nav-margin: 0;
   }
 }
 

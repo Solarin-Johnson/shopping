@@ -52,7 +52,7 @@
       grid-template-columns: repeat(2, auto);
       justify-content: start;
       column-gap: 20px;
-      font-weight: 500;
+      font-weight: 400;
     }
     &-tag,
     &-avail {
@@ -122,7 +122,7 @@
   }
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 600px) {
   .display {
     justify-items: center;
     column-gap: none;
@@ -140,6 +140,6 @@
   }
   :root {
     --display-columns: 1fr;
-    --display-rows: 380px 1fr;
+    --display-rows: calc(360px - 10vw) 1fr;
   }
 }

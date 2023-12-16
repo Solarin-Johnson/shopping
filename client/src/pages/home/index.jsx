@@ -4,7 +4,7 @@ import Display from "../../components/display/display";
 import Navigation from "../../components/navigation/navigation";
 
 export default function Home() {
-  sessionStorage.setItem("menu", false);
+  sessionStorage.setItem("menu", 5);
   return (
     <>
       <Navigation type={true} />
