@@ -1,6 +1,7 @@
 :root {
   --display-columns: repeat(2, 1fr);
   --display-rows: auto;
+  --price-padding: 4px;
 }
 .display {
   //   top: 80px;
@@ -71,13 +72,13 @@
       font-family: "Concert One";
     }
     &-price {
-      padding-top: 5px;
+      padding-top: var(--price-padding);
       font-size: clamp(28px, 2vw, 40px);
       font-weight: 500;
       font-family: "Concert One";
     }
     &-desc {
-      padding-top: clamp(20px, 5vw, 30px);
+      padding-top: clamp(25px, 5vw, 32px);
       font-size: clamp(15px, 1vw, 18px);
       font-weight: 400;
     }
@@ -122,7 +123,7 @@
   }
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 700px) {
   .display {
     justify-items: center;
     column-gap: none;
@@ -135,11 +136,21 @@
 
     &-image,
     &-card {
-      width: 100%;
+      width: 94%;
+
+      > div {
+        width: 100%;
+      }
     }
   }
   :root {
     --display-columns: 1fr;
-    --display-rows: calc(360px - 10vw) 1fr;
+    --display-rows: calc(420px - 7vw) 1fr;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  :root {
+    --price-padding: 18px;
   }
 }

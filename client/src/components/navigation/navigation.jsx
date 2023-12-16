@@ -6,6 +6,10 @@ export default function Navigation({ type, title }) {
   const [scrollUp, setScrollUp] = useState(false);
 
   useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
+
+  useEffect(() => {
     const handleScroll = () => {
       const currentPosition = window.scrollY;
       setScrollPosition(currentPosition);
@@ -50,8 +54,8 @@ export function Menu() {
 
 export function Nav() {
   const menuArray = [
-    { icon: "fas fa-heart", name: "Home", path: "/" },
-    { icon: "fas fa-heart", name: "Search" },
+    { icon: "fas fa-house", name: "Home", path: "/" },
+    { icon: "fas fa-magnifying-glass", name: "Search" },
   ];
 
   return (
