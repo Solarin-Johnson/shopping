@@ -16,7 +16,7 @@ export default function Display() {
         desc: "Discover Peak Comfort: Our CloudSoft Pillows redefine luxury sleep. Plush and breathable, they cradle your head in perfect comfort. Elevate your sleep experience with CloudSoft - where coziness meets quality",
         img_url: "url",
       });
-    }, 2000);
+    }, 5000);
   });
 
   return (

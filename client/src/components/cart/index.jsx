@@ -8,7 +8,7 @@ export default function Cart() {
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
-    }, 2000);
+    }, 5000);
   });
   return (
     <div className="cart">

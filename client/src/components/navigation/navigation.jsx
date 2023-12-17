@@ -12,7 +12,7 @@ export default function Navigation({ type, title }) {
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
-    }, 2000);
+    }, 5000);
   });
 
   useEffect(() => {
@@ -86,7 +86,7 @@ export function MenuItems({ data, i }) {
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
-    }, 2000);
+    }, 5000);
   });
   const selectMenu = (e, i, path) => {
     // const siblings = Array.from(e.currentTarget.parentElement.children).filter(
