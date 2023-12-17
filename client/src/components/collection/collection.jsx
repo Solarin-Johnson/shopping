@@ -40,14 +40,15 @@ export const CollectionCard = ({ data }) => {
 
   const preview = () => {
     setDisplayData(data);
+    sessionStorage.setItem("display", JSON.stringify([data]));
   };
   useEffect(() => {
     handleDataChange(displayData);
     window.scrollTo({ top: 0, behavior: "smooth" });
-  }, [displayData, handleDataChange]);
+  }, [displayData, handleDataChange, data]);
 
   return (
-    <div className="collections-card">
+    <div className="collections-card" onClick={preview}>
       {loading ? (
         <Skeleton className="collections-card-image-skeleton" />
       ) : (
@@ -64,7 +65,7 @@ export const CollectionCard = ({ data }) => {
         {loading ? (
           <Skeleton className="collections-card-action-skeleton" />
         ) : (
-          <div className="collections-card-action" onClick={preview}>
+          <div className="collections-card-action">
             <i class="fa-solid fa-arrow-right"></i>
           </div>
         )}

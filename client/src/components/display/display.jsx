@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import "./display.scss";
-import { FetchDisplayData } from "../utils";
+import { FetchDisplayData, Scan } from "../utils";
 import { useDataContext } from "../../DataContext";
 export default function Display() {
   const { sharedData } = useDataContext();
@@ -22,14 +22,7 @@ export default function Display() {
   return (
     <div className="display">
       <div className="display-card">
-        <DisplayCard
-          tag={displayData.tag}
-          avail={displayData.avail}
-          name={displayData.name}
-          price={displayData.price}
-          desc={displayData.desc}
-          loading={loading}
-        />
+        <DisplayCard data={displayData} loading={loading} />
       </div>
       {!loading ? (
         <div className="display-image"></div>
@@ -40,28 +33,23 @@ export default function Display() {
   );
 }
 
-export function DisplayCard({
-  tag,
-  avail,
-  name,
-  price,
-  desc,
-  favourite,
-  wish,
-  loading,
-}) {
+export function DisplayCard({ data, favourite, wish, loading }) {
   const [fav, setFav] = useState(favourite);
   const [wished, setWished] = useState(wish);
   const [notify, setNotify] = useState(false);
   const like = () => {
-    setFav(!fav);
-    setNotify(`Product ${!fav ? "added to" : "removed from"} Favorites`);
-    stopInterval();
+    if (!loading) {
+      setFav(!fav);
+      setNotify(`Product ${!fav ? "added to" : "removed from"} Favorites`);
+      stopInterval();
+    }
   };
   const wishlist = () => {
-    setWished(!wished);
-    setNotify(`Product ${!wished ? "added to" : "removed from"} Wishlist`);
-    stopInterval();
+    if (!loading) {
+      setWished(!wished);
+      setNotify(`Product ${!wished ? "added to" : "removed from"} Wishlist`);
+      stopInterval();
+    }
   };
 
   const stopInterval = () => {
@@ -74,29 +62,33 @@ export function DisplayCard({
     <>
       <div className="display-card-label">
         {!loading ? (
-          <div className="display-card-tag">{tag}</div>
+          <div className="display-card-tag">{data.tag}</div>
         ) : (
           <Skeleton className="display-card-label-skeleton" />
         )}
         {!loading ? (
-          <div className="display-card-avail">{avail}</div>
+          <div className="display-card-avail">{data.avail}</div>
         ) : (
           <Skeleton className="display-card-label-skeleton" />
         )}
       </div>
       <div className="display-card-name">
-        {!loading ? name : <Skeleton className="display-card-name-skeleton" />}
+        {!loading ? (
+          data.name
+        ) : (
+          <Skeleton className="display-card-name-skeleton" />
+        )}
       </div>
       <div className="display-card-price">
         {!loading ? (
-          price
+          data.price
         ) : (
           <Skeleton className="display-card-price-skeleton" />
         )}
       </div>
       <div className="display-card-desc">
         {!loading ? (
-          desc
+          data.desc
         ) : (
           <Skeleton className="display-card-desc-skeleton" count={3} />
         )}

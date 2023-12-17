@@ -2,6 +2,7 @@
   --display-columns: repeat(2, 1fr);
   --display-rows: auto;
   --price-padding: 4px;
+  --min-height: 450px;
 }
 .display {
   //   top: 80px;
@@ -29,7 +30,7 @@
   &-image,
   &-card {
     height: 75%;
-    min-height: 450px;
+    min-height: var(--min-height);
     width: 40vw;
     max-width: 700px;
 
@@ -185,7 +186,8 @@
   }
   :root {
     --display-columns: 1fr;
-    --display-rows: calc(420px - 7vw) 1fr;
+    --display-rows: auto 1fr;
+    --min-height: 370px;
   }
 }
 
