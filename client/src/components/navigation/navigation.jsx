@@ -58,7 +58,7 @@ export function Menu() {
   return (
     <div className="menu">
       {menuArray.map((data, i) => (
-        <MenuItems data={data} i={i} />
+        <MenuItems key={i} data={data} i={i} />
       ))}
     </div>
   );
@@ -73,7 +73,7 @@ export function Nav() {
   return (
     <div className="nav">
       {menuArray.map((data, i) => (
-        <MenuItems data={data} i={i + 5} />
+        <MenuItems key={i} data={data} i={i + 5} />
       ))}
     </div>
   );

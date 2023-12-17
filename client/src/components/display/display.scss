@@ -94,24 +94,23 @@
         width: 150px;
       }
       padding-top: clamp(15px, 5vw, 35px);
-      font-size: clamp(32px, 2.2vw, 46px);
+      font-size: clamp(24px, 2.2vw, 30px);
       font-weight: 500;
-      font-family: "Concert One";
     }
     &-price {
       &-skeleton {
         width: 60px;
       }
       padding-top: var(--price-padding);
-      font-size: clamp(28px, 2vw, 40px);
-      font-weight: 500;
-      font-family: "Concert One";
+      font-size: clamp(22px, 2vw, 28px);
+      font-weight: 600;
+      // font-family: "Concert One";
     }
     &-desc {
       &-skeleton {
         // height: 120px;
       }
-      padding-top: clamp(25px, 5vw, 32px);
+      padding-top: clamp(10px, 2vw, 20px);
       font-size: clamp(15px, 1vw, 18px);
       font-weight: 400;
     }

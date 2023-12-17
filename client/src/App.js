@@ -1,6 +1,7 @@
 import './App.scss';
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Home from './pages/home';
+import { DataProvider } from './DataContext';
 import Background from './components/background';
 import { Arrivals, Best, Featured } from './pages/paths';
 
@@ -35,7 +36,9 @@ function App() {
   ])
   return <div className='container'>
     {/* <Background /> */}
-    <RouterProvider router={links} />
+    <DataProvider>
+      <RouterProvider router={links} />
+    </DataProvider>
   </div>
 }
 

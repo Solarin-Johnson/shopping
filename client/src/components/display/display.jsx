@@ -2,22 +2,22 @@ import { useEffect, useState } from "react";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import "./display.scss";
+import { FetchDisplayData } from "../utils";
+import { useDataContext } from "../../DataContext";
 export default function Display() {
+  const { sharedData } = useDataContext();
   const [displayData, setDisplayData] = useState("");
   const [loading, setLoading] = useState(true);
+  FetchDisplayData(setDisplayData);
   useEffect(() => {
+    if (sharedData) {
+      setDisplayData(sharedData);
+      console.log(sharedData);
+    }
     setTimeout(() => {
       setLoading(false);
-      setDisplayData({
-        tag: "Beauty",
-        avail: "New",
-        name: "Product Name",
-        price: "$32.95",
-        desc: "Discover Peak Comfort: Our CloudSoft Pillows redefine luxury sleep. Plush and breathable, they cradle your head in perfect comfort. Elevate your sleep experience with CloudSoft - where coziness meets quality",
-        img_url: "url",
-      });
-    }, 5000);
-  });
+    }, 3000);
+  }, [sharedData]);
 
   return (
     <div className="display">
@@ -28,9 +28,10 @@ export default function Display() {
           name={displayData.name}
           price={displayData.price}
           desc={displayData.desc}
+          loading={loading}
         />
       </div>
-      {displayData.img_url ? (
+      {!loading ? (
         <div className="display-image"></div>
       ) : (
         <Skeleton className="display-image-skeleton" />
@@ -47,6 +48,7 @@ export function DisplayCard({
   desc,
   favourite,
   wish,
+  loading,
 }) {
   const [fav, setFav] = useState(favourite);
   const [wished, setWished] = useState(wish);
@@ -71,29 +73,37 @@ export function DisplayCard({
   return (
     <>
       <div className="display-card-label">
-        {tag ? (
+        {!loading ? (
           <div className="display-card-tag">{tag}</div>
         ) : (
           <Skeleton className="display-card-label-skeleton" />
         )}
-        {avail ? (
+        {!loading ? (
           <div className="display-card-avail">{avail}</div>
         ) : (
           <Skeleton className="display-card-label-skeleton" />
         )}
       </div>
       <div className="display-card-name">
-        {name || <Skeleton className="display-card-name-skeleton" />}
+        {!loading ? name : <Skeleton className="display-card-name-skeleton" />}
       </div>
       <div className="display-card-price">
-        {price || <Skeleton className="display-card-price-skeleton" />}
+        {!loading ? (
+          price
+        ) : (
+          <Skeleton className="display-card-price-skeleton" />
+        )}
       </div>
       <div className="display-card-desc">
-        {desc || <Skeleton className="display-card-desc-skeleton" count={3} />}
+        {!loading ? (
+          desc
+        ) : (
+          <Skeleton className="display-card-desc-skeleton" count={3} />
+        )}
       </div>
       <div className="display-card-btn">
         <div className="favorite" id={fav ? "liked" : ""} onClick={like}>
-          {name ? (
+          {!loading ? (
             <i class={`${fav ? "fa-solid" : "fa-regular"} fa-heart`}></i>
           ) : (
             <Skeleton className="btn-skeleton" />
@@ -104,7 +114,7 @@ export function DisplayCard({
           id={wished ? "wished" : ""}
           onClick={wishlist}
         >
-          {name ? (
+          {!loading ? (
             <i class="fa-solid fa-cart-shopping"></i>
           ) : (
             <Skeleton className="btn-skeleton" />

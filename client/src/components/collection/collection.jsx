@@ -1,13 +1,21 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./collection.scss";
 import { useInView } from "react-intersection-observer";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
+import { FetchArrivals, FetchBest, FetchFeatured } from "../utils";
+import { useDataContext } from "../../DataContext";
 
 export default function Collection() {
-  const arrival = [1, 2, 3, 4, 5];
-  const best = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-  const featured = [1, 2, 3, 4];
+  const [arrival, setArrival] = useState(false);
+  FetchArrivals(setArrival);
+
+  const [best, setBest] = useState(false);
+  FetchBest(setBest);
+
+  const [featured, setFeatured] = useState(false);
+  FetchFeatured(setFeatured);
+
   const favorite = [];
   return (
     <div className="collections">
@@ -19,14 +27,25 @@ export default function Collection() {
   );
 }
 
-export const CollectionCard = ({ name }) => {
+export const CollectionCard = ({ data }) => {
   const [loading, setLoading] = useState(true);
+  const { handleDataChange } = useDataContext();
+  const [displayData, setDisplayData] = React.useState();
 
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
     }, 5000);
   });
+
+  const preview = () => {
+    setDisplayData(data);
+  };
+  useEffect(() => {
+    handleDataChange(displayData);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [displayData, handleDataChange]);
+
   return (
     <div className="collections-card">
       {loading ? (
@@ -34,18 +53,22 @@ export const CollectionCard = ({ name }) => {
       ) : (
         <div className="collections-card-image"></div>
       )}
-      {loading ? (
-        <Skeleton className="collections-card-name-skeleton" />
-      ) : (
-        <div className="collections-card-name">{name}</div>
-      )}
-      {loading ? (
-        <></>
-      ) : (
-        <div className="collections-card-action">
-          <i class="fa-solid fa-arrow-right"></i>
-        </div>
-      )}
+      <div className="collections-card-content">
+        {loading ? (
+          <Skeleton className="collections-card-name-skeleton" />
+        ) : (
+          <div title="name" className="collections-card-name">
+            {data.name}
+          </div>
+        )}
+        {loading ? (
+          <Skeleton className="collections-card-action-skeleton" />
+        ) : (
+          <div className="collections-card-action" onClick={preview}>
+            <i class="fa-solid fa-arrow-right"></i>
+          </div>
+        )}
+      </div>
     </div>
   );
 };
@@ -64,7 +87,6 @@ export const EmptyCollectionCard = ({ name }) => {
       ) : (
         <div className="collections-card collections-card-empty">
           <div>Your Favorites List is Empty</div>
-         
         </div>
       )}
     </>
@@ -107,12 +129,12 @@ export const CollectionTab = ({ i, tab, products, preview }) => {
           products.map((data, i) =>
             preview ? (
               browserWidth > 1920 ? (
-                <CollectionCard name={"Product Name"} />
+                <CollectionCard data={data} />
               ) : (
-                i < 5 && <CollectionCard name={"Product Name"} />
+                i < 5 && <CollectionCard data={data} />
               )
             ) : (
-              <CollectionCard name={"Product Name"} />
+              <CollectionCard data={data} />
             )
           )
         ) : (
