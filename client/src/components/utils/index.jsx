@@ -176,9 +176,29 @@ export const FetchFeatured = (setData) => {
   }, [setData]);
 };
 
+
+export const FetchFavorite = (setData) => {
+  useEffect(() => {
+    const storedData = localStorage.getItem("favorite");
+    if (storedData) {
+      setData(JSON.parse(storedData));
+    } else {
+      const fetchData = async () => {
+        try {
+          localStorage.setItem("favorite", JSON.stringify([]));
+        } catch (error) {
+          console.error("Error fetching data:", error);
+        }
+      };
+
+      fetchData();
+    }
+  }, [setData]);
+};
+
 export const FetchDisplayData = (setData) => {
   useEffect(() => {
-    const storedData = localStorage.getItem("display");
+    const storedData = sessionStorage.getItem("display");
     if (storedData) {
       setData(shuffleArray(JSON.parse(storedData))[0]);
     } else {
@@ -186,7 +206,7 @@ export const FetchDisplayData = (setData) => {
         try {
           let Data = shuffleArray(simulate);
           setData(Data[0]);
-          localStorage.setItem("display", JSON.stringify(Data));
+          sessionStorage.setItem("display", JSON.stringify(Data));
         } catch (error) {
           console.error("Error fetching data:", error);
         }
@@ -212,6 +232,8 @@ export function compareObj(first, second) {
 
   return true;
 }
+
+
 
 // export function Scan(data) {
 //   const featured = JSON.parse(localStorage.getItem("featured")) || false;

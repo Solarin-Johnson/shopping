@@ -3,7 +3,7 @@ import "./collection.scss";
 import { useInView } from "react-intersection-observer";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
-import { FetchArrivals, FetchBest, FetchFeatured } from "../utils";
+import { FetchArrivals, FetchBest, FetchFavorite, FetchFeatured } from "../utils";
 import { useDataContext } from "../../DataContext";
 
 export default function Collection() {
@@ -16,7 +16,9 @@ export default function Collection() {
   const [featured, setFeatured] = useState(false);
   FetchFeatured(setFeatured);
 
-  const favorite = [];
+  const [favorite, setFavorite] = useState(false);
+  FetchFavorite(setFavorite);
+
   return (
     <div className="collections">
       <CollectionTab tab={"New Arrivals"} products={arrival} preview={true} />
@@ -41,6 +43,7 @@ export const CollectionCard = ({ data }) => {
   const preview = () => {
     setDisplayData(data);
     sessionStorage.setItem("display", JSON.stringify([data]));
+    handleDataChange(displayData);
   };
   useEffect(() => {
     handleDataChange(displayData);

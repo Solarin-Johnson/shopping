@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import "./display.scss";
-import { FetchDisplayData, Scan } from "../utils";
+import { FetchDisplayData, Scan, compareObj } from "../utils";
 import { useDataContext } from "../../DataContext";
 export default function Display() {
   const { sharedData } = useDataContext();
@@ -37,11 +37,66 @@ export function DisplayCard({ data, favourite, wish, loading }) {
   const [fav, setFav] = useState(favourite);
   const [wished, setWished] = useState(wish);
   const [notify, setNotify] = useState(false);
+  useEffect(() => {
+    const favourite = JSON.parse(localStorage.getItem("favorite"));
+    if (!loading && favourite !== null) {
+      favourite.map((obj) => obj.name).includes(data.name)
+        ? setFav(true)
+        : setFav(false);
+    }
+  }, [data, loading]);
+
+  console.log(fav);
+
   const like = () => {
     if (!loading) {
-      setFav(!fav);
       setNotify(`Product ${!fav ? "added to" : "removed from"} Favorites`);
       stopInterval();
+      const favourite = JSON.parse(localStorage.getItem("favorite"));
+      if (fav) {
+        const updated = favourite.filter((item) => item.name !== data.name);
+        console.log(updated);
+        localStorage.setItem("favorite", JSON.stringify(updated));
+        setFav(false);
+      } else {
+        if (favourite.length > 0) {
+          const updated = favourite.filter((item) => item.name !== data.name);
+          localStorage.setItem("favorite", JSON.stringify([...updated, data]));
+        } else {
+          localStorage.setItem(
+            "favorite",
+            JSON.stringify([...favourite, data])
+          );
+        }
+        setFav(true);
+      }
+      // if (!fav) {
+      //   favourite.length > 0
+      //     ? favourite.map((item, x) => {
+      //         if (compareObj(data, item)) {
+      //           const indexToRemove = favourite.findIndex(
+      //             (items) => items === item
+      //           );
+      //           if (indexToRemove !== -1) {
+      //             favourite.splice(indexToRemove, 1);
+      //           }
+      //         } else {
+      //           localStorage.setItem(
+      //             "favorite",
+      //             JSON.stringify([...favourite, data])
+      //           );
+      //         }
+      //       })
+      //     : localStorage.setItem("favorite", JSON.stringify([data]));
+      // } else {
+      //   favourite.length <= 1 &&
+      //     localStorage.setItem("favorite", JSON.stringify([]));
+      // }
+      // let updated = favourite.filter((item) => compareObj(item, data));
+      // favourite.length > 1
+      //   ? localStorage.setItem("favorite", JSON.stringify(updated))
+      //   : localStorage.setItem("favorite", JSON.stringify([data]));
+      // console.log(updated);
     }
   };
   const wishlist = () => {

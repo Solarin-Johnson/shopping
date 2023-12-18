@@ -13,6 +13,8 @@ export const DataProvider = ({ children }) => {
     setSharedData(newData);
   };
 
+  
+
   return (
     <DataContext.Provider value={{ sharedData, handleDataChange }}>
       {children}
