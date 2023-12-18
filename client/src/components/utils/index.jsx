@@ -196,6 +196,25 @@ export const FetchFavorite = (setData) => {
   }, [setData]);
 };
 
+export const FetchCart = (setData) => {
+  useEffect(() => {
+    const storedData = localStorage.getItem("cart");
+    if (storedData) {
+      setData(JSON.parse(storedData));
+    } else {
+      const fetchData = async () => {
+        try {
+          localStorage.setItem("cart", JSON.stringify([]));
+        } catch (error) {
+          console.error("Error fetching data:", error);
+        }
+      };
+
+      fetchData();
+    }
+  }, [setData]);
+};
+
 export const FetchDisplayData = (setData) => {
   useEffect(() => {
     const storedData = sessionStorage.getItem("display");

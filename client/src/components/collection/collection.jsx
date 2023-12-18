@@ -3,10 +3,18 @@ import "./collection.scss";
 import { useInView } from "react-intersection-observer";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
-import { FetchArrivals, FetchBest, FetchFavorite, FetchFeatured } from "../utils";
+import { useNavigate } from "react-router-dom";
+import {
+  FetchArrivals,
+  FetchBest,
+  FetchFavorite,
+  FetchFeatured,
+} from "../utils";
 import { useDataContext } from "../../DataContext";
 
 export default function Collection() {
+  const { favData } = useDataContext();
+
   const [arrival, setArrival] = useState(false);
   FetchArrivals(setArrival);
 
@@ -17,38 +25,63 @@ export default function Collection() {
   FetchFeatured(setFeatured);
 
   const [favorite, setFavorite] = useState(false);
+  
+  
+  useEffect(() => {
+    setFavorite(favData);
+  }, [favData]);
+  
   FetchFavorite(setFavorite);
-
   return (
     <div className="collections">
-      <CollectionTab tab={"New Arrivals"} products={arrival} preview={true} />
-      <CollectionTab tab={"Best Sellings"} products={best} preview={true} />
-      <CollectionTab tab={"Featured"} products={featured} preview={true} />
-      <CollectionTab tab={"Favorites"} products={favorite} preview={true} />
+      <CollectionTab
+        tab={"New Arrivals"}
+        products={arrival}
+        preview={true}
+        msg="No New Arrivals at the moment"
+      />
+      <CollectionTab
+        tab={"Best Sellings"}
+        products={best}
+        preview={true}
+        msg="No Best Selling Product at the moment"
+      />
+      <CollectionTab
+        tab={"Featured"}
+        products={featured}
+        preview={true}
+        msg="No Featured Product at the moment"
+      />
+      <CollectionTab
+        tab={"Favorites"}
+        products={favorite}
+        preview={true}
+        msg={["Your Favorites List is Empty ", <strong>Add Some! </strong>]}
+      />
     </div>
   );
 }
 
-export const CollectionCard = ({ data }) => {
+export const CollectionCard = ({ data, ispreview }) => {
   const [loading, setLoading] = useState(true);
   const { handleDataChange } = useDataContext();
   const [displayData, setDisplayData] = React.useState();
+  const navigate = useNavigate();
 
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
-    }, 5000);
+    }, 1500);
   });
 
   const preview = () => {
     setDisplayData(data);
     sessionStorage.setItem("display", JSON.stringify([data]));
-    handleDataChange(displayData);
+    handleDataChange(data);
+    !ispreview && navigate("/");
+    window.scrollTo({ top: 0 });
   };
-  useEffect(() => {
-    handleDataChange(displayData);
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  }, [displayData, handleDataChange, data]);
+ 
 
   return (
     <div className="collections-card" onClick={preview}>
@@ -77,12 +110,12 @@ export const CollectionCard = ({ data }) => {
   );
 };
 
-export const EmptyCollectionCard = ({ name }) => {
+export const EmptyCollectionCard = ({ msg }) => {
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
-    }, 5000);
+    }, 1500);
   });
   return (
     <>
@@ -90,14 +123,14 @@ export const EmptyCollectionCard = ({ name }) => {
         <Skeleton className="collections-card-empty-skeleton" />
       ) : (
         <div className="collections-card collections-card-empty">
-          <div>Your Favorites List is Empty</div>
+          <div>{msg}</div>
         </div>
       )}
     </>
   );
 };
 
-export const CollectionTab = ({ i, tab, products, preview }) => {
+export const CollectionTab = ({ i, tab, products, preview, msg }) => {
   const [ref, inView] = useInView({
     triggerOnce: true,
   });
@@ -106,7 +139,7 @@ export const CollectionTab = ({ i, tab, products, preview }) => {
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
-    }, 5000);
+    }, 1500);
   });
 
   const [browserWidth, setBrowserWidth] = useState(window.innerWidth);
@@ -133,16 +166,16 @@ export const CollectionTab = ({ i, tab, products, preview }) => {
           products.map((data, i) =>
             preview ? (
               browserWidth > 1920 ? (
-                <CollectionCard data={data} />
+                <CollectionCard data={data} preview />
               ) : (
-                i < 5 && <CollectionCard data={data} />
+                i < 5 && <CollectionCard data={data} preview />
               )
             ) : (
               <CollectionCard data={data} />
             )
           )
         ) : (
-          <EmptyCollectionCard />
+          <EmptyCollectionCard msg={msg} />
         )}
       </div>
     </div>

@@ -126,6 +126,7 @@
       align-content: center;
       row-gap: 5px;
       height: 280px;
+      line-height: 28px;
 
       &-skeleton {
         height: 280px;
@@ -140,6 +141,10 @@
       }
     }
   }
+}
+
+strong {
+  white-space: nowrap;
 }
 
 @media screen and (max-width: 600px) {

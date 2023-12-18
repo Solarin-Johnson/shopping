@@ -12,7 +12,7 @@ export default function Navigation({ type, title }) {
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
-    }, 5000);
+    }, 1500);
   });
 
   useEffect(() => {
@@ -52,7 +52,7 @@ export function Menu() {
     { icon: "fas fa-bolt", name: "New Arrivals", path: "/arrivals" },
     { icon: "fas fa-star", name: "Best Selling", path: "/best-sellings" },
     { icon: "fas fa-trophy", name: "Featured", path: "/featured" },
-    { icon: "fas fa-heart", name: "Favourites", path: "/" },
+    { icon: "fas fa-heart", name: "Favourites", path: "/favorite" },
   ];
 
   return (
@@ -86,7 +86,7 @@ export function MenuItems({ data, i }) {
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
-    }, 5000);
+    }, 1500);
   });
   const selectMenu = (e, i, path) => {
     // const siblings = Array.from(e.currentTarget.parentElement.children).filter(

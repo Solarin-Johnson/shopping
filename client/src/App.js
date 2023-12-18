@@ -3,7 +3,7 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Home from './pages/home';
 import { DataProvider } from './DataContext';
 import Background from './components/background';
-import { Arrivals, Best, Featured } from './pages/paths';
+import { Arrivals, Best, Favorite, Featured } from './pages/paths';
 
 function App() {
   const links = createBrowserRouter([
@@ -31,6 +31,12 @@ function App() {
       path: "/featured",
       element: (
         <Featured />
+      ),
+    },
+    {
+      path: "/favorite",
+      element: (
+        <Favorite />
       ),
     },
   ])

@@ -4,6 +4,7 @@ import "react-loading-skeleton/dist/skeleton.css";
 import "./display.scss";
 import { FetchDisplayData, Scan, compareObj } from "../utils";
 import { useDataContext } from "../../DataContext";
+
 export default function Display() {
   const { sharedData } = useDataContext();
   const [displayData, setDisplayData] = useState("");
@@ -16,7 +17,7 @@ export default function Display() {
     }
     setTimeout(() => {
       setLoading(false);
-    }, 3000);
+    }, 1500);
   }, [sharedData]);
 
   return (
@@ -33,16 +34,21 @@ export default function Display() {
   );
 }
 
-export function DisplayCard({ data, favourite, wish, loading }) {
-  const [fav, setFav] = useState(favourite);
+export function DisplayCard({ data, wish, loading }) {
+  const { handleFavChange } = useDataContext();
+  const [fav, setFav] = useState();
   const [wished, setWished] = useState(wish);
   const [notify, setNotify] = useState(false);
   useEffect(() => {
     const favourite = JSON.parse(localStorage.getItem("favorite"));
-    if (!loading && favourite !== null) {
+    const cart = JSON.parse(localStorage.getItem("cart"));
+    if ((!loading && favourite !== null, cart !== null)) {
       favourite.map((obj) => obj.name).includes(data.name)
         ? setFav(true)
         : setFav(false);
+      cart.map((obj) => obj.name).includes(data.name)
+        ? setWished(true)
+        : setWished(false);
     }
   }, [data, loading]);
 
@@ -58,15 +64,18 @@ export function DisplayCard({ data, favourite, wish, loading }) {
         console.log(updated);
         localStorage.setItem("favorite", JSON.stringify(updated));
         setFav(false);
+        handleFavChange(updated);
       } else {
         if (favourite.length > 0) {
           const updated = favourite.filter((item) => item.name !== data.name);
           localStorage.setItem("favorite", JSON.stringify([...updated, data]));
+          handleFavChange([...updated, data]);
         } else {
           localStorage.setItem(
             "favorite",
             JSON.stringify([...favourite, data])
           );
+          handleFavChange([...favourite, data]);
         }
         setFav(true);
       }
@@ -101,9 +110,30 @@ export function DisplayCard({ data, favourite, wish, loading }) {
   };
   const wishlist = () => {
     if (!loading) {
-      setWished(!wished);
       setNotify(`Product ${!wished ? "added to" : "removed from"} Wishlist`);
       stopInterval();
+      const cart = JSON.parse(localStorage.getItem("cart"));
+      if (wished) {
+        const updated = cart.filter((item) => item.name !== data.name);
+        console.log(updated);
+        localStorage.setItem("cart", JSON.stringify(updated));
+        setWished(false);
+        handleFavChange(updated);
+      } else {
+        if (cart.length > 0) {
+          const updated = cart.filter((item) => item.name !== data.name);
+          localStorage.setItem("cart", JSON.stringify([...updated, data]));
+          handleFavChange([...updated, data]);
+        } else {
+          localStorage.setItem(
+            "cart",
+            JSON.stringify([...cart, data])
+          );
+          handleFavChange([...cart, data]);
+        }
+      }
+
+      setWished(!wished);
     }
   };
 

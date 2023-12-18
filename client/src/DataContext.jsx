@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useState } from "react";
 
 const DataContext = createContext();
 
@@ -7,16 +7,20 @@ export const useDataContext = () => {
 };
 
 export const DataProvider = ({ children }) => {
-  const [sharedData, setSharedData] = useState('');
+  const [sharedData, setSharedData] = useState("");
+  const [favData, setFavData] = useState("");
 
-  const handleDataChange = newData => {
+  const handleDataChange = (newData) => {
     setSharedData(newData);
   };
-
-  
+  const handleFavChange = (newData) => {
+    setFavData(newData);
+  };
 
   return (
-    <DataContext.Provider value={{ sharedData, handleDataChange }}>
+    <DataContext.Provider
+      value={{ sharedData, handleDataChange, favData, handleFavChange }}
+    >
       {children}
     </DataContext.Provider>
   );

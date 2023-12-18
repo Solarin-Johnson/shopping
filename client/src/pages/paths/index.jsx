@@ -2,7 +2,12 @@ import { useEffect, useState } from "react";
 import { CollectionTab } from "../../components/collection/collection";
 import Navigation from "../../components/navigation/navigation";
 import "./path.scss";
-import { FetchArrivals, FetchBest, FetchFeatured, simulate } from "../../components/utils";
+import {
+  FetchArrivals,
+  FetchBest,
+  FetchFavorite,
+  FetchFeatured,
+} from "../../components/utils";
 
 export default function Pages({ products, title }) {
   return (
@@ -23,7 +28,7 @@ export function Arrivals() {
 export function Best() {
   const [data, setData] = useState(false);
   FetchBest(setData);
-  
+
   sessionStorage.setItem("menu", 1);
   return <Pages products={data} title={"Best Sellings"} />;
 }
@@ -32,10 +37,12 @@ export function Featured() {
   const [data, setData] = useState(false);
   FetchFeatured(setData);
   sessionStorage.setItem("menu", 2);
-  return (
-    <Pages
-      products={data}
-      title={"Featured"}
-    />
-  );
+  return <Pages products={data} title={"Featured"} />;
+}
+
+export function Favorite() {
+  const [data, setData] = useState(false);
+  FetchFavorite(setData);
+  sessionStorage.setItem("menu", 3);
+  return <Pages products={data} title={"Favorites"} />;
 }
