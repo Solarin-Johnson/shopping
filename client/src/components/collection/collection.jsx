@@ -58,16 +58,16 @@ export const CollectionCard = ({ data }) => {
         {loading ? (
           <Skeleton className="collections-card-name-skeleton" />
         ) : (
-          <div title="name" className="collections-card-name">
+          <div title={data.name} className="collections-card-name">
             {data.name}
           </div>
         )}
         {loading ? (
           <Skeleton className="collections-card-action-skeleton" />
         ) : (
-          <div className="collections-card-action">
+          <button className="collections-card-action">
             <i class="fa-solid fa-arrow-right"></i>
-          </div>
+          </button>
         )}
       </div>
     </div>

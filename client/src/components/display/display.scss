@@ -115,11 +115,12 @@
       font-size: clamp(15px, 1vw, 18px);
       font-weight: 400;
     }
+
     &-btn {
       .btn-skeleton {
+        border-radius: 50%;
         width: 35px;
         height: 35px;
-        border-radius: 50%;
       }
       padding-top: clamp(15px, 5vw, 30px);
       display: grid;
@@ -129,8 +130,24 @@
       align-items: center;
       justify-content: start;
       justify-items: center;
-      i {
+      button {
         cursor: pointer;
+        color: inherit;
+        background-color: inherit;
+        border: none;
+        font-size: inherit;
+        margin-left: -5px;
+        border-radius: 50%;
+        width: 35px;
+        height: 35px;
+        overflow: hidden;
+        display: grid;
+        place-items: center;
+        place-content: center;
+        padding: 4px;
+        i {
+          padding: 5px;
+        }
       }
       .favorite,
       .wishlist {
@@ -138,8 +155,8 @@
       }
       .wishlist {
         font-size: 22px;
-        i {
-          margin-left: 15px;
+        button {
+          margin-left: 2px;
         }
       }
       #liked {

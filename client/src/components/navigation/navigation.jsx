@@ -108,7 +108,7 @@ export function MenuItems({ data, i }) {
     }
   }, []);
   return (
-    <div
+    <button
       onClick={(e) => selectMenu(e, i, data.path)}
       className={`menu-items ${i === currentMenu && "menu-active"}`}
       key={i}
@@ -123,6 +123,6 @@ export function MenuItems({ data, i }) {
       ) : (
         <span>{data.name}</span>
       )}
-    </div>
+    </button>
   );
 }

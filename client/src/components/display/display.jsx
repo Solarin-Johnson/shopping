@@ -96,7 +96,9 @@ export function DisplayCard({ data, favourite, wish, loading }) {
       <div className="display-card-btn">
         <div className="favorite" id={fav ? "liked" : ""} onClick={like}>
           {!loading ? (
-            <i class={`${fav ? "fa-solid" : "fa-regular"} fa-heart`}></i>
+            <button>
+              <i class={`${fav ? "fa-solid" : "fa-regular"} fa-heart`}></i>
+            </button>
           ) : (
             <Skeleton className="btn-skeleton" />
           )}
@@ -107,7 +109,9 @@ export function DisplayCard({ data, favourite, wish, loading }) {
           onClick={wishlist}
         >
           {!loading ? (
-            <i class="fa-solid fa-cart-shopping"></i>
+            <button>
+              <i class="fa-solid fa-cart-shopping"></i>{" "}
+            </button>
           ) : (
             <Skeleton className="btn-skeleton" />
           )}

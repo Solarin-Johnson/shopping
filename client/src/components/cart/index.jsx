@@ -11,7 +11,7 @@ export default function Cart() {
     }, 5000);
   });
   return (
-    <div className="cart">
+    <button className="cart">
       {!loading ? (
         <div className="cart-icon">
           <i class="fa-solid fa-cart-shopping"></i>
@@ -19,6 +19,6 @@ export default function Cart() {
       ) : (
         <Skeleton className="cart-icon-skeleton" />
       )}
-    </div>
+    </button>
   );
 }

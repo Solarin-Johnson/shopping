@@ -87,7 +87,16 @@
     &:has(.menu-items-text-skeleton) {
       column-gap: 40px;
     }
+    button:focus {
+      outline: 2px solid var(--text-color);
+      border-radius: 4px;
+    }
     &-items {
+      background-color: transparent;
+      border: none;
+      color: inherit;
+      padding-top: 0;
+      padding-bottom: 0;
       &-icon-skeleton {
         width: 18px;
         height: 18px;
