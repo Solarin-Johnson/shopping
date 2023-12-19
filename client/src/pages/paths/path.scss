@@ -5,8 +5,8 @@
 .pages {
   &-container {
     display: grid;
-    padding: var(--page-top) 6vw 80px;
-    width: 88vw;
+    width: calc(100vw - (2 * var(--padding)));
+    padding: clamp(35px, 10vw, 60px) var(--padding) 80px;
     justify-items: center;
   }
 }

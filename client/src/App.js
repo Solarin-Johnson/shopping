@@ -2,8 +2,8 @@ import './App.scss';
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Home from './pages/home';
 import { DataProvider } from './DataContext';
-import Background from './components/background';
 import { Arrivals, Best, Favorite, Featured } from './pages/paths';
+import WishList from './pages/cart';
 
 function App() {
   const links = createBrowserRouter([
@@ -37,6 +37,12 @@ function App() {
       path: "/favorite",
       element: (
         <Favorite />
+      ),
+    },
+    {
+      path: "/cart",
+      element: (
+        <WishList />
       ),
     },
   ])
