@@ -24,17 +24,23 @@
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
   overflow-x: auto;
+  justify-items: center;
+  // overflow-x: hidden;
 
   &-tab {
     scroll-snap-align: center;
     min-height: 0;
     display: grid;
     grid-template-rows: 30px 1fr;
+    grid-template-columns: auto;
     row-gap: 30px;
+    max-width: 1920px;
+    width: calc(100vw - (2 * var(--padding)));
     // &::-webkit-scrollbar {
     //   display: none;
     // }
     &-head {
+      justify-self: start;
       font-size: clamp(22px, 2.5vw, 30px);
       font-weight: 500;
       color: #3d9412;
@@ -59,12 +65,17 @@
     grid-template-rows: 280px auto;
     row-gap: 15px;
     height: 320px;
-    &:nth-child(odd) {
+    &:nth-child(4n + 3) {
+      .collections-card-image {
+        background-color: #81e57c;
+      }
+    }
+    &:nth-child(2n + 2) {
       .collections-card-image {
         background-color: #fff276;
       }
     }
-    &:nth-child(even) {
+    &:nth-child(4n + 1) {
       .collections-card-image {
         background-color: #ffb8c7;
       }

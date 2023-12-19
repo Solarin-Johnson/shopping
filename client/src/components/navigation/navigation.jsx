@@ -12,7 +12,7 @@ export default function Navigation({ type, title }) {
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
-    }, 1500);
+    }, 500);
   });
 
   useEffect(() => {
@@ -38,9 +38,9 @@ export default function Navigation({ type, title }) {
   return (
     <div className="navigation" id={!scrollUp ? "" : "slide-up"}>
       <div className="logo"></div>
-      <div className="navigation-title">
+      <span className="navigation-title">
         {loading ? <Skeleton className="navigation-title-skeleton" /> : title}
-      </div>
+      </span>
       <Nav />
       <Menu />
     </div>
@@ -86,7 +86,7 @@ export function MenuItems({ data, i }) {
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
-    }, 1500);
+    }, 500);
   });
   const selectMenu = (e, i, path) => {
     // const siblings = Array.from(e.currentTarget.parentElement.children).filter(

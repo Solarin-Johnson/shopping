@@ -1,7 +1,18 @@
+:root {
+  --page-top: 70px;
+}
+
 .pages {
   &-container {
     display: grid;
-    padding: 50px 6vw 80px;
+    padding: var(--page-top) 6vw 80px;
     width: 88vw;
+    justify-items: center;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  :root {
+    --page-top: 25px;
   }
 }

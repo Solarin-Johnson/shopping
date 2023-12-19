@@ -25,12 +25,11 @@ export default function Collection() {
   FetchFeatured(setFeatured);
 
   const [favorite, setFavorite] = useState(false);
-  
-  
+
   useEffect(() => {
     setFavorite(favData);
   }, [favData]);
-  
+
   FetchFavorite(setFavorite);
   return (
     <div className="collections">
@@ -71,7 +70,7 @@ export const CollectionCard = ({ data, ispreview }) => {
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
-    }, 1500);
+    }, 500);
   });
 
   const preview = () => {
@@ -81,7 +80,6 @@ export const CollectionCard = ({ data, ispreview }) => {
     !ispreview && navigate("/");
     window.scrollTo({ top: 0 });
   };
- 
 
   return (
     <div className="collections-card" onClick={preview}>
@@ -115,7 +113,7 @@ export const EmptyCollectionCard = ({ msg }) => {
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
-    }, 1500);
+    }, 500);
   });
   return (
     <>
@@ -139,7 +137,7 @@ export const CollectionTab = ({ i, tab, products, preview, msg }) => {
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
-    }, 1500);
+    }, 500);
   });
 
   const [browserWidth, setBrowserWidth] = useState(window.innerWidth);

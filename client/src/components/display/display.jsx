@@ -17,7 +17,7 @@ export default function Display() {
     }
     setTimeout(() => {
       setLoading(false);
-    }, 1500);
+    }, 500);
   }, [sharedData]);
 
   return (
@@ -125,10 +125,7 @@ export function DisplayCard({ data, wish, loading }) {
           localStorage.setItem("cart", JSON.stringify([...updated, data]));
           handleFavChange([...updated, data]);
         } else {
-          localStorage.setItem(
-            "cart",
-            JSON.stringify([...cart, data])
-          );
+          localStorage.setItem("cart", JSON.stringify([...cart, data]));
           handleFavChange([...cart, data]);
         }
       }

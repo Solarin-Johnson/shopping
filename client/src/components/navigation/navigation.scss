@@ -34,12 +34,13 @@
   grid-template-columns: auto auto 1fr auto;
   justify-items: start;
   color: var(--text-color);
+  // background-color: blue;
   &-title {
     text-align: left;
     font-size: var(--title-font-size);
     font-weight: 500;
     color: var(--text-color);
-    font-family: "Concert One";
+    font-family: "Concert One", serif;
     padding-bottom: var(--bug);
     min-width: 140px;
     // white-space: nowrap;
@@ -58,7 +59,7 @@
     // padding: var(--menu-padding);
     display: grid;
     grid-template-columns: repeat(2, auto);
-    column-gap: 50px;
+    column-gap: 30px;
     &:has(.menu-items-text-skeleton) {
       column-gap: 40px;
     }
@@ -73,7 +74,7 @@
   }
   .menu {
     justify-self: end;
-    background-color: var(--bottom-menu-color);
+    background: var(--bottom-menu-color);
     width: var(--menu-width);
     position: var(--menu-position);
     bottom: var(--menu-bottom);
@@ -91,8 +92,12 @@
       outline: 2px solid var(--text-color);
       border-radius: 4px;
     }
+    button:active {
+      outline: none;
+    }
     &-items {
       background-color: transparent;
+      // background-color: red;
       border: none;
       color: inherit;
       padding-top: 0;
@@ -124,6 +129,7 @@
       span {
         font-size: var(--menu-font-size);
         text-align: center;
+        font-weight: 500;
       }
       i {
         font-size: var(--menu-icon-size);
@@ -150,10 +156,10 @@
     --menu-padding: 15px 0;
     --backdrop: none;
     --header-trans: #ffffff;
-    --bottom-menu-color: #ffffffe8;
+    --bottom-menu-color: linear-gradient(to bottom, #ffffffc2, #fffffffb, #fff);
     --nav-margin: 0;
     --nav-padding: 16px 6vw;
-    --bug: 6px;
+    --bug: clamp(0px, calc(50px - 10vw), 12px);
     --nav-justify: end;
   }
   // .nav:has(.menu-items-text-skeleton) {

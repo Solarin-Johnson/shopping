@@ -9,11 +9,11 @@ import {
   FetchFeatured,
 } from "../../components/utils";
 
-export default function Pages({ products, title }) {
+export default function Pages({ products, title, msg }) {
   return (
     <div className="pages-container">
       <Navigation home={false} title={title} />
-      <CollectionTab products={products} />
+      <CollectionTab products={products} msg={msg} />
     </div>
   );
 }
@@ -44,5 +44,11 @@ export function Favorite() {
   const [data, setData] = useState(false);
   FetchFavorite(setData);
   sessionStorage.setItem("menu", 3);
-  return <Pages products={data} title={"Favorites"} />;
+  return (
+    <Pages
+      products={data}
+      title={"Favorites"}
+      msg={["Your Favorites List is Empty ", <strong> Add Some! </strong>]}
+    />
+  );
 }
