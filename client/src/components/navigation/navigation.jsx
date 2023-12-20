@@ -3,6 +3,7 @@ import "./navigation.scss";
 import { useNavigate } from "react-router-dom";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
+import Cart from "../cart";
 
 export default function Navigation({ type, title }) {
   const [scrollPosition, setScrollPosition] = useState(0);
@@ -36,14 +37,17 @@ export default function Navigation({ type, title }) {
     };
   }, [scrollPosition, scrollUp, type]);
   return (
-    <div className="navigation" id={!scrollUp ? "" : "slide-up"}>
-      <div className="logo"></div>
-      <span className="navigation-title">
-        {loading ? <Skeleton className="navigation-title-skeleton" /> : title}
-      </span>
-      <Nav />
-      <Menu />
-    </div>
+    <>
+      <Cart />
+      <div className="navigation" id={!scrollUp ? "" : "slide-up"}>
+        <div className="logo"></div>
+        <span className="navigation-title">
+          {loading ? <Skeleton className="navigation-title-skeleton" /> : title}
+        </span>
+        <Nav />
+        <Menu />
+      </div>
+    </>
   );
 }
 

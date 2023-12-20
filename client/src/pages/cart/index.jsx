@@ -5,19 +5,35 @@ import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 
 export default function WishList() {
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 500);
+  }, []);
+
   return (
     <div className="cart-container">
       <Navigation home={false} title={"Cart"} />
       <div className="wishlist-container">
         <div className="wishlist-data">
           <div className="wishlist-data-container">
-            <WishlistCard />
-            <WishlistCard />
-            <WishlistCard />
-            <WishlistCard />
-            <WishlistCard />
-            <WishlistCard />
-            <WishlistCard />
+            {loading ? (
+              <>
+                <Skeleton className="wishlist-card-skeleton" />
+                <Skeleton className="wishlist-card-skeleton" />
+              </>
+            ) : (
+              <>
+                <WishlistCard />
+                <WishlistCard />
+                <WishlistCard />
+                <WishlistCard />
+                <WishlistCard />
+                <WishlistCard />
+                <WishlistCard />
+              </>
+            )}
           </div>
           <div className="wishlist-button">
             <div className="sub-total">
@@ -36,20 +52,8 @@ export default function WishList() {
 }
 
 export const WishlistCard = () => {
-  const [loading, setLoading] = useState(true);
-  useEffect(() => {
-    setTimeout(() => {
-      setLoading(false);
-    }, 1500);
-  }, []);
-
-  return (
-    <>
-      {loading ? (
-        <Skeleton className="wishlist-card-skeleton" />
-      ) : (
-        <div className="wishlist-card"></div>
-      )}
-    </>
-  );
+  return <div className="wishlist-card">
+    <div className="wishlist-card-image"></div>
+    <div className="wishlist-card-product"></div>
+  </div>;
 };

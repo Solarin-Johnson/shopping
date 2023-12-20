@@ -61,7 +61,7 @@
     grid-template-columns: repeat(2, auto);
     column-gap: 30px;
     &:has(.menu-items-text-skeleton) {
-      column-gap: 40px;
+      column-gap: 35px;
     }
     // .menu-items {
     //   span {
@@ -85,9 +85,7 @@
     justify-content: space-evenly;
     column-gap: var(--column-gap);
     min-width: clamp(auto, 50vw, 600px);
-    &:has(.menu-items-text-skeleton) {
-      column-gap: 40px;
-    }
+   
     button:focus {
       outline: 2px solid var(--text-color);
       border-radius: 4px;

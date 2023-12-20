@@ -10,7 +10,6 @@ export default function Home() {
       <Navigation title={"Home"} type={true} />
       <Display />
       <Collection />
-      <Cart />
     </>
   );
 }
