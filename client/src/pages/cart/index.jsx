@@ -25,7 +25,11 @@ export default function WishList() {
               </>
             ) : (
               <>
-                <WishlistCard />
+                <WishlistCard
+                  product={"Product Name"}
+                  price={30000}
+                  items={3}
+                />
                 <WishlistCard />
                 <WishlistCard />
                 <WishlistCard />
@@ -51,9 +55,16 @@ export default function WishList() {
   );
 }
 
-export const WishlistCard = () => {
-  return <div className="wishlist-card">
-    <div className="wishlist-card-image"></div>
-    <div className="wishlist-card-product"></div>
-  </div>;
+export const WishlistCard = ({ product, price, items }) => {
+  return (
+    <div className="wishlist-card">
+      <div className="wishlist-card-image"></div>
+      <div className="wishlist-card-product">{product}</div>
+      <div className="wishlist-card-price">{price} NGN</div>
+      <div className="wishlist-card-items"></div>
+      <div className="wishlist-card-delete">
+        <i class="fa-solid fa-xmark"></i>
+      </div>
+    </div>
+  );
 };
