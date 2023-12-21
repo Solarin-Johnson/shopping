@@ -157,7 +157,10 @@ export const WishlistCard = ({
     <>
       <div className="wishlist-card-image"></div>
       <div className="wishlist-card-product">{product}</div>
-      <div className="wishlist-card-price">{`${price.toLocaleString()} NGN`}</div>
+      <div className="wishlist-card-price">{`${parseFloat(
+        price,
+        10
+      ).toLocaleString()} NGN`}</div>
       <div className="wishlist-card-items" ref={itemsRef}>
         <div className="minus" onClick={minus}>
           <i class="fa-solid fa-minus"></i>
