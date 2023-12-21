@@ -33,7 +33,7 @@
   }
   &-data {
     max-width: 800px;
-    max-height: var(--data-height);
+    height: var(--data-height);
     display: grid;
     grid-template-rows: repeat(2, auto);
     align-content: start;
@@ -153,10 +153,9 @@
       border-radius: 10px;
     }
 
-    border-radius: 10px;
+    border-radius: 14px;
     height: 110px;
-    box-shadow: 0 0 20px #00000010;
-    box-shadow: 0px 5px 18px 0px #00000015;
+    box-shadow: 0px 5px 18px 0px #00000012;
     width: 100%;
     transition: 0.4s ease-in;
     display: grid;
@@ -244,7 +243,7 @@
     }
 
     &:hover {
-      box-shadow: 0px 5px 20px 0px #00000030;
+      box-shadow: 0px 5px 20px 0px #00000025;
     }
 
     &-empty {
