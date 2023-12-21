@@ -12,9 +12,15 @@ export default function WishList() {
     }, 500);
   }, []);
 
+  const [sumTotal, setSumTotal] = useState(0);
+
+  const total = (data) => {
+    setSumTotal(data);
+  };
+
   return (
     <div className="cart-container">
-      <Navigation home={false} title={"Cart"} />
+      <Navigation type={false} title={"Cart"} cart={true} />
       <div className="wishlist-container">
         <div className="wishlist-data">
           <div className="wishlist-data-container">
@@ -29,6 +35,7 @@ export default function WishList() {
                   product={"Product Name"}
                   price={30000}
                   items={3}
+                  total={total}
                 />
                 <WishlistCard />
                 <WishlistCard />
@@ -55,8 +62,9 @@ export default function WishList() {
   );
 }
 
-export const WishlistCard = ({ product, price, items }) => {
+export const WishlistCard = ({ product, price, items, total }) => {
   const itemsRef = useRef(null);
+  const [itemsNumber, setItemsNumber] = useState(1);
   useEffect(() => {
     const updateDivWidthAttribute = () => {
       const divWidth = itemsRef.current.parentElement.offsetWidth;
@@ -75,18 +83,36 @@ export const WishlistCard = ({ product, price, items }) => {
     };
   }, []);
 
+  useEffect(() => {
+    if (total) {
+      total(itemsNumber * Number(price));
+    }
+  }, [itemsNumber, total, price]);
+
+  const minus = () => {
+    if (Number(itemsNumber) > 1) {
+      setItemsNumber(itemsNumber - 1);
+    }
+  };
+
+  const plus = () => {
+    if (Number(itemsNumber) + 1 <= items) {
+      setItemsNumber(itemsNumber + 1);
+    }
+  };
+
   return (
     <div className="wishlist-card">
       <div className="wishlist-card-image"></div>
       <div className="wishlist-card-product">{product}</div>
       <div className="wishlist-card-price">{price} NGN</div>
       <div className="wishlist-card-items" ref={itemsRef}>
-        <div className="minus">
-          <i class="fa-solid fa-plus"></i>
-        </div>
-        <div className="value">1</div>
-        <div className="plus">
+        <div className="minus" onClick={minus}>
           <i class="fa-solid fa-minus"></i>
+        </div>
+        <div className="value">{itemsNumber}</div>
+        <div className="plus" onClick={plus}>
+          <i class="fa-solid fa-plus"></i>
         </div>
       </div>
       <div className="wishlist-card-delete">

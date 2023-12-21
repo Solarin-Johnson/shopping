@@ -5,7 +5,7 @@ import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import Cart from "../cart";
 
-export default function Navigation({ type, title }) {
+export default function Navigation({ type, title, cart }) {
   const [scrollPosition, setScrollPosition] = useState(0);
   const [loading, setLoading] = useState(true);
   const [scrollUp, setScrollUp] = useState(false);
@@ -38,7 +38,7 @@ export default function Navigation({ type, title }) {
   }, [scrollPosition, scrollUp, type]);
   return (
     <>
-      <Cart />
+      {!cart && <Cart />}
       <div className="navigation" id={!scrollUp ? "" : "slide-up"}>
         <div className="logo"></div>
         <span className="navigation-title">
