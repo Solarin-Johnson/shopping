@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Navigation from "../../components/navigation/navigation";
 import "./wishlist.scss";
 import Skeleton from "react-loading-skeleton";
@@ -56,12 +56,39 @@ export default function WishList() {
 }
 
 export const WishlistCard = ({ product, price, items }) => {
+  const itemsRef = useRef(null);
+  useEffect(() => {
+    const updateDivWidthAttribute = () => {
+      const divWidth = itemsRef.current.parentElement.offsetWidth;
+      if (divWidth < 500) {
+        itemsRef.current.classList.add("small_items");
+      } else {
+        itemsRef.current.classList.remove("small_items");
+      }
+    };
+
+    updateDivWidthAttribute();
+    window.addEventListener("resize", updateDivWidthAttribute);
+
+    return () => {
+      window.removeEventListener("resize", updateDivWidthAttribute);
+    };
+  }, []);
+
   return (
     <div className="wishlist-card">
       <div className="wishlist-card-image"></div>
       <div className="wishlist-card-product">{product}</div>
       <div className="wishlist-card-price">{price} NGN</div>
-      <div className="wishlist-card-items"></div>
+      <div className="wishlist-card-items" ref={itemsRef}>
+        <div className="minus">
+          <i class="fa-solid fa-plus"></i>
+        </div>
+        <div className="value">1</div>
+        <div className="plus">
+          <i class="fa-solid fa-minus"></i>
+        </div>
+      </div>
       <div className="wishlist-card-delete">
         <i class="fa-solid fa-xmark"></i>
       </div>

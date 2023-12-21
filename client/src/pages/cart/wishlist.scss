@@ -185,7 +185,20 @@ body:has(.s) {
 
     &-items {
       grid-area: items;
-      background: #000;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      align-items: center;
+      font-weight: 600;
+      justify-items: center;
+      font-size: clamp(12px, 3vw, 14px);
+
+      .value {
+      }
+
+      &.small_items {
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(3, 1fr);
+      }
     }
     &-delete {
       grid-area: delete;
