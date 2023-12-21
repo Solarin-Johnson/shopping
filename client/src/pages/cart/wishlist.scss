@@ -124,28 +124,6 @@
       }
     }
   }
-  &-preview {
-    margin-top: 20px;
-    justify-self: center;
-    border-radius: 10px;
-    border: 2px dashed #00000080;
-    display: var(--preview-display);
-    width: 80%;
-    align-self: center;
-    height: 560px;
-    max-width: 500px;
-
-    &-empty {
-      font-size: clamp(16px, 3vw, 28px);
-      color: var(--text-color);
-      align-self: center;
-      justify-self: center;
-      margin: 0 20%;
-      text-align: center;
-      line-height: 1.6;
-      font-weight: 500;
-    }
-  }
 
   &-card {
     &-skeleton {
@@ -276,6 +254,79 @@
         padding: 0 10px;
         line-height: 25px;
       }
+    }
+  }
+}
+
+.preview {
+  margin-top: 20px;
+  justify-self: center;
+  border-radius: 10px;
+  border: 2px dashed #00000080;
+  display: var(--preview-display);
+  width: 80%;
+  align-self: start;
+  height: 560px;
+  max-width: 500px;
+  overflow: hidden;
+
+  &-empty {
+    font-size: clamp(16px, 3vw, 28px);
+    color: var(--text-color);
+    align-self: center;
+    justify-self: center;
+    margin: 0 20%;
+    text-align: center;
+    line-height: 1.6;
+    font-weight: 500;
+  }
+
+  &-card {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    padding: 20px;
+    align-content: start;
+    row-gap: 20px;
+    width: calc(100% - 40px);
+
+    &-label {
+      padding-top: 20px;
+      display: grid;
+      grid-template-columns: repeat(2, auto);
+      justify-content: start;
+      column-gap: 20px;
+    }
+    &-tag,
+    &-avail {
+      padding: clamp(6px, 1vw, 4px) clamp(20px, 2vw, 25px);
+      border-radius: 4px;
+      font-size: 15px;
+      font-weight: 400;
+      min-width: 20px;
+      display: grid;
+      height: 24px;
+      align-items: center;
+    }
+
+    &-avail {
+      background-color: #ffdf00;
+    }
+    &-tag {
+      background-color: #ff91af;
+    }
+
+    &-image {
+      background-color: #00000010;
+      height: 150px;
+      border-radius: 10px;
+    }
+    &-desc {
+      color: var(--text-color);
+      font-size: 17px;
+      font-weight: 600;
+      line-height: 1.7;
     }
   }
 }

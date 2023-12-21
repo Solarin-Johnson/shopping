@@ -83,11 +83,11 @@ export default function WishList() {
               </div>
             </div>
           </div>
-          <div className="wishlist-preview">
-            {PreviewIndex ? (
-              <PreviewIndexCard />
+          <div className="preview">
+            {PreviewIndex && wishlist[PreviewIndex] !== undefined ? (
+              <PreviewIndexCard data={wishlist[PreviewIndex]} />
             ) : (
-              <div className="wishlist-preview-empty">
+              <div className="preview-empty">
                 Select A Product to Preview it Here
               </div>
             )}
@@ -191,4 +191,15 @@ export const EmpyWishlistCard = ({ loading }) => {
   );
 };
 
-export const PreviewIndexCard = () => {};
+export const PreviewIndexCard = ({ data }) => {
+  return (
+    <div className="preview-card">
+      <div className="preview-card-image"></div>
+      <div className="preview-card-label">
+        <div className="preview-card-tag">{data.tag}</div>
+        <div className="preview-card-avail">{data.avail}</div>
+      </div>
+      <div className="preview-card-desc">{data.desc}</div>
+    </div>
+  );
+};
