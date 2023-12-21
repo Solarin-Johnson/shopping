@@ -152,6 +152,7 @@
       width: clamp(45px, 16vw, 85px);
       height: clamp(45px, 16vw, 85px);
       border-radius: 50%;
+      cursor: pointer;
     }
 
     &-product,
@@ -324,9 +325,15 @@
     }
     &-desc {
       color: var(--text-color);
-      font-size: 17px;
+      font-size: 16px;
       font-weight: 600;
       line-height: 1.7;
+    }
+
+    &-name {
+      color: var(--text-color);
+      font-size: 24px;
+      font-weight: 600;
     }
   }
 }

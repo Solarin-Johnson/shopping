@@ -199,6 +199,7 @@ export const PreviewIndexCard = ({ data }) => {
         <div className="preview-card-tag">{data.tag}</div>
         <div className="preview-card-avail">{data.avail}</div>
       </div>
+      <div className="preview-card-name">{data.name}</div>
       <div className="preview-card-desc">{data.desc}</div>
     </div>
   );
