@@ -1,68 +1,113 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import Navigation from "../../components/navigation/navigation";
 import "./wishlist.scss";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
+import { FetchCart } from "../../components/utils";
 
 export default function WishList() {
   const [loading, setLoading] = useState(true);
+  const [wishlist, setWishlist] = useState();
+  const [sumTotal, setSumTotal] = useState(0);
+  // const [prices, setPrices] = useState([]);
+  const [PreviewIndex, setPreviewIndex] = useState(false);
+  FetchCart(setWishlist);
+  const prices = wishlist && wishlist.map((data) => parseFloat(data.price, 10));
+  // useEffect(() => {
+  // }, [wishlist]);
+
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
     }, 500);
   }, []);
 
-  const [sumTotal, setSumTotal] = useState(0);
+  // useEffect(() => {
+  //   if (prices) {
 
-  const total = (data) => {
-    setSumTotal(data);
+  //   }
+  // }, [prices]);
+
+  const total = (data, i) => {
+    prices[i] = data;
+    const sum = prices.reduce(
+      (accumulator, currentValue) => accumulator + currentValue,
+      0
+    );
+    setSumTotal(sum);
+  };
+
+  const updateCart = (data) => {
+    setWishlist(data);
   };
 
   return (
     <div className="cart-container">
       <Navigation type={false} title={"Cart"} cart={true} />
-      <div className="wishlist-container">
-        <div className="wishlist-data">
-          <div className="wishlist-data-container">
-            {loading ? (
-              <>
-                <Skeleton className="wishlist-card-skeleton" />
-                <Skeleton className="wishlist-card-skeleton" />
-              </>
+      {wishlist !== undefined && wishlist.length > 0 ? (
+        <div className="wishlist-container">
+          <div className="wishlist-data">
+            <div className="wishlist-data-container">
+              {loading ? (
+                <>
+                  <Skeleton className="wishlist-card-skeleton" />
+                </>
+              ) : (
+                <>
+                  {wishlist.map((data, i) => (
+                    <div
+                      className="wishlist-card"
+                      onClick={() => setPreviewIndex(i.toString())}
+                    >
+                      <WishlistCard
+                        key={i}
+                        product={data.name}
+                        price={data.price}
+                        items={3}
+                        total={total}
+                        index={i}
+                        updateCart={updateCart}
+                      />
+                    </div>
+                  ))}
+                </>
+              )}
+            </div>
+            <div className="wishlist-button">
+              <div className="sub-total">
+                <span>Sum Total</span>
+                <span>{`${sumTotal.toLocaleString()} NGN`}</span>
+              </div>
+              <div className="place-order">
+                Place Order <span className="fas fa-arrow-right"></span>
+              </div>
+            </div>
+          </div>
+          <div className="wishlist-preview">
+            {PreviewIndex ? (
+              <PreviewIndexCard />
             ) : (
-              <>
-                <WishlistCard
-                  product={"Product Name"}
-                  price={30000}
-                  items={3}
-                  total={total}
-                />
-                <WishlistCard />
-                <WishlistCard />
-                <WishlistCard />
-                <WishlistCard />
-                <WishlistCard />
-                <WishlistCard />
-              </>
+              <div className="wishlist-preview-empty">
+                Select A Product to Preview it Here
+              </div>
             )}
           </div>
-          <div className="wishlist-button">
-            <div className="sub-total">
-              <span>Sum Total</span>
-              <span>320,000 NGN</span>
-            </div>
-            <div className="place-order">
-              Place Order <span className="fas fa-arrow-right"></span>
-            </div>
-          </div>
         </div>
-        <div className="wishlist-preview"></div>
-      </div>
+      ) : (
+        <EmpyWishlistCard loading={loading} />
+      )}
     </div>
   );
 }
 
-export const WishlistCard = ({ product, price, items, total }) => {
+export const WishlistCard = ({
+  product,
+  price,
+  items,
+  total,
+  index,
+  updateCart,
+}) => {
   const itemsRef = useRef(null);
   const [itemsNumber, setItemsNumber] = useState(1);
   useEffect(() => {
@@ -82,30 +127,37 @@ export const WishlistCard = ({ product, price, items, total }) => {
       window.removeEventListener("resize", updateDivWidthAttribute);
     };
   }, []);
-
   useEffect(() => {
-    if (total) {
-      total(itemsNumber * Number(price));
-    }
-  }, [itemsNumber, total, price]);
+    total(itemsNumber * Number(price), index);
+    console.log(total);
+  }, [itemsNumber, price, index, total]);
 
-  const minus = () => {
+  const minus = (e) => {
+    e.stopPropagation();
     if (Number(itemsNumber) > 1) {
       setItemsNumber(itemsNumber - 1);
     }
   };
 
-  const plus = () => {
+  const plus = (e) => {
+    e.stopPropagation();
     if (Number(itemsNumber) + 1 <= items) {
       setItemsNumber(itemsNumber + 1);
     }
   };
 
+  const deleteItem = () => {
+    const cartStore = JSON.parse(localStorage.getItem("cart")) || [];
+    cartStore.splice(index, 1);
+    localStorage.setItem("cart", JSON.stringify(cartStore));
+    updateCart(cartStore);
+  };
+
   return (
-    <div className="wishlist-card">
+    <>
       <div className="wishlist-card-image"></div>
       <div className="wishlist-card-product">{product}</div>
-      <div className="wishlist-card-price">{price} NGN</div>
+      <div className="wishlist-card-price">{`${price.toLocaleString()} NGN`}</div>
       <div className="wishlist-card-items" ref={itemsRef}>
         <div className="minus" onClick={minus}>
           <i class="fa-solid fa-minus"></i>
@@ -115,9 +167,25 @@ export const WishlistCard = ({ product, price, items, total }) => {
           <i class="fa-solid fa-plus"></i>
         </div>
       </div>
-      <div className="wishlist-card-delete">
+      <div className="wishlist-card-delete" onClick={deleteItem}>
         <i class="fa-solid fa-xmark"></i>
       </div>
+    </>
+  );
+};
+
+export const EmpyWishlistCard = ({ loading }) => {
+  return (
+    <div className="wishlist-card-empty">
+      {loading ? (
+        <>
+          <Skeleton className="wishlist-card-empty-skeleton" />
+        </>
+      ) : (
+        <div> Oops! Looks like your cart is Empty </div>
+      )}
     </div>
   );
 };
+
+export const PreviewIndexCard = () => {};

@@ -25,12 +25,12 @@ export default function Collection() {
   FetchFeatured(setFeatured);
 
   const [favorite, setFavorite] = useState(false);
+  FetchFavorite(setFavorite);
 
   useEffect(() => {
     setFavorite(favData);
   }, [favData]);
 
-  FetchFavorite(setFavorite);
   return (
     <div className="collections">
       <CollectionTab
@@ -164,7 +164,7 @@ export const CollectionTab = ({ i, tab, products, preview, msg }) => {
           products.map((data, i) =>
             preview ? (
               browserWidth > 1920 ? (
-                <CollectionCard data={data} preview />
+                i < 14 && <CollectionCard data={data} preview />
               ) : (
                 i < 5 && <CollectionCard data={data} preview />
               )

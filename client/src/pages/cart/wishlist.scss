@@ -12,9 +12,6 @@
   --temp: 140px;
 }
 
-body:has(.s) {
-}
-
 .cart {
   &-container {
     display: grid;
@@ -22,6 +19,9 @@ body:has(.s) {
     width: calc(100vw - (2 * var(--padding)));
     padding: var(--cart-top) var(--padding) var(--cart-bottom);
     overflow-y: hidden;
+    max-height: 700px;
+    max-width: 1920px;
+    justify-self: center;
   }
 }
 
@@ -32,6 +32,7 @@ body:has(.s) {
     column-gap: 40px;
   }
   &-data {
+    max-width: 800px;
     max-height: var(--data-height);
     display: grid;
     grid-template-rows: repeat(2, auto);
@@ -43,7 +44,7 @@ body:has(.s) {
       padding: 5% 5% 6%;
       overflow-y: auto;
       display: grid;
-      row-gap: 30px;
+      row-gap: 40px;
       align-content: start;
       max-height: var(--data-container-height);
 
@@ -116,6 +117,7 @@ body:has(.s) {
       column-gap: 10px;
       background-color: #39b44f;
       font-weight: 500;
+      cursor: pointer;
       //   box-shadow: 0 0 20px #00000040;
       :first-child {
         font-size: 16px;
@@ -131,12 +133,24 @@ body:has(.s) {
     width: 80%;
     align-self: center;
     height: 560px;
+    max-width: 500px;
+
+    &-empty {
+      font-size: clamp(16px, 3vw, 28px);
+      color: var(--text-color);
+      align-self: center;
+      justify-self: center;
+      margin: 0 20%;
+      text-align: center;
+      line-height: 1.6;
+      font-weight: 500;
+    }
   }
 
   &-card {
     &-skeleton {
       height: 90px;
-      border-radius: 6px;
+      border-radius: 10px;
     }
 
     border-radius: 10px;
@@ -158,8 +172,8 @@ body:has(.s) {
       background-color: #39b44f;
       justify-self: center;
       align-self: center;
-      width: clamp(45px, 16vw, 90px);
-      height: clamp(45px, 16vw, 90px);
+      width: clamp(45px, 16vw, 85px);
+      height: clamp(45px, 16vw, 85px);
       border-radius: 50%;
     }
 
@@ -231,6 +245,38 @@ body:has(.s) {
 
     &:hover {
       box-shadow: 0px 5px 20px 0px #00000030;
+    }
+
+    &-empty {
+      &-skeleton {
+        height: 90px;
+        border-radius: 6px;
+        max-width: 450px;
+      }
+      display: grid;
+      align-self: center;
+      justify-self: center;
+      max-width: 450px;
+      width: calc(100% - 20px);
+      > div {
+        border-radius: 10px;
+        height: 110px;
+        box-shadow: 0 0 20px #00000010;
+        width: 100%;
+        box-shadow: 0px 5px 18px 0px #00000015;
+        transition: 0.4s ease-in;
+        color: var(--text-color) !important;
+        display: grid;
+        align-items: center;
+        justify-content: center;
+        font-size: clamp(16px, 3vw, 20px);
+        font-weight: 600;
+        align-self: center;
+        justify-self: center;
+        text-align: center;
+        padding: 0 10px;
+        line-height: 25px;
+      }
     }
   }
 }

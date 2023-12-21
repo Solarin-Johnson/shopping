@@ -42,7 +42,7 @@ export function DisplayCard({ data, wish, loading }) {
   useEffect(() => {
     const favourite = JSON.parse(localStorage.getItem("favorite"));
     const cart = JSON.parse(localStorage.getItem("cart"));
-    if ((!loading && favourite !== null, cart !== null)) {
+    if (!loading && favourite !== null && cart !== null) {
       favourite.map((obj) => obj.name).includes(data.name)
         ? setFav(true)
         : setFav(false);
@@ -163,7 +163,7 @@ export function DisplayCard({ data, wish, loading }) {
       </div>
       <div className="display-card-price">
         {!loading ? (
-          data.price
+          parseFloat(data.price).toLocaleString()
         ) : (
           <Skeleton className="display-card-price-skeleton" />
         )}
