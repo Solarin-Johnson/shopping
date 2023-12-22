@@ -163,7 +163,7 @@ export function DisplayCard({ data, wish, loading }) {
       </div>
       <div className="display-card-price">
         {!loading ? (
-          parseFloat(data.price).toLocaleString()
+          `NGN ${parseFloat(data.price).toLocaleString()}`
         ) : (
           <Skeleton className="display-card-price-skeleton" />
         )}

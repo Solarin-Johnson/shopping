@@ -79,7 +79,7 @@ export default function WishList() {
             <div className="wishlist-button">
               <div className="sub-total">
                 <span>Sum Total</span>
-                <span>{`${sumTotal.toLocaleString()} NGN`}</span>
+                <span>{`NGN ${sumTotal.toLocaleString()}`}</span>
               </div>
               <div className="place-order">
                 Place Order <span className="fas fa-arrow-right"></span>
@@ -159,10 +159,10 @@ export const WishlistCard = ({
     <>
       <div className="wishlist-card-image"></div>
       <div className="wishlist-card-product">{product}</div>
-      <div className="wishlist-card-price">{`${parseFloat(
+      <div className="wishlist-card-price">{`NGN ${parseFloat(
         price,
         10
-      ).toLocaleString()} NGN`}</div>
+      ).toLocaleString()}`}</div>
       <div className="wishlist-card-items" ref={itemsRef}>
         <div className="minus" onClick={minus}>
           <i class="fa-solid fa-minus"></i>
