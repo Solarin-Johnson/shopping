@@ -39,6 +39,9 @@ export default function WishList() {
 
   const updateCart = (data) => {
     setWishlist(data);
+    setTimeout(() => {
+      setPreviewIndex(false);
+    }, 10);
   };
 
   return (
@@ -129,7 +132,6 @@ export const WishlistCard = ({
   }, []);
   useEffect(() => {
     total(itemsNumber * Number(price), index);
-    console.log(total);
   }, [itemsNumber, price, index, total]);
 
   const minus = (e) => {

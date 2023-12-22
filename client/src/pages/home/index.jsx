@@ -6,10 +6,10 @@ import { FetchAll } from "../../components/utils";
 
 export default function Home() {
   sessionStorage.setItem("menu", 5);
-  FetchAll()
+  FetchAll();
   return (
     <>
-      <Navigation title={"Home"} type={true} />
+      <Navigation title={"E-Vendor"} type={true} />
       <Display />
       <Collection />
     </>
