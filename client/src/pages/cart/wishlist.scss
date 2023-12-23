@@ -272,7 +272,7 @@
   overflow: hidden;
 
   &-empty {
-    font-size: clamp(16px, 3vw, 28px);
+    font-size: clamp(12px, 2.5vw, 24px);
     color: var(--text-color);
     align-self: center;
     justify-self: center;
@@ -280,6 +280,7 @@
     text-align: center;
     line-height: 1.6;
     font-weight: 500;
+    opacity: 0.7;
   }
 
   &-card {

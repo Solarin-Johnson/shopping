@@ -91,7 +91,7 @@ export default function WishList() {
               <PreviewIndexCard data={wishlist[PreviewIndex]} />
             ) : (
               <div className="preview-empty">
-                Select A Product to Preview it Here
+                Tap on a Product to Preview it Here
               </div>
             )}
           </div>
