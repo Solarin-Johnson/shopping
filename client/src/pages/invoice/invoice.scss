@@ -1,11 +1,12 @@
 .invoice {
   &-container {
     display: grid;
-    background-color: #e6e6e6;
+    background-color: #f3f3f3;
     width: 100vw;
     max-width: 480px;
     justify-self: center;
     align-content: start;
+    color: var(--text-color);
     > * {
       padding: 0 20px;
     }
@@ -16,11 +17,33 @@
   }
   &-head {
     height: 40px;
+    padding-bottom: 10px;
   }
   &-line {
     justify-self: center;
     border: 1px solid #35353590;
     width: calc(100% - 80px);
     border-radius: 2px;
+    height: 0px;
+  }
+  &-table {
+    min-height: 200px;
+    // background-color: red;
+  }
+  &-total {
+    display: grid;
+    min-height: 20px;
+    margin-top: 20px;
+    grid-template-columns: repeat(2, auto);
+    justify-content: space-between;
+    font-weight: 600;
+    align-items: center;
+    :first-child {
+      font-size: clamp(10px, 3vw, 16px);
+      opacity: 0.9;
+    }
+    :last-child {
+      font-size: clamp(12px, 3.5vw, 20px);
+    }
   }
 }
