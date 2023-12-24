@@ -4,6 +4,7 @@ import Home from './pages/home';
 import { DataProvider } from './DataContext';
 import { Arrivals, Best, Favorite, Featured } from './pages/paths';
 import WishList from './pages/cart';
+import Invoice from './pages/invoice';
 
 function App() {
   const links = createBrowserRouter([
@@ -43,6 +44,12 @@ function App() {
       path: "/cart",
       element: (
         <WishList />
+      ),
+    },
+    {
+      path: "/invoice",
+      element: (
+        <Invoice />
       ),
     },
   ])
