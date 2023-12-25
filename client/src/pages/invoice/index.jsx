@@ -32,7 +32,7 @@ export default function Invoice() {
       <div className="invoice-line" />
       <div className="invoice-total">
         <span>Grand Total</span>
-        <span>{total.toFixed(2).toLocaleString()}</span>
+        <span>{"NGN " + parseFloat(total.toFixed(2)).toLocaleString()}</span>
       </div>
     </div>
   );
@@ -44,11 +44,11 @@ export function InvoiceItems({ name, price, qty }) {
       <div className="invoice-items-container">
         <div className="invoice-items-name">{name || "Product Name"}</div>
         <div className="invoice-items-price">
-          {(price || 0).toFixed(2).toLocaleString()}
+          {parseFloat((price || 0).toFixed(2)).toLocaleString()}
         </div>
         <div className="invoice-items-qty">{qty || 0}</div>
         <div className="invoice-items-total">
-          {(price * qty || 0).toFixed(2).toLocaleString()}
+          {parseFloat((price * qty || 0).toFixed(2)).toLocaleString()}
         </div>
       </div>
       <div className="invoice-line invoice-table-line invoice-items-line" />
