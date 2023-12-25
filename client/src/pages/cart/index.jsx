@@ -13,8 +13,9 @@ export default function WishList() {
   const [PreviewIndex, setPreviewIndex] = useState(false);
   FetchCart(setWishlist);
   const prices = wishlist && wishlist.map((data) => parseFloat(data.price, 10));
-  // useEffect(() => {
-  // }, [wishlist]);
+  useEffect(() => {
+    sessionStorage.setItem("prices", JSON.stringify(prices));
+  }, [prices]);
 
   useEffect(() => {
     setTimeout(() => {

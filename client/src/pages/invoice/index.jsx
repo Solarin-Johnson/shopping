@@ -1,5 +1,11 @@
 import "./invoice.scss";
 export default function Invoice() {
+  const cartDB = JSON.parse(localStorage.getItem("cart")) || [];
+  const priceDB = JSON.parse(sessionStorage.getItem("prices")) || [];
+  const total = priceDB.reduce(
+    (accumulator, currentValue) => accumulator + currentValue,
+    0
+  );
   return (
     <div className="invoice-container">
       <div className="invoice-head"></div>
@@ -14,32 +20,36 @@ export default function Invoice() {
         </div>
         <div className="invoice-line invoice-table-line" />
         <div className="invoice-items">
-          <InvoiceItems />
-          <InvoiceItems />
-          <InvoiceItems />
-          <InvoiceItems />
-          <InvoiceItems />
+          {cartDB.map((data, i) => (
+            <InvoiceItems
+              name={data.name}
+              qty={priceDB[i] / data.price}
+              price={Number(data.price)}
+            />
+          ))}
         </div>
       </div>
       <div className="invoice-line" />
       <div className="invoice-total">
-        <span>Sum Total</span>
-        <span>{(2000).toFixed(2).toLocaleString()}</span>
+        <span>Grand Total</span>
+        <span>{total.toFixed(2).toLocaleString()}</span>
       </div>
     </div>
   );
 }
 
-export function InvoiceItems({ name = "Product Name", price = 800, qty = 2 }) {
+export function InvoiceItems({ name, price, qty }) {
   return (
     <>
       <div className="invoice-items-container">
-        <div className="invoice-items-name">Product Name</div>
+        <div className="invoice-items-name">{name || "Product Name"}</div>
         <div className="invoice-items-price">
-          {price.toFixed(2).toLocaleString()}
+          {(price || 0).toFixed(2).toLocaleString()}
         </div>
-        <div className="invoice-items-qty">{qty}</div>
-        <div className="invoice-items-total">{price * qty}</div>
+        <div className="invoice-items-qty">{qty || 0}</div>
+        <div className="invoice-items-total">
+          {(price * qty || 0).toFixed(2).toLocaleString()}
+        </div>
       </div>
       <div className="invoice-line invoice-table-line invoice-items-line" />
     </>
