@@ -111,6 +111,8 @@
     width: 100vw;
     height: 100vh;
     display: grid;
+    align-content: center;
+    row-gap: 40px;
     img {
       align-self: center;
       width: 70px;
@@ -120,7 +122,34 @@
       //   left: -100px;
       justify-self: center;
     }
+    &-btn {
+      width: 160px;
+      padding: 9px 0;
+      border-radius: 8px;
+      text-align: center;
+      justify-self: center;
+      font-weight: 600;
+      font-size: 18px;
+      //   box-shadow: 0 8px 25px 0 #00000025;
+      background-color: #4cb815;
+      color: #fff;
+      cursor: pointer;
+      transition: 0.3s ease-in-out;
+      opacity: 0;
+      border: 0.15rem solid transparent;
+
+      &:hover {
+        background-color: #fff;
+        color: #4cb815;
+        border-color: #4cb815;
+        // box-shadow: 0 8px 25px 5px #00000020;
+      }
+    }
   }
+}
+
+#show-btn {
+  opacity: 1;
 }
 
 @keyframes drive {
@@ -136,13 +165,13 @@
   26% {
     transform: translateX(0px) rotate(0deg);
   }
-  55% {
+  60% {
     transform: scale(1.1);
   }
   70% {
     transform: scale(1);
   }
-  85% {
+  90% {
     transform: scale(1.1);
   }
 }

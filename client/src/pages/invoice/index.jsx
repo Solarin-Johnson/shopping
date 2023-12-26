@@ -1,16 +1,39 @@
 import { useState } from "react";
 import "./invoice.scss";
 import { useEffect } from "react";
+import html2canvas from "html2canvas";
 export default function Invoice() {
   const cartDB = JSON.parse(localStorage.getItem("cart")) || [];
   const priceDB = JSON.parse(sessionStorage.getItem("prices"));
   const [loading, setLoading] = useState(true);
+  const [showBtn, setShowBtn] = useState(false);
+  const [imageURL, setImageURL] = useState("");
 
   useEffect(() => {
     setTimeout(() => {
-      setLoading(false);
-    }, 1000000);
-  }, [loading]);
+      setShowBtn(true);
+    }, 1200);
+  }, [showBtn]);
+
+  useEffect(() => {
+    console.log(imageURL);
+    // if (/WhatsApp/i.test(navigator.userAgent) && imageURL !== "") {
+    //   // Create a shareable link
+    //   const shareLink = document.createElement("a");
+    //   shareLink.href = imageURL;
+    //   shareLink.download = "screenshot.png";
+    //   shareLink.click();
+    // } else {
+    //   alert(
+    //     "WhatsApp is not detected on this device. Please share the image manually."
+    //   );
+    // }
+
+    if (imageURL !== "") {
+      const whatsappLink = `https://wa.me/?text=Check%20out%20this%20image!%20${encodeURIComponent(imageURL)}`;
+      window.open(whatsappLink, "_blank");
+    }
+  }, [imageURL]);
 
   if (priceDB && !loading) {
     const total = priceDB.reduce(
@@ -50,9 +73,31 @@ export default function Invoice() {
       </div>
     );
   } else {
+    const proceed = () => {
+      setLoading(false);
+      setTimeout(() => {
+        capture();
+      }, 2000);
+    };
+
+    const capture = () => {
+      const elementToCapture =
+        document.querySelectorAll(".invoice-container")[0];
+      html2canvas(elementToCapture).then((canvas) => {
+        const dataUrl = canvas.toDataURL();
+        setImageURL(dataUrl);
+      });
+    };
     return (
       <div className="invoice-loader">
         <img src={process.env.PUBLIC_URL + "/logo.png"} alt="" />
+        <div
+          onClick={proceed}
+          className="invoice-loader-btn"
+          id={showBtn && "show-btn"}
+        >
+          Proceed
+        </div>
       </div>
     );
   }
