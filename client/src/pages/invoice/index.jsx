@@ -30,8 +30,8 @@ export default function Invoice() {
     // }
 
     if (imageURL !== "") {
-      const whatsappLink = `https://wa.me/?text=Check%20out%20this%20image!%20${encodeURIComponent(imageURL)}`;
-      window.open(whatsappLink, "_blank");
+    //   const whatsappLink = `https://wa.me/?text=Check%20out%20this%20image!%20${encodeURIComponent(imageURL)}`;
+    //   window.open(whatsappLink, "_blank");
     }
   }, [imageURL]);
 
