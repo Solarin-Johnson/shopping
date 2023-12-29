@@ -44,7 +44,10 @@ export default function Navigation({ type, title, cart }) {
     <>
       <SearchBox searchX={searchX} _setSearch={(data) => setSearch(data)} />
       {!cart && <Cart />}
-      <div className={`navigation ${search && 'remove_blur'}`} id={!scrollUp ? "" : "slide-up"}>
+      <div
+        className={`navigation ${search && "remove_blur"}`}
+        id={!scrollUp ? "" : "slide-up"}
+      >
         <div className="logo"></div>
         <span className="navigation-title">
           {loading ? <Skeleton className="navigation-title-skeleton" /> : title}
@@ -177,9 +180,12 @@ export const SearchBox = ({ searchX, _setSearch }) => {
         setSearch(false);
         _setSearch(false);
       }
-      if (searchIcon.contains(e.target)) {
+      if (searchBoxRef.current && searchIcon.contains(e.target)) {
         setSearch(true);
         _setSearch(true);
+        setTimeout(() => {
+          searchBoxRef.current.children[1].firstChild.focus();
+        }, 100);
       }
     };
     document.addEventListener("click", handleBlur);
@@ -187,20 +193,28 @@ export const SearchBox = ({ searchX, _setSearch }) => {
     return () => {
       document.removeEventListener("click", handleBlur);
     };
-  }, [setSearch, search]);
+  }, [_setSearch, search]);
 
   return (
-    <div
-      ref={searchBoxRef}
-      className="search-box"
-      id={search && "show-search"}
-      style={{
-        left: search ? "inherit" : searchX + "px",
-      }}
-    >
-      <div className="search-back"></div>
-      <div className="search-input"></div>
-      <div className="search-clear"></div>
-    </div>
+    <>
+      <div
+        ref={searchBoxRef}
+        className="search-box"
+        id={search && "show-search"}
+        style={{
+          left: search ? "inherit" : searchX + "px",
+        }}
+      >
+        <div className="search-back">
+          <i className="fa-solid fa-arrow-left"></i>
+        </div>
+        <div className="search-input">
+          <input type="text" name="" id="search-input" />
+        </div>
+        <div className="search-clear">
+          <i className="fa-solid fa-xmark"></i>
+        </div>
+      </div>
+    </>
   );
 };

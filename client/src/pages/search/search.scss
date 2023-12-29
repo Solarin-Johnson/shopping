@@ -2,36 +2,65 @@
   --search-right: 6.5vw;
   --search-left: inherit;
   --search-hidden-width: 40px;
+  --search-width: clamp(0px, calc(86vw - 20px), 1024px);
 }
 
 .search {
   &-box {
     visibility: hidden;
+    overflow: hidden;
     position: fixed;
     top: 20px;
     width: var(--search-hidden-width);
     height: 50px;
     background-color: #ffffff;
+    display: grid;
     // animation: fill 1s linear forwards;
     transition: 0.25s cubic-bezier(0.445, 0.05, 0.55, 0.95),
       2s ease-in border-radius;
     border-radius: 50%;
     display: grid;
-    grid-template-columns: 40px 1fr 40px;
+    align-items: center;
+    grid-template-columns: 50px calc(var(--search-width) - 100px) 50px;
     z-index: 200;
+    > * {
+      padding: 10px 0;
+    }
+    div {
+      display: grid;
+    }
+    i {
+      color: var(--text-color);
+      justify-self: center;
+    }
+  }
+  &-input {
+    display: grid;
+
+    input {
+      outline: none;
+      border: none;
+      font-size: 18px;
+      color: var(--text-color);
+      font-weight: 500;
+      opacity: 0;
+    }
   }
 }
 
 #show-search {
   box-shadow: 0 0 5px 2px #00000025;
   left: 7vw !important;
-  width: clamp(0px, calc(86vw - 20px), 1024px);
+  width: var(--search-width);
   height: 55px;
   padding: 0 10px;
   visibility: visible !important;
   border-radius: 10rem;
   transition: 0.2s cubic-bezier(0.445, 0.05, 0.55, 0.95),
     0.12s ease-in border-radius;
+  input {
+    opacity: 1;
+  }
 }
 
 // @keyframes fill {
