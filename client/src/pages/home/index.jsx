@@ -9,7 +9,7 @@ export default function Home() {
   FetchAll();
   return (
     <>
-      <Navigation title={"E-Vendor"} type={true} />
+      <Navigation title={"E-Vendor"} type={true}/>
       <Display />
       <Collection />
     </>

@@ -18,6 +18,12 @@
   --nav-justify: start;
 }
 
+.navigation.remove_blur {
+  backdrop-filter: none;
+  opacity: 0;
+  background-color: transparent;
+}
+
 .navigation {
   position: fixed;
   top: 0;
@@ -28,7 +34,7 @@
   background-color: var(--header-trans);
   backdrop-filter: var(--backdrop);
   transition: 0.3s ease;
-  z-index: 1000;
+  z-index: 100;
   align-items: center;
   align-content: center;
   grid-template-columns: auto auto 1fr auto;
@@ -85,7 +91,7 @@
     justify-content: space-evenly;
     column-gap: var(--column-gap);
     min-width: clamp(auto, 50vw, 600px);
-   
+
     button:focus {
       outline: 2px solid var(--text-color);
       border-radius: 4px;

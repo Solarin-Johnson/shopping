@@ -1,14 +1,17 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./navigation.scss";
 import { useNavigate } from "react-router-dom";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import Cart from "../cart";
 
-export default function Navigation({ type, title, cart, search }) {
+export default function Navigation({ type, title, cart }) {
   const [scrollPosition, setScrollPosition] = useState(0);
   const [loading, setLoading] = useState(true);
   const [scrollUp, setScrollUp] = useState(false);
+  const [search, setSearch] = useState(false);
+  const [searchX, setSearchX] = useState();
+  console.log(search);
 
   useEffect(() => {
     setTimeout(() => {
@@ -36,24 +39,19 @@ export default function Navigation({ type, title, cart, search }) {
       window.removeEventListener("scroll", handleScroll);
     };
   }, [scrollPosition, scrollUp, type]);
+
   return (
     <>
+      <SearchBox searchX={searchX} _setSearch={(data) => setSearch(data)} />
       {!cart && <Cart />}
-      <div className="navigation" id={!scrollUp ? "" : "slide-up"}>
-        {!search && (
-          <>
-            <div className="logo"></div>
-            <span className="navigation-title">
-              {loading ? (
-                <Skeleton className="navigation-title-skeleton" />
-              ) : (
-                title
-              )}
-            </span>
-            <Nav />
-            <Menu />{" "}
-          </>
-        )}
+      <div className={`navigation ${search && 'remove_blur'}`} id={!scrollUp ? "" : "slide-up"}>
+        <div className="logo"></div>
+        <span className="navigation-title">
+          {loading ? <Skeleton className="navigation-title-skeleton" /> : title}
+        </span>
+        <Nav setSearchX={(data) => setSearchX(data)} />
+
+        <Menu />
       </div>
     </>
   );
@@ -76,14 +74,34 @@ export function Menu() {
   );
 }
 
-export function Nav() {
+export function Nav({ setSearchX, clicked }) {
+  const NavRef = useRef(null);
+
+  if (NavRef.current) {
+    setTimeout(() => {
+      setSearchX(NavRef.current.lastChild.getBoundingClientRect().left);
+    }, 100);
+  }
+
+  const handleResize = () => {
+    setSearchX(NavRef.current.lastChild.getBoundingClientRect().left);
+  };
+
+  useEffect(() => {
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   const menuArray = [
     { icon: "fas fa-house", name: "Home", path: "/" },
     { icon: "fas fa-magnifying-glass", name: "Search" },
   ];
 
   return (
-    <div className="nav">
+    <div className="nav" ref={NavRef}>
       {menuArray.map((data, i) => (
         <MenuItems key={i} data={data} i={i + 5} />
       ))}
@@ -138,3 +156,51 @@ export function MenuItems({ data, i }) {
     </button>
   );
 }
+
+export const SearchBox = ({ searchX, _setSearch }) => {
+  const [search, setSearch] = useState(false);
+  const searchBoxRef = useRef(null);
+  // useEffect(() => {
+  //   if (searchIcon) {
+  //     searchIcon.addEventListener("click", () => setSearch(true));
+  //   }
+  // }, []);
+
+  useEffect(() => {
+    const handleBlur = (e) => {
+      const searchIcon = document.querySelectorAll(".nav")[0].lastChild;
+      if (
+        search &&
+        searchBoxRef.current &&
+        !searchBoxRef.current.contains(e.target)
+      ) {
+        setSearch(false);
+        _setSearch(false);
+      }
+      if (searchIcon.contains(e.target)) {
+        setSearch(true);
+        _setSearch(true);
+      }
+    };
+    document.addEventListener("click", handleBlur);
+
+    return () => {
+      document.removeEventListener("click", handleBlur);
+    };
+  }, [setSearch, search]);
+
+  return (
+    <div
+      ref={searchBoxRef}
+      className="search-box"
+      id={search && "show-search"}
+      style={{
+        left: search ? "inherit" : searchX + "px",
+      }}
+    >
+      <div className="search-back"></div>
+      <div className="search-input"></div>
+      <div className="search-clear"></div>
+    </div>
+  );
+};

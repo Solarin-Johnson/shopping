@@ -80,7 +80,7 @@
     &-avail {
       padding: clamp(6px, 1vw, 4px) clamp(20px, 2vw, 25px);
       border-radius: 4px;
-      font-size: clamp(14px, 3vw, 18px);
+      font-size: clamp(14px, 2vw, 17px);
       font-weight: 400;
       min-width: 20px;
       display: grid;
@@ -99,7 +99,6 @@
       }
       padding-top: clamp(15px, 5vw, 35px);
       font-size: clamp(24px, 2vw, 30px);
-      font-weight: 600;
     }
     &-price {
       &-skeleton {
@@ -107,7 +106,7 @@
       }
       opacity: 0.9;
       padding-top: var(--price-padding);
-      font-size: clamp(20px, 2.2vw, 26px);
+      font-size: clamp(20px, 4vw, 28px);
       font-weight: 600;
       // font-family: "Concert One";
     }
