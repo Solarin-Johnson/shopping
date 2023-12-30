@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import html2canvas from "html2canvas";
 export default function Invoice() {
   const cartDB = JSON.parse(localStorage.getItem("cart")) || [];
-  const priceDB = JSON.parse(sessionStorage.getItem("prices"));
+  const priceDB = JSON.parse(sessionStorage.getItem("prices")) || [];
   const [loading, setLoading] = useState(true);
   const [showBtn, setShowBtn] = useState(false);
   const [imageURL, setImageURL] = useState("");

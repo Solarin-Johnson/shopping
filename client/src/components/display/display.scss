@@ -106,7 +106,7 @@
       }
       opacity: 0.9;
       padding-top: var(--price-padding);
-      font-size: clamp(20px, 4vw, 28px);
+      font-size: clamp(21px, 4vw, 28px);
       font-weight: 600;
       // font-family: "Concert One";
     }
@@ -213,6 +213,6 @@
 
 @media screen and (max-width: 480px) {
   :root {
-    --price-padding: 20px;
+    --price-padding: 5px;
   }
 }
