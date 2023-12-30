@@ -29,9 +29,13 @@
     div {
       display: grid;
     }
+    > :first-child,
+    > :last-child {
+      justify-self: center;
+    }
     i {
       color: var(--text-color);
-      justify-self: center;
+      cursor: pointer;
     }
   }
   &-input {
@@ -45,6 +49,20 @@
       font-weight: 500;
       opacity: 0;
     }
+  }
+
+  &-result {
+    &-container {
+      background-color: #fff;
+      position: fixed;
+      height: 100vh;
+      width: 100vw;
+      z-index: 150;
+      display: grid;
+    }
+    display: grid;
+    background-color: blue;
+    margin-top: 100px;
   }
 }
 

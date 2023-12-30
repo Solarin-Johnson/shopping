@@ -53,7 +53,6 @@ export default function Navigation({ type, title, cart }) {
           {loading ? <Skeleton className="navigation-title-skeleton" /> : title}
         </span>
         <Nav setSearchX={(data) => setSearchX(data)} />
-
         <Menu />
       </div>
     </>
@@ -162,6 +161,7 @@ export function MenuItems({ data, i }) {
 
 export const SearchBox = ({ searchX, _setSearch }) => {
   const [search, setSearch] = useState(false);
+  const [query, setQuery] = useState("");
   const searchBoxRef = useRef(null);
   // useEffect(() => {
   //   if (searchIcon) {
@@ -175,17 +175,17 @@ export const SearchBox = ({ searchX, _setSearch }) => {
       if (
         search &&
         searchBoxRef.current &&
-        !searchBoxRef.current.contains(e.target)
+        !searchBoxRef.current.contains(e.target) &&
+        !searchBoxRef.current.parentElement.children[1].contains(e.target)
       ) {
         setSearch(false);
         _setSearch(false);
+        setQuery("");
       }
       if (searchBoxRef.current && searchIcon.contains(e.target)) {
         setSearch(true);
         _setSearch(true);
-        setTimeout(() => {
-          searchBoxRef.current.children[1].firstChild.focus();
-        }, 100);
+        FocusSearch();
       }
     };
     document.addEventListener("click", handleBlur);
@@ -194,6 +194,12 @@ export const SearchBox = ({ searchX, _setSearch }) => {
       document.removeEventListener("click", handleBlur);
     };
   }, [_setSearch, search]);
+
+  const FocusSearch = () => {
+    setTimeout(() => {
+      searchBoxRef.current.children[1].firstChild.focus();
+    }, 100);
+  };
 
   return (
     <>
@@ -205,16 +211,44 @@ export const SearchBox = ({ searchX, _setSearch }) => {
           left: search ? "inherit" : searchX + "px",
         }}
       >
-        <div className="search-back">
+        <div
+          className="search-back"
+          onClick={() => {
+            setSearch(false);
+            _setSearch(false);
+            setQuery("");
+          }}
+        >
           <i className="fa-solid fa-arrow-left"></i>
         </div>
         <div className="search-input">
-          <input type="text" name="" id="search-input" />
+          <input
+            type="text"
+            name=""
+            id="search-input"
+            value={query}
+            onInput={(e) => setQuery(e.target.value)}
+          />
         </div>
-        <div className="search-clear">
+        <div
+          className="search-clear"
+          onClick={() => {
+            setQuery("");
+            FocusSearch();
+          }}
+        >
           <i className="fa-solid fa-xmark"></i>
         </div>
       </div>
+      {query.length > 0 && <SearchResult query={query} />}
     </>
+  );
+};
+
+const SearchResult = ({ query }) => {
+  return (
+    <div className="search-result-container">
+      <div className="search-result"></div>
+    </div>
   );
 };
