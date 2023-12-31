@@ -4,6 +4,13 @@ import { useNavigate } from "react-router-dom";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import Cart from "../cart";
+import { useDataContext } from "../../DataContext";
+import {
+  FetchArrivals,
+  FetchBest,
+  FetchFavorite,
+  FetchFeatured,
+} from "../utils";
 
 export default function Navigation({ type, title, cart }) {
   const [scrollPosition, setScrollPosition] = useState(0);
@@ -85,17 +92,16 @@ export function Nav({ setSearchX, clicked }) {
     }, 100);
   }
 
-  const handleResize = () => {
-    setSearchX(NavRef.current.lastChild.getBoundingClientRect().left);
-  };
-
   useEffect(() => {
+    const handleResize = () => {
+      setSearchX(NavRef.current.lastChild.getBoundingClientRect().left);
+    };
     window.addEventListener("resize", handleResize);
 
     return () => {
       window.removeEventListener("resize", handleResize);
     };
-  }, []);
+  }, [setSearchX]);
 
   const menuArray = [
     { icon: "fas fa-house", name: "Home", path: "/" },
@@ -228,6 +234,7 @@ export const SearchBox = ({ searchX, _setSearch }) => {
             id="search-input"
             value={query}
             onInput={(e) => setQuery(e.target.value)}
+            placeholder="Search..."
           />
         </div>
         <div
@@ -240,14 +247,70 @@ export const SearchBox = ({ searchX, _setSearch }) => {
           <i className="fa-solid fa-xmark"></i>
         </div>
       </div>
-      {query.length > 0 && <SearchResult query={query} />}
+      {query && <SearchResult query={query} filter={(e) => console.log(e)} />}
     </>
   );
 };
 
-const SearchResult = ({ query }) => {
+const SearchResult = ({ query, filter }) => {
+  const { favData } = useDataContext();
+  // console.log("ss");
+
+  const [arrival, setArrival] = useState(false);
+  FetchArrivals(setArrival);
+
+  const [best, setBest] = useState(false);
+  FetchBest(setBest);
+
+  const [featured, setFeatured] = useState(false);
+  FetchFeatured(setFeatured);
+
+  const [favorite, setFavorite] = useState(false);
+  FetchFavorite(setFavorite);
+
+  const filterData = [
+    { label: "Name", icon: "fa-solid fa-file-signature" },
+    { label: "Name", icon: "fa-solid fa-file-signature" },
+    { label: "Name", icon: "fa-solid fa-file-signature" },
+    { label: "Name", icon: "fa-solid fa-file-signature" },
+  ];
+
+  useEffect(() => {
+    setFavorite(favData);
+  }, [favData]);
+
+  const SearchFilter = ({ icon, label }) => {
+    const selectMenu = (e) => {
+      const siblings = Array.from(
+        e.currentTarget.parentElement.children
+      ).filter((child) => child !== e.currentTarget);
+      siblings.forEach((sibling) => {
+        sibling.classList.remove("active-filter");
+      });
+      e.currentTarget.classList.add("active-filter");
+      console.log("kk");
+    };
+    return (
+      <div
+        className=""
+        onClick={(e) => {
+          // filter(e.currentTarget.lastChild.textContent);
+          selectMenu(e);
+        }}
+      >
+        <i class={icon}></i>
+        <span>{label}</span>
+      </div>
+    );
+  };
+
   return (
     <div className="search-result-container">
+      <div className="search-filter">
+        {filterData.map((data, index) => (
+          <SearchFilter icon={data.icon} label={data.label} />
+        ))}
+      </div>
       <div className="search-result"></div>
     </div>
   );
