@@ -270,9 +270,9 @@ const SearchResult = ({ query, filter }) => {
 
   const filterData = [
     { label: "Name", icon: "fa-solid fa-file-signature" },
-    { label: "Name", icon: "fa-solid fa-file-signature" },
-    { label: "Name", icon: "fa-solid fa-file-signature" },
-    { label: "Name", icon: "fa-solid fa-file-signature" },
+    { label: "Tag", icon: "fa-solid fa-tag" },
+    { label: "Availability", icon: "fa-solid fa-magnifying-glass-location" },
+    { label: "Price", icon: "fa-solid fa-money-bill-1" },
   ];
 
   useEffect(() => {
