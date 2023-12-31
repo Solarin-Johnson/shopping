@@ -18,7 +18,6 @@ export default function Navigation({ type, title, cart }) {
   const [scrollUp, setScrollUp] = useState(false);
   const [search, setSearch] = useState(false);
   const [searchX, setSearchX] = useState();
-  console.log(search);
 
   useEffect(() => {
     setTimeout(() => {
@@ -168,7 +167,19 @@ export function MenuItems({ data, i }) {
 export const SearchBox = ({ searchX, _setSearch }) => {
   const [search, setSearch] = useState(false);
   const [query, setQuery] = useState("");
+  const [filter, setFilter] = useState("name");
   const searchBoxRef = useRef(null);
+
+  // useEffect(() => {
+  //   console.log(filter);
+  // }, [filter]);
+
+  const filterData = [
+    { label: "Name", icon: "fa-solid fa-file-signature" },
+    { label: "Tag", icon: "fa-solid fa-tag" },
+    { label: "Price", icon: "fa-solid fa-money-bill-1" },
+    { label: "Availability", icon: "fa-solid fa-magnifying-glass-location" },
+  ];
   // useEffect(() => {
   //   if (searchIcon) {
   //     searchIcon.addEventListener("click", () => setSearch(true));
@@ -208,7 +219,7 @@ export const SearchBox = ({ searchX, _setSearch }) => {
   };
 
   return (
-    <>
+    <div className="search-box-container">
       <div
         ref={searchBoxRef}
         className="search-box"
@@ -247,14 +258,23 @@ export const SearchBox = ({ searchX, _setSearch }) => {
           <i className="fa-solid fa-xmark"></i>
         </div>
       </div>
-      {query && <SearchResult query={query} filter={(e) => console.log(e)} />}
-    </>
+      <div className="search-filter">
+        {filterData.map((data, index) => (
+          <SearchFilter
+            icon={data.icon}
+            label={data.label}
+            i={index}
+            filter={(data) => setFilter(data)}
+          />
+        ))}
+      </div>
+      {query && <SearchResult query={query} filter={filter} />}
+    </div>
   );
 };
 
 const SearchResult = ({ query, filter }) => {
   const { favData } = useDataContext();
-  // console.log("ss");
 
   const [arrival, setArrival] = useState(false);
   FetchArrivals(setArrival);
@@ -267,51 +287,50 @@ const SearchResult = ({ query, filter }) => {
 
   const [favorite, setFavorite] = useState(false);
   FetchFavorite(setFavorite);
-
-  const filterData = [
-    { label: "Name", icon: "fa-solid fa-file-signature" },
-    { label: "Tag", icon: "fa-solid fa-tag" },
-    { label: "Availability", icon: "fa-solid fa-magnifying-glass-location" },
-    { label: "Price", icon: "fa-solid fa-money-bill-1" },
-  ];
+  
 
   useEffect(() => {
     setFavorite(favData);
   }, [favData]);
 
-  const SearchFilter = ({ icon, label }) => {
-    const selectMenu = (e) => {
-      const siblings = Array.from(
-        e.currentTarget.parentElement.children
-      ).filter((child) => child !== e.currentTarget);
-      siblings.forEach((sibling) => {
-        sibling.classList.remove("active-filter");
-      });
-      e.currentTarget.classList.add("active-filter");
-      console.log("kk");
-    };
-    return (
-      <div
-        className=""
-        onClick={(e) => {
-          // filter(e.currentTarget.lastChild.textContent);
-          selectMenu(e);
-        }}
-      >
-        <i class={icon}></i>
-        <span>{label}</span>
-      </div>
-    );
-  };
 
+
+  const lowercaseQuery = query.toLowerCase();
+
+  // Use the filter method to find matching items
+  const results = data.filter((item) => {
+    // Assuming you want to search by the 'name' property
+    const lowercaseName = item.name.toLowerCase();
+    return lowercaseName.includes(lowercaseQuery);
+  });
   return (
     <div className="search-result-container">
-      <div className="search-filter">
-        {filterData.map((data, index) => (
-          <SearchFilter icon={data.icon} label={data.label} />
-        ))}
-      </div>
       <div className="search-result"></div>
+    </div>
+  );
+};
+
+export const SearchFilter = ({ icon, label, i, filter }) => {
+  const selectMenu = (e) => {
+    const siblings = Array.from(e.currentTarget.parentElement.children).filter(
+      (child) => child !== e.currentTarget
+    );
+    siblings.forEach((sibling) => {
+      sibling.classList.remove("active-filter");
+    });
+    e.currentTarget.classList.add("active-filter");
+  };
+  return (
+    <div
+      className={i === 0 && "active-filter"}
+      onClick={(e) => {
+        // filter(e.currentTarget.lastChild.textContent);
+        filter(label);
+        selectMenu(e);
+      }}
+    >
+      <i class={icon}></i>
+      <span>{label}</span>
     </div>
   );
 };
