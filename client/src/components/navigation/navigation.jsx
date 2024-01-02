@@ -274,7 +274,9 @@ export const SearchBox = ({ searchX, _setSearch }) => {
 };
 
 const SearchResult = ({ query, filter }) => {
+  const Query = query.toLowerCase();
   const { favData } = useDataContext();
+  const [_filter, setFilter] = useState(filter);
 
   const [arrival, setArrival] = useState(false);
   FetchArrivals(setArrival);
@@ -287,22 +289,13 @@ const SearchResult = ({ query, filter }) => {
 
   const [favorite, setFavorite] = useState(false);
   FetchFavorite(setFavorite);
-  
+
+  const database = [...arrival, ...best, ...featured, ...favorite];
 
   useEffect(() => {
     setFavorite(favData);
   }, [favData]);
 
-
-
-  const lowercaseQuery = query.toLowerCase();
-
-  // Use the filter method to find matching items
-  const results = data.filter((item) => {
-    // Assuming you want to search by the 'name' property
-    const lowercaseName = item.name.toLowerCase();
-    return lowercaseName.includes(lowercaseQuery);
-  });
   return (
     <div className="search-result-container">
       <div className="search-result"></div>

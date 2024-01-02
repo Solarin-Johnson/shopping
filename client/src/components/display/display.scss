@@ -142,11 +142,12 @@
         margin-left: -5px;
         border-radius: 50%;
         width: 35px;
-        height: 35px;
+        height: auto;
         overflow: hidden;
         display: grid;
-        place-items: center;
-        place-content: center;
+        align-items: center;
+        align-content: center;
+        justify-content: center;
         padding: 4px;
         i {
           padding: 5px;
@@ -155,6 +156,11 @@
       .favorite,
       .wishlist {
         color: #525252;
+        transition: 0.5s ease-in transform;
+
+        &:active {
+          transform: scale(2);
+        }
       }
       .wishlist {
         font-size: 22px;
@@ -167,6 +173,13 @@
       }
       #wished {
         color: #4dd447;
+      }
+
+      #wished,
+      #liked {
+        &:active {
+          transform: scale(1);
+        }
       }
     }
     &-notify {

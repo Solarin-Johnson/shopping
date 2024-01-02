@@ -28,7 +28,9 @@ export default function Collection() {
   FetchFavorite(setFavorite);
 
   useEffect(() => {
-    setFavorite(favData);
+    if (favData) {
+      setFavorite(favData);
+    }
   }, [favData]);
 
   return (
@@ -92,7 +94,11 @@ export const CollectionCard = ({ data, ispreview }) => {
         {loading ? (
           <Skeleton className="collections-card-name-skeleton" />
         ) : (
-          <div title={data.name} className="collections-card-name">
+          <div
+            title={data.name}
+            onClick={(e) => e.stopPropagation()}
+            className="collections-card-name"
+          >
             {data.name}
           </div>
         )}
