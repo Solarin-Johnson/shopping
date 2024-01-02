@@ -23,9 +23,9 @@
     background-color: #ff91af;
     transition: 0.4s ease;
 
-    &:hover {
-      box-shadow: inset 0 0 20px #00000020, 0 5px 15px #00000047;
-    }
+    // &:hover {
+    //   box-shadow: inset 0 0 20px #00000020, 0 5px 15px #00000047;
+    // }
   }
   &-image,
   &-card {
@@ -156,10 +156,10 @@
       .favorite,
       .wishlist {
         color: #525252;
-        transition: 0.5s ease-in transform;
+        transition: 0.2s ease-in transform;
 
-        &:active {
-          transform: scale(2);
+        &.zoomEffect {
+          transform: scale(1.2);
         }
       }
       .wishlist {
@@ -195,6 +195,11 @@
       max-width: 250px;
     }
   }
+}
+
+.cart-effect {
+  position: fixed;
+  z-index: 300;
 }
 
 @media screen and (max-width: 800px) {

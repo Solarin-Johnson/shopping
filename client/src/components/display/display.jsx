@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import "./display.scss";
@@ -54,7 +54,7 @@ export function DisplayCard({ data, wish, loading }) {
 
   console.log(fav);
 
-  const like = () => {
+  const like = (e) => {
     if (!loading) {
       setNotify(`Product ${!fav ? "added to" : "removed from"} Favorites`);
       stopInterval();
@@ -77,6 +77,7 @@ export function DisplayCard({ data, wish, loading }) {
           );
           handleFavChange([...favourite, data]);
         }
+        zoomEffect(e);
         setFav(true);
       }
       // if (!fav) {
@@ -108,7 +109,7 @@ export function DisplayCard({ data, wish, loading }) {
       // console.log(updated);
     }
   };
-  const wishlist = () => {
+  const wishlist = (e) => {
     if (!loading) {
       setNotify(`Product ${!wished ? "added to" : "removed from"} Wishlist`);
       stopInterval();
@@ -131,6 +132,18 @@ export function DisplayCard({ data, wish, loading }) {
       }
 
       setWished(!wished);
+    }
+  };
+
+  const zoomEffect = (e) => {
+    const currentTarget = e.currentTarget;
+
+    if (currentTarget) {
+      currentTarget.classList.add("zoomEffect");
+
+      setTimeout(() => {
+        currentTarget.classList.remove("zoomEffect");
+      }, 200);
     }
   };
 
@@ -192,7 +205,7 @@ export function DisplayCard({ data, wish, loading }) {
         >
           {!loading ? (
             <button>
-              <i class="fa-solid fa-cart-shopping"></i>{" "}
+              <i class="fa-solid fa-cart-shopping"></i> <CartEffect />
             </button>
           ) : (
             <Skeleton className="btn-skeleton" />
@@ -203,3 +216,36 @@ export function DisplayCard({ data, wish, loading }) {
     </>
   );
 }
+
+export const CartEffect = () => {
+  const effectRef = useRef(null);
+  const [cartX, setCartX] = useState([0, 0]);
+  const handleResize = () => {
+    if (effectRef.current) {
+      const siblings = effectRef.current.parentElement.firstChild;
+      setCartX([
+        siblings.getBoundingClientRect().left,
+        siblings.getBoundingClientRect().top,
+      ]);
+    }
+  };
+  useEffect(() => {
+    window.addEventListener("resize", handleResize);
+    window.addEventListener("wheel", handleResize);
+    handleResize();
+    return () => {
+      window.removeEventListener("resize", handleResize);
+      window.removeEventListener("wheel", handleResize);
+    };
+  }, []);
+
+  return (
+    <div
+      className="cart-effect"
+      ref={effectRef}
+      style={{ top: cartX[1], left: cartX[0] }}
+    >
+      <i class="fa-solid fa-cart-shopping"></i>
+    </div>
+  );
+};
