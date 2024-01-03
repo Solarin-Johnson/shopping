@@ -35,6 +35,7 @@ export default function Display() {
 }
 
 export function DisplayCard({ data, wish, loading }) {
+  const [animateCart, setAnimateCart] = useState(false);
   const { handleFavChange } = useDataContext();
   const [fav, setFav] = useState();
   const [wished, setWished] = useState(wish);
@@ -120,6 +121,7 @@ export function DisplayCard({ data, wish, loading }) {
         localStorage.setItem("cart", JSON.stringify(updated));
         setWished(false);
         handleFavChange(updated);
+        setAnimateCart(false);
       } else {
         if (cart.length > 0) {
           const updated = cart.filter((item) => item.name !== data.name);
@@ -129,6 +131,7 @@ export function DisplayCard({ data, wish, loading }) {
           localStorage.setItem("cart", JSON.stringify([...cart, data]));
           handleFavChange([...cart, data]);
         }
+        setAnimateCart(true);
       }
 
       setWished(!wished);
@@ -205,7 +208,8 @@ export function DisplayCard({ data, wish, loading }) {
         >
           {!loading ? (
             <button>
-              <i class="fa-solid fa-cart-shopping"></i> <CartEffect />
+              <i class="fa-solid fa-cart-shopping"></i>
+              <CartEffect wished={animateCart} />
             </button>
           ) : (
             <Skeleton className="btn-skeleton" />
@@ -217,31 +221,41 @@ export function DisplayCard({ data, wish, loading }) {
   );
 }
 
-export const CartEffect = () => {
+export const CartEffect = ({ wished }) => {
   const effectRef = useRef(null);
   const [cartX, setCartX] = useState([0, 0]);
-  const handleResize = () => {
-    if (effectRef.current) {
-      const siblings = effectRef.current.parentElement.firstChild;
-      setCartX([
-        siblings.getBoundingClientRect().left,
-        siblings.getBoundingClientRect().top,
-      ]);
-    }
-  };
+  const [cartEndX, setCartEndX] = useState([0, 0]);
   useEffect(() => {
+    const handleResize = () => {
+      const cartEnd = document.querySelectorAll(".cart")[0];
+      if (effectRef.current) {
+        const siblings = effectRef.current.parentElement.firstChild;
+        setCartX([
+          siblings.getBoundingClientRect().left,
+          siblings.getBoundingClientRect().top,
+        ]);
+      }
+      if (cartEnd && wished) {
+        setCartX([
+          cartEnd.getBoundingClientRect().left + 10,
+          cartEnd.getBoundingClientRect().top + 10,
+        ]);
+      }
+    };
     window.addEventListener("resize", handleResize);
-    window.addEventListener("wheel", handleResize);
+    window.addEventListener("scroll", handleResize);
     handleResize();
     return () => {
       window.removeEventListener("resize", handleResize);
-      window.removeEventListener("wheel", handleResize);
+      window.removeEventListener("scroll", handleResize);
     };
-  }, []);
+  }, [wished]);
 
   return (
     <div
-      className="cart-effect"
+      className={`cart-effect ${
+        wished ? "show-cart-effect" : "hide-cart-effect"
+      }`}
       ref={effectRef}
       style={{ top: cartX[1], left: cartX[0] }}
     >

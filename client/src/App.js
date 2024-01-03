@@ -5,7 +5,6 @@ import { DataProvider } from './DataContext';
 import { Arrivals, Best, Favorite, Featured } from './pages/paths';
 import WishList from './pages/cart';
 import Invoice from './pages/invoice';
-import SearchPage from './pages/search';
 
 function App() {
   const links = createBrowserRouter([
@@ -53,12 +52,7 @@ function App() {
         <Invoice />
       ),
     },
-    {
-      path: "/search",
-      element: (
-        <SearchPage />
-      ),
-    },
+    
   ])
   return <div className='container'>
     {/* <Background /> */}

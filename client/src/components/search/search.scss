@@ -40,7 +40,7 @@
       }
 
       &:has(#show-search) {
-        background: linear-gradient(to bottom, #fff, #fff, #fff, #fffffff3);
+        background: #ffffff;
         visibility: visible;
         > :last-child {
           opacity: 1;
@@ -92,6 +92,7 @@
     display: grid;
   }
   &-filter {
+    width: calc(86vw - 14px);
     display: grid;
     position: fixed;
     top: 85px;
@@ -126,6 +127,7 @@
       box-shadow: 0 0 5px 1px #00000015;
       font-size: 15px;
       font-weight: 600;
+      cursor: pointer;
     }
   }
 }

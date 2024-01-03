@@ -199,7 +199,18 @@
 
 .cart-effect {
   position: fixed;
-  z-index: 300;
+  z-index: 50;
+  transition: 0.8s cubic-bezier(0.39, 0.575, 0.565, 1);
+  color: #525252 !important;
+  &.show-cart-effect {
+    transform: scale(1) rotate(270deg);
+    visibility: visible;
+  }
+  &.hide-cart-effect {
+    visibility: hidden;
+    transform: scale(2);
+    transition: none;
+  }
 }
 
 @media screen and (max-width: 800px) {
