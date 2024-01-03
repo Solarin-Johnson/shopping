@@ -3,6 +3,8 @@
   --search-left: inherit;
   --search-hidden-width: 40px;
   --search-width: clamp(0px, calc(86vw - 20px), 1024px);
+  --overflow-columns: repeat(auto-fill, minmax(220px, 1fr));
+  --scroll: auto;
 }
 
 .search {
@@ -76,20 +78,40 @@
     }
   }
 
+  &-title {
+    text-transform: capitalize;
+    justify-self: start;
+    padding: 0 7vw;
+    font-weight: 600;
+  }
+
   &-result {
     &-container {
-      padding-top: 100px;
+      padding-top: 10px;
       background-color: #fff;
       position: fixed;
-      height: calc(100vh - 100px);
+      height: calc(100vh - 160px);
+      display: grid;
+      grid-template-rows: 40px auto;
       width: 100vw;
       z-index: 100;
-      display: grid;
-      align-content: start;
-      grid-template-rows: 40px 1fr;
-      row-gap: 20px;
+      margin-top: 150px;
+      overflow-x: hidden;
+      overflow-y: var(--scroll);
+      // transition: 0.5s cubic-bezier(0.39, 0.575, 0.565, 1);
+
+      &:hover {
+        overflow-y: auto;
+        overflow-x: hidden;
+      }
     }
+    row-gap: 20px;
+    column-gap: 30px;
+    padding: 10px 7vw;
     display: grid;
+    width: calc(86vw - 14px);
+    grid-template-columns: var(--overflow-columns);
+    padding-bottom: 50px;
   }
   &-filter {
     width: calc(86vw - 14px);
@@ -114,6 +136,7 @@
 
     > div {
       color: var(--text-color);
+      text-transform: capitalize;
       background-color: #fff;
       padding: 10px 20px;
       height: 15px;
@@ -155,5 +178,7 @@
 @media screen and (min-width: 800px) {
   :root {
     --search-hidden-width: 55px;
+    --overflow-columns: repeat(auto-fill, minmax(200px, 1fr));
+    --scroll: hidden;
   }
 }

@@ -6,8 +6,12 @@
   &-container {
     display: grid;
     width: calc(100vw - (2 * var(--padding)));
-    padding: clamp(35px, 10vw, 60px) var(--padding) 80px;
+    padding: 0 var(--padding) 80px;
     justify-items: center;
+
+    .collections-tab-body {
+      padding-top: clamp(35px, 10vw, 60px);
+    }
   }
 }
 

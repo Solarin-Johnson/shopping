@@ -7,6 +7,7 @@ import {
   FetchFeatured,
 } from "../utils";
 import "./search.scss";
+import { CollectionCard } from "../collection/collection";
 
 export const SearchBox = ({ searchX, _setSearch }) => {
   const [search, setSearch] = useState(false);
@@ -19,10 +20,10 @@ export const SearchBox = ({ searchX, _setSearch }) => {
   // }, [filter]);
 
   const filterData = [
-    { label: "Name", icon: "fa-solid fa-file-signature" },
-    { label: "Tag", icon: "fa-solid fa-tag" },
-    { label: "Price", icon: "fa-solid fa-money-bill-1" },
-    { label: "Availability", icon: "fa-solid fa-magnifying-glass-location" },
+    { label: "name", icon: "fa-solid fa-file-signature" },
+    { label: "tag", icon: "fa-solid fa-tag" },
+    { label: "price", icon: "fa-solid fa-money-bill-1" },
+    { label: "availability", icon: "fa-solid fa-magnifying-glass-location" },
   ];
   // useEffect(() => {
   //   if (searchIcon) {
@@ -36,8 +37,7 @@ export const SearchBox = ({ searchX, _setSearch }) => {
       if (
         search &&
         searchBoxRef.current &&
-        !searchBoxRef.current.contains(e.target) &&
-        !searchBoxRef.current.parentElement.children[1].contains(e.target)
+        !searchBoxRef.current.parentElement.contains(e.target)
       ) {
         setSearch(false);
         _setSearch(false);
@@ -121,7 +121,7 @@ const SearchResult = ({ query, filter }) => {
   const Query = query.toLowerCase();
   const { favData } = useDataContext();
   const [_filter, setFilter] = useState(filter);
-  const [lowercase, setLowercase] = useState();
+  // const [lowercase, setLowercase] = useState("");
 
   const [arrival, setArrival] = useState(false);
   FetchArrivals(setArrival);
@@ -145,21 +145,51 @@ const SearchResult = ({ query, filter }) => {
 
     const SearchQuery = (data) => {
       const uniqueProductIds = new Set();
-      const [lowercase, setLowercase] = useState();
       const results = data.filter((product) => {
+        // if (filter === "name") {
+        //   setLowercase(product.name.toLowerCase());
+        // } else if (filter === "tag") {
+        //   setLowercase(product.tag.toLowerCase());
+        // } else if (filter === "price") {
+        //   setLowercase(product.price.toLowerCase());
+        // } else {
+        //   setLowercase(product.avail.toLowerCase());
+        // }
         if (filter === "name") {
-          setLowercase(product.name.toLowerCase());
+          if (
+            product.name.toLowerCase().includes(Query) &&
+            !uniqueProductIds.has(product.name)
+          ) {
+            console.log(Query, product.name);
+            uniqueProductIds.add(product.name);
+            return true;
+          }
         } else if (filter === "tag") {
-          setLowercase(product.name.toLowerCase());
+          if (
+            product.tag.toLowerCase().includes(Query) &&
+            !uniqueProductIds.has(product.name)
+          ) {
+            uniqueProductIds.add(product.name);
+            return true;
+          }
         } else if (filter === "price") {
-          setLowercase(product.price.toLowerCase());
+          if (
+            product.price.toLowerCase().includes(Query) &&
+            !uniqueProductIds.has(product.name)
+          ) {
+            uniqueProductIds.add(product.name);
+            return true;
+          }
         } else {
-          uniqueProductIds.add(product.availability);
+          if (
+            product.avail.toLowerCase().includes(Query) &&
+            !uniqueProductIds.has(product.name)
+          ) {
+            uniqueProductIds.add(product.name);
+            return true;
+          }
         }
-        if (lowercase.includes(Query) && !uniqueProductIds.has(product.name)) {
-          uniqueProductIds.add(product.name);
-          return true;
-        }
+
         return false;
       });
 
@@ -167,7 +197,11 @@ const SearchResult = ({ query, filter }) => {
       console.log(results);
     };
 
-    if (currentPageIndex < 3) {
+    if (
+      currentPageIndex < 3 &&
+      database !== undefined &&
+      database[currentPageIndex] !== undefined
+    ) {
       SearchQuery(database[currentPageIndex]);
     } else if (
       (Array.isArray(arrival), Array.isArray(best), Array.isArray(featured))
@@ -175,11 +209,23 @@ const SearchResult = ({ query, filter }) => {
       const allDB = [...arrival, ...best, ...featured];
       SearchQuery(allDB);
     }
+    console.log(filter);
   }, [Query, filter, database, arrival, best, featured]);
 
   return (
     <div className="search-result-container">
-      <div className="search-result"></div>
+      <div className="search-title">
+        {searchResult.length > 0
+          ? `Search ${
+              searchResult.length > 1 ? "Results" : "Result"
+            } for '${query}'`
+          : `No Result for '${query}'`}
+      </div>
+      <div className="search-result">
+        {searchResult.map((data, _) => (
+          <CollectionCard data={data} ispreview={false} />
+        ))}
+      </div>
     </div>
   );
 };
