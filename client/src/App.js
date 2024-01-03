@@ -5,6 +5,7 @@ import { DataProvider } from './DataContext';
 import { Arrivals, Best, Favorite, Featured } from './pages/paths';
 import WishList from './pages/cart';
 import Invoice from './pages/invoice';
+import { useEffect } from 'react';
 
 function App() {
   const links = createBrowserRouter([
@@ -52,8 +53,29 @@ function App() {
         <Invoice />
       ),
     },
-    
+
   ])
+
+  useEffect(() => {
+    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+      const addTextCursorClass = (elements) => {
+        elements.forEach(element => {
+          element.classList.add('text-cursor');
+        });
+      }
+
+      const divElements = document.querySelectorAll('div');
+      const buttonElements = document.querySelectorAll('button');
+      const spanElements = document.querySelectorAll('span');
+      const iElements = document.querySelectorAll('i');
+
+      addTextCursorClass(divElements);
+      addTextCursorClass(spanElements);
+      addTextCursorClass(iElements);
+      addTextCursorClass(buttonElements);
+    }
+  }, [])
+
   return <div className='container'>
     {/* <Background /> */}
     <DataProvider>

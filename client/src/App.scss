@@ -2,6 +2,12 @@
   --text-color: #353535;
   --bg-color: #fff;
 }
+i {
+  user-select: none;
+}
+.text-cursor {
+  cursor: text !important;
+}
 .container {
   display: grid;
   row-gap: 10px;

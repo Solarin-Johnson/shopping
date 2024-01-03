@@ -15,9 +15,8 @@
 .cart {
   &-container {
     display: grid;
-    // padding: ;
     width: calc(100vw - (2 * var(--padding)));
-    padding: var(--cart-top) var(--padding) var(--cart-bottom);
+    padding: 0 var(--padding) var(--cart-bottom);
     overflow-y: hidden;
     max-height: 700px;
     max-width: 1920px;
@@ -30,6 +29,7 @@
     display: grid;
     grid-template-columns: var(--wishlist-columns);
     column-gap: 40px;
+    padding-top: var(--cart-top);
   }
   &-data {
     max-width: 800px;

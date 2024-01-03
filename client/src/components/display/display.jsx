@@ -132,6 +132,7 @@ export function DisplayCard({ data, wish, loading }) {
           handleFavChange([...cart, data]);
         }
         setAnimateCart(true);
+        zoomEffect(e);
       }
 
       setWished(!wished);
@@ -209,7 +210,7 @@ export function DisplayCard({ data, wish, loading }) {
           {!loading ? (
             <button>
               <i class="fa-solid fa-cart-shopping"></i>
-              <CartEffect wished={animateCart} />
+              {/* <CartEffect wished={animateCart} /> */}
             </button>
           ) : (
             <Skeleton className="btn-skeleton" />
@@ -257,7 +258,7 @@ export const CartEffect = ({ wished }) => {
         wished ? "show-cart-effect" : "hide-cart-effect"
       }`}
       ref={effectRef}
-      style={{ top: cartX[1], left: cartX[0] }}
+      style={{ top: cartX[1] + "px", left: cartX[0] + "px" }}
     >
       <i class="fa-solid fa-cart-shopping"></i>
     </div>

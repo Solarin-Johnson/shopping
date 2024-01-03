@@ -52,7 +52,7 @@ const simulate = [
     tag: "Electronics",
     avail: "Back Soon",
     name: "4K Ultra HD Smart TV",
-    price: "79900.99",
+    price: "799000.99",
     desc: "Bring the cinematic experience to your living room with our 4K Ultra HD Smart TV. Coming back soon for those who desire immersive entertainment at home. Elevate your viewing experience with this state-of-the-art TV!",
     img_url: "4k_smart_tv_image.jpg",
   },

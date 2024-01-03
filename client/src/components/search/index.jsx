@@ -89,7 +89,7 @@ export const SearchBox = ({ searchX, _setSearch }) => {
             id="search-input"
             value={query}
             onInput={(e) => setQuery(e.target.value)}
-            placeholder="Search..."
+            placeholder={`Search ${filter} ...`}
           />
         </div>
         <div

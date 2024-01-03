@@ -99,7 +99,7 @@
       }
       padding-top: clamp(15px, 5vw, 35px);
       font-size: clamp(28px, 4vw, 32px);
-      opacity: 0.7;
+      opacity: 0.8;
     }
     &-price {
       &-skeleton {
@@ -157,15 +157,19 @@
       .wishlist {
         color: #525252;
         transition: 0.2s ease-in transform;
-
-        &.zoomEffect {
-          transform: scale(1.2);
-        }
       }
       .wishlist {
         font-size: 22px;
+        &.zoomEffect {
+          transform: scale(1.3);
+        }
         button {
           margin-left: 2px;
+        }
+      }
+      .favorite {
+        &.zoomEffect {
+          transform: scale(1.3);
         }
       }
       #liked {
@@ -200,7 +204,7 @@
 .cart-effect {
   position: fixed;
   z-index: 50;
-  transition: 0.8s cubic-bezier(0.39, 0.575, 0.565, 1);
+  transition: 0.6s cubic-bezier(0.39, 0.575, 0.565, 1);
   color: #525252 !important;
   &.show-cart-effect {
     transform: scale(1) rotate(270deg);
@@ -208,7 +212,7 @@
   }
   &.hide-cart-effect {
     visibility: hidden;
-    transform: scale(2);
+    transform: scale(2.5);
     transition: none;
   }
 }
