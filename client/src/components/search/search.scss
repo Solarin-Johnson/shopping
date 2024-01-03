@@ -3,8 +3,8 @@
   --search-left: inherit;
   --search-hidden-width: 40px;
   --search-width: clamp(0px, calc(86vw - 20px), 1024px);
-  --overflow-columns: repeat(auto-fill, minmax(220px, 1fr));
   --scroll: auto;
+  --overflow-columns: repeat(auto-fill, minmax(220px, 1fr));
 }
 
 .search {
