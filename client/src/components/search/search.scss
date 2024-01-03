@@ -75,6 +75,7 @@
       color: var(--text-color);
       font-weight: 500;
       opacity: 0;
+      text-transform: capitalize;
     }
   }
 
@@ -105,10 +106,12 @@
         overflow-x: hidden;
       }
     }
-    row-gap: 20px;
+    max-width: 1920px;
+    row-gap: 30px;
     column-gap: 30px;
     padding: 10px 7vw;
     display: grid;
+    align-content: start;
     width: calc(86vw - 14px);
     grid-template-columns: var(--overflow-columns);
     padding-bottom: 50px;

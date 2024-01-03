@@ -112,12 +112,20 @@ export const SearchBox = ({ searchX, _setSearch }) => {
           />
         ))}
       </div>
-      {query && <SearchResult query={query} filter={filter} />}
+      {query && (
+        <SearchResult
+          setSearch={(data) => setSearch(data)}
+          _setSearch={(data) => _setSearch(data)}
+          setQuery={(data) => setQuery(data)}
+          query={query}
+          filter={filter}
+        />
+      )}
     </div>
   );
 };
 
-const SearchResult = ({ query, filter }) => {
+const SearchResult = ({ query, filter, setSearch, _setSearch, setQuery }) => {
   const Query = query.toLowerCase();
   const { favData } = useDataContext();
   const [_filter, setFilter] = useState(filter);
@@ -157,7 +165,10 @@ const SearchResult = ({ query, filter }) => {
         // }
         if (filter === "name") {
           if (
-            product.name.toLowerCase().includes(Query) &&
+            product.name
+              .toLowerCase()
+              .split(" ")
+              .some((word) => word.startsWith(Query)) &&
             !uniqueProductIds.has(product.name)
           ) {
             console.log(Query, product.name);
@@ -166,7 +177,10 @@ const SearchResult = ({ query, filter }) => {
           }
         } else if (filter === "tag") {
           if (
-            product.tag.toLowerCase().includes(Query) &&
+            product.tag
+              .toLowerCase()
+              .split(" ")
+              .some((word) => word.startsWith(Query)) &&
             !uniqueProductIds.has(product.name)
           ) {
             uniqueProductIds.add(product.name);
@@ -174,7 +188,10 @@ const SearchResult = ({ query, filter }) => {
           }
         } else if (filter === "price") {
           if (
-            product.price.toLowerCase().includes(Query) &&
+            product.price
+              .toLowerCase()
+              .split(" ")
+              .some((word) => word.startsWith(Query)) &&
             !uniqueProductIds.has(product.name)
           ) {
             uniqueProductIds.add(product.name);
@@ -182,7 +199,10 @@ const SearchResult = ({ query, filter }) => {
           }
         } else {
           if (
-            product.avail.toLowerCase().includes(Query) &&
+            product.avail
+              .toLowerCase()
+              .split(" ")
+              .some((word) => word.startsWith(Query)) &&
             !uniqueProductIds.has(product.name)
           ) {
             uniqueProductIds.add(product.name);
@@ -223,7 +243,16 @@ const SearchResult = ({ query, filter }) => {
       </div>
       <div className="search-result">
         {searchResult.map((data, _) => (
-          <CollectionCard data={data} ispreview={false} />
+          <div
+            className="search-results"
+            onClick={() => {
+              setSearch(false);
+              _setSearch(false);
+              setQuery("");
+            }}
+          >
+            <CollectionCard data={data} ispreview={false} />
+          </div>
         ))}
       </div>
     </div>

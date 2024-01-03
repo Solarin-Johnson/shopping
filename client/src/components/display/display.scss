@@ -98,13 +98,13 @@
         width: 150px;
       }
       padding-top: clamp(15px, 5vw, 35px);
-      font-size: clamp(24px, 2vw, 30px);
+      font-size: clamp(28px, 4vw, 32px);
+      opacity: 0.7;
     }
     &-price {
       &-skeleton {
         width: 60px;
       }
-      opacity: 0.9;
       padding-top: var(--price-padding);
       font-size: clamp(21px, 4vw, 28px);
       font-weight: 600;
