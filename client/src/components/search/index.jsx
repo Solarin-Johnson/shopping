@@ -121,6 +121,7 @@ const SearchResult = ({ query, filter }) => {
   const Query = query.toLowerCase();
   const { favData } = useDataContext();
   const [_filter, setFilter] = useState(filter);
+  const [lowercase, setLowercase] = useState();
 
   const [arrival, setArrival] = useState(false);
   FetchArrivals(setArrival);
@@ -131,14 +132,50 @@ const SearchResult = ({ query, filter }) => {
   const [featured, setFeatured] = useState(false);
   FetchFeatured(setFeatured);
 
-  const [favorite, setFavorite] = useState(false);
-  FetchFavorite(setFavorite);
-
-  const database = [...arrival, ...best, ...featured, ...favorite];
+  const [searchResult, setSearchResult] = useState([]);
+  const [database, setDatabase] = useState([]);
+  useEffect(() => {
+    if (arrival && best && featured) {
+      setDatabase([arrival, best, featured]);
+    }
+  }, [arrival, best, featured]);
 
   useEffect(() => {
-    setFavorite(favData);
-  }, [favData]);
+    const currentPageIndex = sessionStorage.getItem("menu");
+
+    const SearchQuery = (data) => {
+      const uniqueProductIds = new Set();
+      const [lowercase, setLowercase] = useState();
+      const results = data.filter((product) => {
+        if (filter === "name") {
+          setLowercase(product.name.toLowerCase());
+        } else if (filter === "tag") {
+          setLowercase(product.name.toLowerCase());
+        } else if (filter === "price") {
+          setLowercase(product.price.toLowerCase());
+        } else {
+          uniqueProductIds.add(product.availability);
+        }
+        if (lowercase.includes(Query) && !uniqueProductIds.has(product.name)) {
+          uniqueProductIds.add(product.name);
+          return true;
+        }
+        return false;
+      });
+
+      setSearchResult(results);
+      console.log(results);
+    };
+
+    if (currentPageIndex < 3) {
+      SearchQuery(database[currentPageIndex]);
+    } else if (
+      (Array.isArray(arrival), Array.isArray(best), Array.isArray(featured))
+    ) {
+      const allDB = [...arrival, ...best, ...featured];
+      SearchQuery(allDB);
+    }
+  }, [Query, filter, database, arrival, best, featured]);
 
   return (
     <div className="search-result-container">
@@ -161,7 +198,6 @@ export const SearchFilter = ({ icon, label, i, filter }) => {
     <div
       className={i === 0 && "active-filter"}
       onClick={(e) => {
-        // filter(e.currentTarget.lastChild.textContent);
         filter(label);
         selectMenu(e);
       }}
