@@ -118,7 +118,7 @@ export default function Invoice() {
         </div>
       </div>
     );
-  } else if (priceDB.length > 1) {
+  } else if (priceDB.length > 0) {
     const proceed = () => {
       // setLoading(false);
       // setTimeout(() => {
