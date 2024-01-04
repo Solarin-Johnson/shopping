@@ -196,6 +196,8 @@ export default function Invoice() {
           setImageURL(url);
           share(url, type);
           console.log("Image uploaded. URL:", url);
+          sessionStorage.setItem("prices", JSON.stringify([]));
+          localStorage.setItem("cart", JSON.stringify([]));
         } catch (error) {
           console.error("Error uploading image:", error);
         }
@@ -279,7 +281,7 @@ export default function Invoice() {
             {tip && (
               <div
                 className="invoice-method-tip"
-                style={{ left: tip[1] - 75, top: tip[2] + 50 }}
+                style={{ left: tip[1] - 80, top: tip[2] + 55 }}
               >
                 {tip[0]}
               </div>
