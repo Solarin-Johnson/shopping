@@ -395,3 +395,11 @@ export const FetchAll = () => {
 
 //   // for()
 // }
+
+export function copyText(text) {
+  try {
+    navigator.clipboard.writeText(text);
+  } catch (error) {
+    // alert(error)
+  }
+}

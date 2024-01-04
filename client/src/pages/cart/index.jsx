@@ -4,8 +4,10 @@ import "./wishlist.scss";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import { FetchCart } from "../../components/utils";
+import { useNavigate } from "react-router-dom";
 
 export default function WishList() {
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [wishlist, setWishlist] = useState();
   const [sumTotal, setSumTotal] = useState(0);
@@ -82,7 +84,7 @@ export default function WishList() {
                 <span>Sum Total</span>
                 <span>{`NGN ${sumTotal.toLocaleString()}`}</span>
               </div>
-              <div className="place-order">
+              <div className="place-order" onClick={() => navigate("/invoice")}>
                 Place Order <span className="fas fa-arrow-right"></span>
               </div>
             </div>

@@ -113,9 +113,9 @@
     padding: 10px 7vw;
     display: grid;
     align-content: start;
-    width: calc(86vw - 14px);
+    width: calc(86vw - 2px);
     grid-template-columns: var(--overflow-columns);
-    padding-bottom: 50px;
+    padding-bottom: 100px;
   }
   &-filter {
     width: calc(86vw - 14px);
