@@ -132,7 +132,9 @@ export default function Invoice() {
       const msg = `I've placed an order and would like to inquire about its status. Here's the link to the purchase order details: ${url}. Thank you.`;
       if (type === "whatsapp") {
         if (isMobile) {
-          setLink(`https://wa.me/+2348179835234?text=${encodeURIComponent()}`);
+          setLink(
+            `https://wa.me/+2348179835234?text=${encodeURIComponent(msg)}`
+          );
           // window.open(
           //   `https://wa.me/+2348179835234?text=${encodeURIComponent(msg)}`,
           //   "_blank"

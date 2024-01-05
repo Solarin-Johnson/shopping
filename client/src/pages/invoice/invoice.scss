@@ -1,8 +1,12 @@
+.container:has(.invoice-container) {
+  overflow: hidden;
+}
+
 .invoice {
   &-loader-spin {
     width: 100vw;
     padding: 0 !important;
-    height: 100%;
+    height: 100vh;
     background-color: #fff;
     display: grid;
     align-content: center;
