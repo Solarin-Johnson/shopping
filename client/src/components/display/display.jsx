@@ -40,6 +40,17 @@ export function DisplayCard({ data, wish, loading }) {
   const [fav, setFav] = useState();
   const [wished, setWished] = useState(wish);
   const [notify, setNotify] = useState(false);
+  const [timeoutId, setTimeoutId] = useState(null);
+
+  useEffect(() => {
+    document.addEventListener("wheel", () => setNotify(false));
+    document.addEventListener("resize", () => setNotify(false));
+    return () => {
+      document.removeEventListener("wheel", () => setNotify(false));
+      document.addEventListener("resize", () => setNotify(false));
+    };
+  }, []);
+
   useEffect(() => {
     const favourite = JSON.parse(localStorage.getItem("favorite"));
     const cart = JSON.parse(localStorage.getItem("cart"));
@@ -57,7 +68,11 @@ export function DisplayCard({ data, wish, loading }) {
 
   const like = (e) => {
     if (!loading) {
-      setNotify(`Product ${!fav ? "added to" : "removed from"} Favorites`);
+      setNotify([
+        `Product ${!fav ? "added to" : "removed from"} Favorites`,
+        e.currentTarget.getBoundingClientRect().left,
+        e.currentTarget.getBoundingClientRect().top,
+      ]);
       stopInterval();
       const favourite = JSON.parse(localStorage.getItem("favorite"));
       if (fav) {
@@ -81,6 +96,7 @@ export function DisplayCard({ data, wish, loading }) {
         zoomEffect(e);
         setFav(true);
       }
+
       // if (!fav) {
       //   favourite.length > 0
       //     ? favourite.map((item, x) => {
@@ -112,7 +128,11 @@ export function DisplayCard({ data, wish, loading }) {
   };
   const wishlist = (e) => {
     if (!loading) {
-      setNotify(`Product ${!wished ? "added to" : "removed from"} Wishlist`);
+      setNotify([
+        `Product ${!wished ? "added to" : "removed from"} Wishlist`,
+        e.currentTarget.getBoundingClientRect().left,
+        e.currentTarget.getBoundingClientRect().top,
+      ]);
       stopInterval();
       const cart = JSON.parse(localStorage.getItem("cart"));
       if (wished) {
@@ -152,9 +172,12 @@ export function DisplayCard({ data, wish, loading }) {
   };
 
   const stopInterval = () => {
-    setTimeout(() => {
-      setNotify(false);
-    }, 4000);
+    clearTimeout(timeoutId);
+    setTimeoutId(
+      setTimeout(() => {
+        setNotify(false);
+      }, 3000)
+    );
   };
 
   return (
@@ -180,7 +203,10 @@ export function DisplayCard({ data, wish, loading }) {
       </div>
       <div className="display-card-price">
         {!loading ? (
-          `NGN ${Number(parseFloat(data.price).toFixed(2)).toLocaleString()}`
+          `${Number(parseFloat(data.price).toFixed(2)).toLocaleString("en-NG", {
+            style: "currency",
+            currency: "NGN",
+          })}`
         ) : (
           <Skeleton className="display-card-price-skeleton" />
         )}
@@ -216,8 +242,15 @@ export function DisplayCard({ data, wish, loading }) {
             <Skeleton className="btn-skeleton" />
           )}
         </div>
+        {notify && (
+          <div
+            className="display-card-notify"
+            style={{ left: notify[1], top: notify[2] }}
+          >
+            {notify[0]}
+          </div>
+        )}
       </div>
-      {notify && <div className="display-card-notify">{notify}</div>}
     </>
   );
 }

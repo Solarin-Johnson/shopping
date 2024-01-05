@@ -82,7 +82,12 @@ export default function WishList() {
             <div className="wishlist-button">
               <div className="sub-total">
                 <span>Sum Total</span>
-                <span>{`NGN ${sumTotal.toLocaleString()}`}</span>
+                <span>
+                  {Number(sumTotal.toFixed(2)).toLocaleString("en-NG", {
+                    style: "currency",
+                    currency: "NGN",
+                  })}
+                </span>
               </div>
               <div className="place-order" onClick={() => navigate("/invoice")}>
                 Place Order <span className="fas fa-arrow-right"></span>
@@ -162,10 +167,12 @@ export const WishlistCard = ({
     <>
       <div className="wishlist-card-image"></div>
       <div className="wishlist-card-product">{product}</div>
-      <div className="wishlist-card-price">{`NGN ${parseFloat(
-        price,
-        10
-      ).toLocaleString()}`}</div>
+      <div className="wishlist-card-price">
+        {Number(parseFloat(price, 10).toFixed(2)).toLocaleString("en-NG", {
+          style: "currency",
+          currency: "NGN",
+        })}
+      </div>
       <div className="wishlist-card-items" ref={itemsRef}>
         <div className="minus" onClick={minus}>
           <i class="fa-solid fa-minus"></i>

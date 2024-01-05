@@ -84,7 +84,7 @@ export const SearchBox = ({ searchX, _setSearch }) => {
         </div>
         <div className="search-input">
           <input
-            type="text"
+            type={filter === "price" ? "number" : "text"}
             name=""
             id="search-input"
             value={query}
@@ -126,7 +126,10 @@ export const SearchBox = ({ searchX, _setSearch }) => {
 };
 
 const SearchResult = ({ query, filter, setSearch, _setSearch, setQuery }) => {
-  const Query = query.toLowerCase();
+  const Query = query
+    .toLowerCase()
+    .replace(/(?<!\w)\s+(?!\w)|\s{2,}|\s+$/g, "");
+  console.log(Query);
   const { favData } = useDataContext();
   const [_filter, setFilter] = useState(filter);
   // const [lowercase, setLowercase] = useState("");
@@ -188,10 +191,7 @@ const SearchResult = ({ query, filter, setSearch, _setSearch, setQuery }) => {
           }
         } else if (filter === "price") {
           if (
-            product.price
-              .toLowerCase()
-              .split(" ")
-              .some((word) => word.startsWith(Query)) &&
+            parseFloat(Query) < parseFloat(product.price) &&
             !uniqueProductIds.has(product.name)
           ) {
             uniqueProductIds.add(product.name);
@@ -199,10 +199,7 @@ const SearchResult = ({ query, filter, setSearch, _setSearch, setQuery }) => {
           }
         } else {
           if (
-            product.avail
-              .toLowerCase()
-              .split(" ")
-              .some((word) => word.startsWith(Query)) &&
+            product.avail.toLowerCase().includes(Query) &&
             !uniqueProductIds.has(product.name)
           ) {
             uniqueProductIds.add(product.name);
