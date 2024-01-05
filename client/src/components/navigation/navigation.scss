@@ -122,6 +122,7 @@
         row-gap: 2px;
       }
       cursor: pointer;
+      -webkit-tap-highlight-color:  rgba(255, 255, 255, 0); 
       display: grid;
       grid-template-rows: repeat(2, 1fr);
       justify-content: center;

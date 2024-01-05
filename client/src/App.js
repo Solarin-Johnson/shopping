@@ -57,23 +57,23 @@ function App() {
   ])
 
   useEffect(() => {
-    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-      const addTextCursorClass = (elements) => {
-        elements.forEach(element => {
-          element.classList.add('text-cursor');
-        });
-      }
+    // if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+    //   const addTextCursorClass = (elements) => {
+    //     elements.forEach(element => {
+    //       element.classList.add('text-cursor');
+    //     });
+    //   }
 
-      const divElements = document.querySelectorAll('div');
-      const buttonElements = document.querySelectorAll('button');
-      const spanElements = document.querySelectorAll('span');
-      const iElements = document.querySelectorAll('i');
+    //   const divElements = document.querySelectorAll('div');
+    //   const buttonElements = document.querySelectorAll('button');
+    //   const spanElements = document.querySelectorAll('span');
+    //   const iElements = document.querySelectorAll('i');
 
-      addTextCursorClass(divElements);
-      addTextCursorClass(spanElements);
-      addTextCursorClass(iElements);
-      addTextCursorClass(buttonElements);
-    }
+    //   addTextCursorClass(divElements);
+    //   addTextCursorClass(spanElements);
+    //   addTextCursorClass(iElements);
+    //   addTextCursorClass(buttonElements);
+    // }
   }, [])
 
   return <div className='container'>
