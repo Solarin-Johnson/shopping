@@ -43,10 +43,10 @@ export function DisplayCard({ data, wish, loading }) {
   const [timeoutId, setTimeoutId] = useState(null);
 
   useEffect(() => {
-    document.addEventListener("wheel", () => setNotify(false));
+    document.addEventListener("scroll", () => setNotify(false));
     document.addEventListener("resize", () => setNotify(false));
     return () => {
-      document.removeEventListener("wheel", () => setNotify(false));
+      document.removeEventListener("scroll", () => setNotify(false));
       document.addEventListener("resize", () => setNotify(false));
     };
   }, []);
