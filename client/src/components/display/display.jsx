@@ -245,7 +245,10 @@ export function DisplayCard({ data, wish, loading }) {
         {notify && (
           <div
             className="display-card-notify"
-            style={{ left: notify[1], top: notify[2] }}
+            style={{
+              left: window.innerWidth > 800 && notify[1],
+              top: window.innerWidth > 800 && notify[2],
+            }}
           >
             {notify[0]}
           </div>

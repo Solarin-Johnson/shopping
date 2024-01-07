@@ -3,6 +3,10 @@
   --display-rows: auto;
   --price-padding: 6px;
   --min-height: 450px;
+  --notify-width: auto;
+  --notify-max-width: 200px;
+  --notify-bottom: inherit;
+  --notify-left: inherit;
 }
 .display {
   //   top: 80px;
@@ -192,6 +196,7 @@
     }
     &-notify {
       position: fixed;
+      z-index: 200;
       margin-top: clamp(55px, 5vw, 80px);
       margin-left: 2px;
       background-color: #ffffff;
@@ -200,13 +205,16 @@
       font-weight: 500;
       padding: 12px 15px;
       font-size: clamp(14px, 2vw, 16px);
-      max-width: 200px;
+      max-width: var(--notify-max-width);
       box-shadow: 0 -3px 15px 0 #00000020;
       justify-self: start;
       font-weight: 600;
       line-height: 1.7;
       animation: fly-up 0.5s cubic-bezier(0.445, 0.05, 0.55, 0.95);
       transition: 0.5s cubic-bezier(0.445, 0.05, 0.55, 0.95);
+      bottom: var(--notify-bottom);
+      left: var(--notify-left);
+      width: var(--notify-width);
 
       // &::after {
       //   content: "";
@@ -283,6 +291,10 @@
     --display-columns: 1fr;
     --display-rows: auto 1fr;
     --min-height: 320px;
+    --notify-width: 70vw;
+    --notify-max-width: 70vw;
+    --notify-bottom: 75px;
+    --notify-left: calc(15vw - 15px);
   }
 }
 
