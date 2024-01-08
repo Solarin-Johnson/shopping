@@ -98,6 +98,7 @@ export function Nav({ setSearchX, clicked }) {
 
   const menuArray = [
     { icon: "fas fa-house", name: "Home", path: "/" },
+    { icon: "material-symbols-outlined", name: "Mode", iconName: "dark_mode" },
     { icon: "fas fa-magnifying-glass", name: "Search" },
   ];
 
@@ -147,7 +148,7 @@ export function MenuItems({ data, i }) {
       {loading ? (
         <Skeleton className="menu-items-icon-skeleton" />
       ) : (
-        <i className={data.icon}></i>
+        <i className={data.icon}>{data.iconName || ""}</i>
       )}
       {loading ? (
         <Skeleton className="menu-items-text-skeleton" />
