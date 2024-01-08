@@ -27,7 +27,7 @@
     align-items: center;
     grid-template-columns: 50px calc(var(--search-width) - 100px) 50px;
     z-index: 200;
-
+    
     &-container {
       position: fixed;
       left: 0;

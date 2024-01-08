@@ -1,4 +1,7 @@
 body {
+  --scroll-track: #a9a9a950;
+  --scroll-active: #696969;
+  --scroll-hover: #1d1d1d74;
   margin: 0;
   padding: 0;
   font-family: "Poppins", "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell",
@@ -8,7 +11,6 @@ body {
   overflow-x: hidden;
   -webkit-tap-highlight-color: rgba(255, 255, 255, 0) !important;
   // background: linear-gradient(to right, transparent 99%, #00000061);
-
   &::-webkit-scrollbar {
     width: 6px;
     display: none;
@@ -27,4 +29,9 @@ body {
   &::-webkit-scrollbar-thumb:active {
     background-color: #898989;
   }
+}
+
+body.dark-mode {
+  --scroll-active: #ebebeb;
+  --scroll-hover: #c3c3c3;
 }
