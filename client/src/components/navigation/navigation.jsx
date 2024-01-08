@@ -78,6 +78,30 @@ export function Menu() {
 
 export function Nav({ setSearchX, clicked }) {
   const NavRef = useRef(null);
+  const body = document.body;
+  const [mode, setMode] = useState(JSON.parse(localStorage.getItem("mode")));
+
+  if (mode !== null && mode !== undefined) {
+    if (mode === "dark") {
+      body.classList.add("dark-mode");
+    }
+  } else {
+    localStorage.setItem("mode", JSON.stringify("light"));
+    setMode("light");
+  }
+
+  const toggleMode = () => {
+    if (body) {
+      if (mode === "light") {
+        setMode("dark");
+        localStorage.setItem("mode", JSON.stringify("dark"));
+      } else {
+        setMode("light");
+        localStorage.setItem("mode", JSON.stringify("light"));
+      }
+      body.classList.toggle("dark-mode");
+    }
+  };
 
   if (NavRef.current) {
     setTimeout(() => {
@@ -98,20 +122,24 @@ export function Nav({ setSearchX, clicked }) {
 
   const menuArray = [
     { icon: "fas fa-house", name: "Home", path: "/" },
-    { icon: "material-symbols-outlined", name: "Mode", iconName: "dark_mode" },
+    {
+      icon: "material-symbols-outlined",
+      name: mode === "light" ? "light mode" : "dark mode",
+      iconName: mode === "light" ? "light_mode" : "dark_mode",
+    },
     { icon: "fas fa-magnifying-glass", name: "Search" },
   ];
 
   return (
     <div className="nav" ref={NavRef}>
       {menuArray.map((data, i) => (
-        <MenuItems key={i} data={data} i={i + 5} />
+        <MenuItems key={i} data={data} i={i + 5} toggleMode={toggleMode} />
       ))}
     </div>
   );
 }
 
-export function MenuItems({ data, i }) {
+export function MenuItems({ data, i, toggleMode }) {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
 
@@ -141,7 +169,10 @@ export function MenuItems({ data, i }) {
   }, []);
   return (
     <button
-      onClick={(e) => selectMenu(e, i, data.path)}
+      onClick={(e) => {
+        selectMenu(e, i, data.path);
+        i === 6 && toggleMode();
+      }}
       className={`menu-items ${i === currentMenu && "menu-active"}`}
       key={i}
     >
