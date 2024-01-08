@@ -25,7 +25,7 @@
   align-items: center;
 
   &-image {
-    background-color: #ff91af;
+    background-color: var(--image-color);
     transition: 0.4s ease;
 
     // &:hover {
@@ -105,11 +105,13 @@
       &-skeleton {
         width: 150px;
       }
+      color: var(--text-color);
       padding-top: clamp(15px, 5vw, 35px);
       font-size: clamp(28px, 4vw, 32px);
       opacity: 0.8;
     }
     &-price {
+      color: var(--text-color);
       &-skeleton {
         width: 60px;
       }
@@ -119,6 +121,7 @@
       // font-family: "Concert One";
     }
     &-desc {
+        color: var(--text-color);
       &-skeleton {
         // height: 120px;
       }
@@ -163,7 +166,7 @@
       }
       .favorite,
       .wishlist {
-        color: #525252;
+        color: var(--text-color);
         transition: 0.2s ease-in transform;
       }
       .wishlist {
@@ -200,8 +203,8 @@
       z-index: 200;
       margin-top: clamp(55px, 5vw, 80px);
       margin-left: 2px;
-      background-color: #ffffff;
-      box-shadow: 0 0 15px 0 #00000030;
+      background-color: var(--bg-color);
+      color: var(--text-color);
       border-radius: 10px;
       font-weight: 500;
       padding: 12px 15px;

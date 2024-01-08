@@ -1,6 +1,5 @@
 :root {
   --bottom: 20px;
-  --cart-bg: #ffffff;
 }
 
 button.cart {
@@ -21,7 +20,7 @@ button.cart {
   cursor: pointer;
   transition: 0.3s ease-in;
   z-index: 100;
-  background-color: var(--cart-bg);
+  background-color: var(--bg-color);
   box-shadow: 0 5px 15px #00000040;
   border: none;
 
@@ -30,7 +29,7 @@ button.cart {
     transform: scale(1.05);
   }
   &:active {
-    background-color: #ffffff40;
+    opacity: 0.6;
     outline: none;
   }
   > span {

@@ -15,12 +15,12 @@
     top: 20px;
     width: var(--search-hidden-width);
     height: 50px;
-    background-color: #ffffff;
+    background-color: var(--bg-color);
     display: grid;
     align-items: center;
     align-content: center;
     // animation: fill 1s linear forwards;
-    transition: 0.25s cubic-bezier(0.445, 0.05, 0.55, 0.95),
+    transition: 0.2s cubic-bezier(0.445, 0.05, 0.55, 0.95),
       2s ease-in border-radius;
     border-radius: 50%;
     display: grid;
@@ -43,7 +43,7 @@
       }
 
       &:has(#show-search) {
-        background: #ffffff;
+        background: var(--bg-color);
         visibility: visible;
         > :last-child {
           opacity: 1;
@@ -74,6 +74,7 @@
       border: none;
       font-size: 18px;
       color: var(--text-color);
+      background-color: transparent;
       font-weight: 500;
       opacity: 0;
       text-transform: capitalize;
@@ -90,7 +91,7 @@
   &-result {
     &-container {
       padding-top: 10px;
-      background-color: #fff;
+      background: var(--bg-color);
       position: fixed;
       height: calc(100vh - 160px);
       display: grid;
@@ -100,7 +101,7 @@
       margin-top: 150px;
       overflow-x: hidden;
       overflow-y: var(--scroll);
-      // transition: 0.5s cubic-bezier(0.39, 0.575, 0.565, 1);
+      transition: 0.2s cubic-bezier(0.39, 0.575, 0.565, 1);
 
       &:hover {
         overflow-y: auto;
@@ -141,7 +142,8 @@
     > div {
       color: var(--text-color);
       text-transform: capitalize;
-      background-color: #fff;
+      border: 2px solid #ffffff40;
+      background: var(--bg-color);
       padding: 10px 20px;
       height: 15px;
       border-radius: 10rem;
@@ -162,24 +164,26 @@
 .active-filter {
   background-color: #8eff88 !important;
   box-shadow: none !important;
+  color: #353535 !important;
 }
 
 #show-search {
   box-shadow: 0 0 5px 2px #00000025;
+  border: 2px solid #ffffff40;
   left: 7vw !important;
   width: var(--search-width);
   height: 55px;
   padding: 0 10px;
   visibility: visible !important;
   border-radius: 10rem;
-  transition: 0.25s cubic-bezier(0.445, 0.05, 0.55, 0.95),
+  transition: 0.2s cubic-bezier(0.445, 0.05, 0.55, 0.95),
     0.12s ease-in border-radius;
   input {
     opacity: 1;
   }
 }
 
-@media screen and (min-width: 800px) {
+@media screen and (min-width: 900px) {
   :root {
     --search-hidden-width: 55px;
     --overflow-columns: repeat(auto-fill, minmax(200px, 1fr));

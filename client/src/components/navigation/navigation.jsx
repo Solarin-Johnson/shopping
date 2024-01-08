@@ -124,8 +124,8 @@ export function Nav({ setSearchX, clicked }) {
     { icon: "fas fa-house", name: "Home", path: "/" },
     {
       icon: "material-symbols-outlined",
-      name: mode === "light" ? "light mode" : "dark mode",
-      iconName: mode === "light" ? "light_mode" : "dark_mode",
+      name: mode === "light" ? "dark mode" : "light mode",
+      iconName: mode === "light" ? "dark_mode" : "light_mode",
     },
     { icon: "fas fa-magnifying-glass", name: "Search" },
   ];

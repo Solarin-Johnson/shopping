@@ -90,6 +90,7 @@ export const SearchBox = ({ searchX, _setSearch }) => {
             value={query}
             onInput={(e) => setQuery(e.target.value)}
             placeholder={`Search ${filter} ...`}
+            autoComplete="off"
           />
         </div>
         <div
