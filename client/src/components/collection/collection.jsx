@@ -63,7 +63,7 @@ export default function Collection() {
   );
 }
 
-export const CollectionCard = ({ data, ispreview }) => {
+export const CollectionCard = ({ data, ispreview, i }) => {
   const [loading, setLoading] = useState(true);
   const { handleDataChange } = useDataContext();
   const [displayData, setDisplayData] = React.useState();
@@ -79,7 +79,7 @@ export const CollectionCard = ({ data, ispreview }) => {
     setDisplayData(data);
     sessionStorage.setItem("display", JSON.stringify([data]));
     handleDataChange(data);
-    !ispreview && navigate("/");
+    !ispreview && navigate(`/home?productId=${i}`);
     window.scrollTo({ top: 0 });
   };
 
@@ -170,12 +170,12 @@ export const CollectionTab = ({ i, tab, products, preview, msg }) => {
           products.map((data, i) =>
             preview ? (
               browserWidth > 1920 ? (
-                i < 14 && <CollectionCard data={data} preview />
+                i < 14 && <CollectionCard data={data} preview i={i} />
               ) : (
-                i < 5 && <CollectionCard data={data} preview />
+                i < 5 && <CollectionCard data={data} preview i={i} />
               )
             ) : (
-              <CollectionCard data={data} />
+              <CollectionCard data={data} preview i={i} />
             )
           )
         ) : (

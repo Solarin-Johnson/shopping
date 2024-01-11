@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 const simulate = [
   {
+    id: 1,
     tag: "Electronics",
     avail: "In Stock",
     name: "Smartphone X",
@@ -9,6 +10,7 @@ const simulate = [
     img_url: "smartphone_x_image.jpg",
   },
   {
+    id: 2,
     tag: "Home Appliances",
     avail: "Limited Stock",
     name: "Smart Home Hub",
@@ -17,6 +19,7 @@ const simulate = [
     img_url: "smart_home_hub_image.jpg",
   },
   {
+    id: 3,
     tag: "Fashion",
     avail: "Back Soon",
     name: "Designer Watch",
@@ -25,6 +28,7 @@ const simulate = [
     img_url: "designer_watch_image.jpg",
   },
   {
+    id: 4,
     tag: "Electronics",
     avail: "Available",
     name: "Wireless Noise-Canceling Headphones",
@@ -33,6 +37,7 @@ const simulate = [
     img_url: "wireless_headphones_image.jpg",
   },
   {
+    id: 5,
     tag: "Home Appliances",
     avail: "New Arrival",
     name: "Robot Vacuum Cleaner",
@@ -41,6 +46,7 @@ const simulate = [
     img_url: "robot_vacuum_image.jpg",
   },
   {
+    id: 6,
     tag: "Fashion",
     avail: "In Stock",
     name: "Leather Laptop Bag",
@@ -49,6 +55,7 @@ const simulate = [
     img_url: "leather_laptop_bag_image.jpg",
   },
   {
+    id: 7,
     tag: "Electronics",
     avail: "Back Soon",
     name: "4K Ultra HD Smart TV",
@@ -57,6 +64,7 @@ const simulate = [
     img_url: "4k_smart_tv_image.jpg",
   },
   {
+    id: 8,
     tag: "Home Appliances",
     avail: "In Stock",
     name: "Smart Refrigerator",
@@ -65,6 +73,7 @@ const simulate = [
     img_url: "smart_refrigerator_image.jpg",
   },
   {
+    id: 9,
     tag: "Fashion",
     avail: "Limited Stock",
     name: "Fitness Tracker Watch",
@@ -73,6 +82,7 @@ const simulate = [
     img_url: "fitness_tracker_watch_image.jpg",
   },
   {
+    id: 10,
     tag: "Electronics",
     avail: "New Arrival",
     name: "High-Performance Gaming Laptop",
@@ -81,6 +91,7 @@ const simulate = [
     img_url: "gaming_laptop_image.jpg",
   },
   {
+    id: 11,
     tag: "Fashion",
     avail: "In Stock",
     name: "Stylish Sunglasses",
@@ -89,6 +100,7 @@ const simulate = [
     img_url: "stylish_sunglasses_image.jpg",
   },
   {
+    id: 12,
     tag: "Home Appliances",
     avail: "Available",
     name: "Coffee Maker with Grinder",
@@ -97,6 +109,7 @@ const simulate = [
     img_url: "coffee_maker_image.jpg",
   },
   {
+    id: 13,
     tag: "Books",
     avail: "In Stock",
     name: "Bestseller Novel Set",
@@ -105,6 +118,7 @@ const simulate = [
     img_url: "bestseller_novel_set_image.jpg",
   },
   {
+    id: 14,
     tag: "Toys",
     avail: "New Arrival",
     name: "Interactive Learning Toy",
@@ -113,6 +127,7 @@ const simulate = [
     img_url: "interactive_learning_toy_image.jpg",
   },
   {
+    id: 15,
     tag: "Sports",
     avail: "In Stock",
     name: "Professional Tennis Racket",
@@ -121,6 +136,7 @@ const simulate = [
     img_url: "professional_tennis_racket_image.jpg",
   },
   {
+    id: 16,
     tag: "Health",
     avail: "Back Soon",
     name: "Nutrient-Rich Superfood Blend",
@@ -129,6 +145,7 @@ const simulate = [
     img_url: "superfood_blend_image.jpg",
   },
   {
+    id: 17,
     tag: "Outdoor",
     avail: "Limited Stock",
     name: "Camping Gear Set",
@@ -137,6 +154,7 @@ const simulate = [
     img_url: "camping_gear_set_image.jpg",
   },
   {
+    id: 18,
     tag: "Beauty",
     avail: "Available",
     name: "Luxury Skincare Set",
@@ -145,6 +163,7 @@ const simulate = [
     img_url: "luxury_skincare_set_image.jpg",
   },
   {
+    id: 19,
     tag: "Pets",
     avail: "In Stock",
     name: "Interactive Pet Toy",
@@ -153,6 +172,7 @@ const simulate = [
     img_url: "interactive_pet_toy_image.jpg",
   },
   {
+    id: 20,
     tag: "Kitchen",
     avail: "Back Soon",
     name: "Professional Chef Knife",
@@ -161,6 +181,7 @@ const simulate = [
     img_url: "professional_chef_knife_image.jpg",
   },
   {
+    id: 21,
     tag: "Garden",
     avail: "Limited Stock",
     name: "Smart Plant Monitoring System",
@@ -169,6 +190,7 @@ const simulate = [
     img_url: "smart_plant_monitoring_system_image.jpg",
   },
   {
+    id: 22,
     tag: "Fitness",
     avail: "New Arrival",
     name: "Resistance Band Set",
@@ -177,6 +199,7 @@ const simulate = [
     img_url: "resistance_band_set_image.jpg",
   },
   {
+    id: 23,
     tag: "Electronics",
     avail: "Back Soon",
     name: "Portable Bluetooth Speaker",
@@ -185,6 +208,7 @@ const simulate = [
     img_url: "portable_bluetooth_speaker_image.jpg",
   },
   {
+    id: 24,
     tag: "Fashion",
     avail: "In Stock",
     name: "Classic Leather Jacket",
@@ -193,6 +217,7 @@ const simulate = [
     img_url: "classic_leather_jacket_image.jpg",
   },
   {
+    id: 25,
     tag: "Home Appliances",
     avail: "Available",
     name: "Smart Coffee Machine",
@@ -201,6 +226,7 @@ const simulate = [
     img_url: "smart_coffee_machine_image.jpg",
   },
   {
+    id: 26,
     tag: "Beauty",
     avail: "Limited Stock",
     name: "Makeup Brush Set",
