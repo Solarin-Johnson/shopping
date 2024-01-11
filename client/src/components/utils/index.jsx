@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 const simulate = [
   {
     id: 1,
@@ -348,22 +349,34 @@ export const FetchCart = (setData) => {
 };
 
 export const FetchDisplayData = (setData) => {
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const productId = queryParams.get("productId");
+  const ref =
+    Number(productId) < simulate.length
+      ? simulate.filter((item) => item.id === parseInt(productId))
+      : shuffleArray(simulate);
+  console.log(productId, ref);
   useEffect(() => {
     const storedData = sessionStorage.getItem("display");
-    if (storedData) {
-      setData(shuffleArray(JSON.parse(storedData))[0]);
+    if (productId) {
+      setData(ref[0]);
     } else {
-      const fetchData = async () => {
-        try {
-          let Data = shuffleArray(simulate);
-          setData(Data[0]);
-          sessionStorage.setItem("display", JSON.stringify(Data));
-        } catch (error) {
-          console.error("Error fetching data:", error);
-        }
-      };
+      if (storedData) {
+        setData(shuffleArray(JSON.parse(storedData))[0]);
+      } else {
+        const fetchData = async () => {
+          try {
+            let Data = shuffleArray(simulate);
+            setData(Data[0]);
+            sessionStorage.setItem("display", JSON.stringify(Data));
+          } catch (error) {
+            console.error("Error fetching data:", error);
+          }
+        };
 
-      fetchData();
+        fetchData();
+      }
     }
   }, [setData]);
 };
