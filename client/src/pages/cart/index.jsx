@@ -11,6 +11,8 @@ export default function WishList() {
   const [loading, setLoading] = useState(true);
   const [wishlist, setWishlist] = useState();
   const [sumTotal, setSumTotal] = useState(0);
+  const [prevLoad, setPrevLoad] = useState(false);
+  const [timeoutId, setTimeoutId] = useState(null);
   // const [prices, setPrices] = useState([]);
   const [PreviewIndex, setPreviewIndex] = useState(false);
   FetchCart(setWishlist);
@@ -24,6 +26,15 @@ export default function WishList() {
       setLoading(false);
     }, 500);
   }, []);
+
+  const stopTimeout = () => {
+    clearTimeout(timeoutId);
+    setTimeoutId(
+      setTimeout(() => {
+        setPrevLoad(false);
+      }, 900)
+    );
+  };
 
   // useEffect(() => {
   //   if (prices) {
@@ -63,7 +74,11 @@ export default function WishList() {
                   {wishlist.map((data, i) => (
                     <div
                       className="wishlist-card"
-                      onClick={() => setPreviewIndex(i.toString())}
+                      onClick={() => {
+                        setPreviewIndex(i.toString());
+                        PreviewIndex !== i.toString() && setPrevLoad(true);
+                        stopTimeout();
+                      }}
                     >
                       <WishlistCard
                         key={i}
@@ -95,11 +110,17 @@ export default function WishList() {
             </div>
           </div>
           <div className="preview">
-            {PreviewIndex && wishlist[PreviewIndex] !== undefined ? (
-              <PreviewIndexCard data={wishlist[PreviewIndex]} />
+            {!prevLoad ? (
+              PreviewIndex && wishlist[PreviewIndex] !== undefined ? (
+                <PreviewIndexCard data={wishlist[PreviewIndex]} />
+              ) : (
+                <div className="preview-empty">
+                  Tap on a Product to Preview it Here
+                </div>
+              )
             ) : (
-              <div className="preview-empty">
-                Tap on a Product to Preview it Here
+              <div className="preview-loader">
+                <i class="fa-solid fa-circle-notch fa-spin"></i>
               </div>
             )}
           </div>
