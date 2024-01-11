@@ -18,6 +18,14 @@ function App() {
       ),
     },
     {
+      path: "/",
+      element: (
+        <>
+          <Home />
+        </>
+      ),
+    },
+    {
       path: "/arrivals",
       element: (
         <Arrivals />
