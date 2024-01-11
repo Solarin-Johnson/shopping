@@ -41,6 +41,7 @@ export function DisplayCard({ data, wish, loading }) {
   const [wished, setWished] = useState(wish);
   const [notify, setNotify] = useState(false);
   const [timeoutId, setTimeoutId] = useState(null);
+  const parentBtn = useRef(null);
 
   useEffect(() => {
     document.addEventListener("scroll", () => setNotify(false));
@@ -67,13 +68,15 @@ export function DisplayCard({ data, wish, loading }) {
   console.log(fav);
 
   const like = (e) => {
+    const clean = parentBtn.current;
     if (!loading) {
+      stopInterval();
+
       setNotify([
         `Product ${!fav ? "added to" : "removed from"} Favorites`,
-        e.currentTarget.getBoundingClientRect().left,
-        e.currentTarget.getBoundingClientRect().top,
+        clean.getBoundingClientRect().left,
+        clean.getBoundingClientRect().top + 20,
       ]);
-      stopInterval();
       const favourite = JSON.parse(localStorage.getItem("favorite"));
       if (fav) {
         const updated = favourite.filter((item) => item.name !== data.name);
@@ -127,11 +130,12 @@ export function DisplayCard({ data, wish, loading }) {
     }
   };
   const wishlist = (e) => {
+    const clean = parentBtn.current;
     if (!loading) {
       setNotify([
         `Product ${!wished ? "added to" : "removed from"} Wishlist`,
-        e.currentTarget.getBoundingClientRect().left,
-        e.currentTarget.getBoundingClientRect().top,
+        clean.getBoundingClientRect().left + 50,
+        clean.getBoundingClientRect().top + 20,
       ]);
       stopInterval();
       const cart = JSON.parse(localStorage.getItem("cart"));
@@ -218,7 +222,7 @@ export function DisplayCard({ data, wish, loading }) {
           <Skeleton className="display-card-desc-skeleton" count={3} />
         )}
       </div>
-      <div className="display-card-btn">
+      <div className="display-card-btn" ref={parentBtn}>
         <div className="favorite" id={fav ? "liked" : ""} onClick={like}>
           {!loading ? (
             <button>

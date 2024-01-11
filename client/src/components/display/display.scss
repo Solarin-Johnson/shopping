@@ -117,11 +117,11 @@
       }
       padding-top: var(--price-padding);
       font-size: clamp(21px, 4vw, 28px);
-      font-weight: 600;
+      font-weight: var(--font-weight);
       // font-family: "Concert One";
     }
     &-desc {
-        color: var(--text-color);
+      color: var(--text-color);
       &-skeleton {
         // height: 120px;
       }
@@ -139,7 +139,7 @@
       padding-top: clamp(15px, 5vw, 30px);
       display: grid;
       grid-template-columns: repeat(2, auto);
-      column-gap: 15px;
+      column-gap: clamp(15px, 3vw, 30px);
       font-size: 24px;
       align-items: center;
       justify-content: start;
@@ -167,10 +167,13 @@
       .favorite,
       .wishlist {
         color: var(--text-color);
-        transition: 0.2s ease-in transform;
+        transition: 0.25s ease-in transform;
+        &:active {
+          transform: scale(0.7);
+        }
       }
       .wishlist {
-        font-size: clamp(22px, 3vw, 28px);
+        font-size: clamp(22px, 2.8vw, 28px);
         &.zoomEffect {
           transform: scale(1.5);
         }
@@ -199,6 +202,7 @@
       }
     }
     &-notify {
+      border: 2px solid #ffffff99;
       position: fixed;
       z-index: 200;
       margin-top: clamp(55px, 5vw, 80px);
@@ -212,12 +216,10 @@
       max-width: var(--notify-max-width);
       box-shadow: 0 -3px 15px 0 #00000020;
       justify-self: start;
-      font-weight: 600;
+      font-weight: var(--font-weight);
       line-height: 1.7;
       animation: fly-up 0.5s cubic-bezier(0.445, 0.05, 0.55, 0.95);
       transition: 0.5s cubic-bezier(0.445, 0.05, 0.55, 0.95);
-      bottom: var(--notify-bottom);
-      left: var(--notify-left) !important;
       width: var(--notify-width);
       text-align: var(--notify-text-align);
       height: auto !important;
@@ -299,9 +301,17 @@
     --min-height: 320px;
     --notify-width: 65vw;
     --notify-max-width: 65vw;
-    --notify-bottom: 140px;
+    --notify-bottom: 75px;
     --notify-left: calc(17.5vw - 15px);
     --notify-text-align: center;
+  }
+
+  .display-card-notify {
+    left: var(--notify-left);
+    max-width: var(--notify-max-width);
+    width: var(--notify-width);
+    bottom: var(--notify-bottom);
+    text-align: var(--notify-text-align);
   }
 }
 

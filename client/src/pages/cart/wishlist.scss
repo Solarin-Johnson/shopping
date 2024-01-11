@@ -95,7 +95,7 @@
       }
       :last-child {
         font-size: 20px;
-        font-weight: 600;
+        font-weight: var(--font-weight);
         color: var(--text-color);
         text-align: var(--total-position);
       }
@@ -159,7 +159,7 @@
 
     &-product,
     &-price {
-      font-weight: 600;
+      font-weight: var(--font-weight);
       color: var(--text-color);
     }
     &-product {
@@ -183,7 +183,7 @@
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       align-items: center;
-      font-weight: 600;
+      font-weight: var(--font-weight);
       justify-items: center;
       font-size: clamp(12px, 3vw, 14px);
       padding: 5px 0;
@@ -250,7 +250,7 @@
         align-items: center;
         justify-content: center;
         font-size: clamp(16px, 3vw, 20px);
-        font-weight: 600;
+        font-weight: var(--font-weight);
         align-self: center;
         justify-self: center;
         text-align: center;
@@ -331,14 +331,14 @@
     &-desc {
       color: var(--text-color);
       font-size: 16px;
-      font-weight: 600;
+      font-weight: var(--font-weight);
       line-height: 1.7;
     }
 
     &-name {
       color: var(--text-color);
       font-size: 24px;
-      font-weight: 600;
+      font-weight: var(--font-weight);
     }
   }
 }

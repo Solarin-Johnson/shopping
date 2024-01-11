@@ -27,7 +27,7 @@
     align-items: center;
     grid-template-columns: 50px calc(var(--search-width) - 100px) 50px;
     z-index: 200;
-    
+
     &-container {
       position: fixed;
       left: 0;
@@ -85,7 +85,8 @@
     text-transform: capitalize;
     justify-self: start;
     padding: 0 7vw;
-    font-weight: 600;
+    font-weight: var(--font-weight);
+    color: var(--text-color);
   }
 
   &-result {
@@ -155,7 +156,7 @@
       column-gap: 10px;
       box-shadow: 0 0 5px 1px #00000015;
       font-size: 15px;
-      font-weight: 600;
+      font-weight: var(--font-weight);
       cursor: pointer;
     }
   }

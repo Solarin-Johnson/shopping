@@ -8,6 +8,7 @@ body {
   --accent-color: #3d9412;
   --skeleton-color: #ebebeb;
   --skeleton--child-color: linear-gradient(to right, #ebebeb, #f5f5f5, #ebebeb);
+  --font-weight: 600;
 }
 
 body.dark-mode {
@@ -20,6 +21,7 @@ body.dark-mode {
   --accent-color: #53c917;
   --skeleton-color: #303030;
   --skeleton--child-color: linear-gradient(to right, #303030, #383838, #303030);
+  --font-weight: 500;
 }
 
 .react-loading-skeleton {
