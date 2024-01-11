@@ -129,7 +129,8 @@
     }
     &-empty {
       border: 2px dashed var(--text-color);
-      background-color: #ffffff;
+      background-color: var(--bg-color);
+      color: var(--text-color);
       border-radius: 6px;
       display: grid;
       grid-template-rows: repeat(2, auto);

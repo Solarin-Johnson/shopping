@@ -83,9 +83,9 @@
     }
     &-tag,
     &-avail {
-      padding: clamp(6px, 1vw, 4px) clamp(20px, 2vw, 25px);
+      padding: 7px clamp(20px, 2vw, 25px);
       border-radius: 4px;
-      font-size: clamp(14px, 2vw, 17px);
+      font-size: clamp(14px, 2vw, 16px);
       font-weight: 400;
       min-width: 20px;
       display: grid;
