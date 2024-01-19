@@ -223,24 +223,21 @@ export function DisplayCard({ data, wish, loading }) {
         )}
       </div>
       <div className="display-card-btn" ref={parentBtn}>
-        <div className="favorite" id={fav ? "liked" : ""} onClick={like}>
-          {!loading ? (
-            <button>
-              <i class={`${fav ? "fa-solid" : "fa-regular"} fa-heart`}></i>
-            </button>
-          ) : (
-            <Skeleton className="btn-skeleton" />
-          )}
-        </div>
         <div
           className="wishlist"
           id={wished ? "wished" : ""}
           onClick={wishlist}
         >
           {!loading ? (
+            <button>{(wished && "Remove from") || "Add to"} cart</button>
+          ) : (
+            <Skeleton className="btn-skeleton" />
+          )}
+        </div>
+        <div className="favorite" id={fav ? "liked" : ""} onClick={like}>
+          {!loading ? (
             <button>
-              <i class="fa-solid fa-cart-shopping"></i>
-              {/* <CartEffect wished={animateCart} /> */}
+              <i class={`${fav ? "fa-solid" : "fa-regular"} fa-heart`}></i>
             </button>
           ) : (
             <Skeleton className="btn-skeleton" />
