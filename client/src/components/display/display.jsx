@@ -236,9 +236,7 @@ export function DisplayCard({ data, wish, loading }) {
         </div>
         <div className="favorite" id={fav ? "liked" : ""} onClick={like}>
           {!loading ? (
-            <button>
-              <i class={`${fav ? "fa-solid" : "fa-regular"} fa-heart`}></i>
-            </button>
+            <i class={`${fav ? "fa-solid" : "fa-regular"} fa-heart`}></i>
           ) : (
             <Skeleton className="btn-skeleton" />
           )}

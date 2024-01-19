@@ -151,12 +151,12 @@
         border: none;
         font-size: inherit;
         margin-left: -5px;
-        border-radius: 50%;
         display: grid;
         align-items: center;
         align-content: center;
         justify-content: center;
         padding: 4px;
+        border-radius: 6px;
         i {
           padding: 5px;
         }
@@ -164,17 +164,20 @@
       .favorite,
       .wishlist {
         color: var(--text-color);
-        transition: 0.25s ease-in transform;
+        cursor: pointer;
+        i {
+          transition: 0.25s ease-in transform;
+          transform: scale(0.8);
+        }
       }
       .wishlist {
         font-size: clamp(14px, 2.8vw, 18px);
-        color: var(--bg-color);
-        border-radius: 6px;
+        color: #181818;
 
         button {
-          background-color: #4dd447;
-          padding: 12px clamp(20px, 5vw, 35px);
-          border-radius: 6px;
+          background-color: var(--cart, #81e57c);
+          padding: 12px 0;
+          width: clamp(190px, 30vw, 250px);
           font-weight: var(--font-weight-inv);
           font-family: inherit;
           margin-left: 2px;
@@ -182,12 +185,19 @@
         }
       }
       .favorite {
+        width: clamp(54px, 3vw, 60px);
         font-size: clamp(30px, 3vw, 36px);
-        &:active {
-          transform: scale(0.7);
+        background-color: #76767630;
+        display: grid;
+        justify-content: center;
+        padding: 8px 2px;
+        border-radius: 6px;
+
+        button {
+          background-color: transparent;
         }
-        &.zoomEffect {
-          transform: scale(1.5);
+        &:active i {
+          transform: scale(0.5);
         }
       }
       #liked {
@@ -241,21 +251,21 @@
   }
 }
 
-.cart-effect {
-  position: fixed;
-  z-index: 50;
-  transition: 0.6s cubic-bezier(0.39, 0.575, 0.565, 1);
-  color: #525252 !important;
-  &.show-cart-effect {
-    transform: scale(1) rotate(270deg);
-    visibility: visible;
-  }
-  &.hide-cart-effect {
-    visibility: hidden;
-    transform: scale(2.5);
-    transition: none;
-  }
-}
+// .cart-effect {
+//   position: fixed;
+//   z-index: 50;
+//   transition: 0.6s cubic-bezier(0.39, 0.575, 0.565, 1);
+//   color: #525252 !important;
+//   &.show-cart-effect i {
+//     transform: scale(1) rotate(270deg);
+//     visibility: visible;
+//   }
+//   &.hide-cart-effect i {
+//     visibility: hidden;
+//     transform: scale(2.5);
+//     transition: none;
+//   }
+// }
 
 @keyframes shake {
   0% {

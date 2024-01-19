@@ -9,7 +9,7 @@ body {
   --skeleton-color: #ebebeb;
   --skeleton--child-color: linear-gradient(to right, #ebebeb, #f5f5f5, #ebebeb);
   --font-weight: 600;
-  --font-weight-inv: 500;
+  --font-weight-inv: 600;
 }
 
 body.dark-mode {
@@ -24,6 +24,7 @@ body.dark-mode {
   --skeleton--child-color: linear-gradient(to right, #303030, #383838, #303030);
   --font-weight: 500;
   --font-weight-inv: 600;
+  --cart: #ebebeb;
 }
 
 .react-loading-skeleton {
