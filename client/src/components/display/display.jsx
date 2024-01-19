@@ -74,8 +74,8 @@ export function DisplayCard({ data, wish, loading }) {
 
       setNotify([
         `Product ${!fav ? "added to" : "removed from"} Favorites`,
-        clean.getBoundingClientRect().left,
-        clean.getBoundingClientRect().top + 20,
+        e.currentTarget.getBoundingClientRect().left,
+        e.currentTarget.getBoundingClientRect().top,
       ]);
       const favourite = JSON.parse(localStorage.getItem("favorite"));
       if (fav) {
@@ -134,8 +134,8 @@ export function DisplayCard({ data, wish, loading }) {
     if (!loading) {
       setNotify([
         `Product ${!wished ? "added to" : "removed from"} Wishlist`,
-        clean.getBoundingClientRect().left + 50,
-        clean.getBoundingClientRect().top + 20,
+        e.currentTarget.getBoundingClientRect().left,
+        e.currentTarget.getBoundingClientRect().top,
       ]);
       stopInterval();
       const cart = JSON.parse(localStorage.getItem("cart"));

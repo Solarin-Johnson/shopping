@@ -139,7 +139,7 @@
       padding-top: clamp(15px, 5vw, 30px);
       display: grid;
       grid-template-columns: repeat(2, auto);
-      column-gap: clamp(25px, 3vw, 40px);
+      column-gap: clamp(25px, 3vw, 32px);
       font-size: 24px;
       align-items: center;
       justify-content: start;
@@ -171,7 +171,7 @@
         }
       }
       .wishlist {
-        font-size: clamp(14px, 2.8vw, 18px);
+        font-size: clamp(14px, 2vw, 18px);
         color: #181818;
 
         button {
@@ -214,7 +214,7 @@
       }
     }
     &-notify {
-      border: 2px solid #ffffff99;
+      border: 3px solid #ffffff99;
       position: fixed;
       z-index: 200;
       margin-top: clamp(55px, 5vw, 80px);
@@ -311,19 +311,22 @@
     --display-columns: 1fr;
     --display-rows: auto 1fr;
     --min-height: 320px;
-    --notify-width: 65vw;
-    --notify-max-width: 65vw;
-    --notify-bottom: 75px;
-    --notify-left: calc(17.5vw - 15px);
+    --notify-width: 90vw;
+    --notify-max-width: 90vw;
+    --notify-bottom: 8px;
+    --notify-left: 5vw;
     --notify-text-align: center;
   }
 
   .display-card-notify {
-    left: var(--notify-left);
+    left: var(--notify-left) !important;
     max-width: var(--notify-max-width);
-    width: var(--notify-width);
+    width: calc(var(--notify-width) - 30px);
     bottom: var(--notify-bottom);
     text-align: var(--notify-text-align);
+    margin-left: 0;
+    box-shadow: none !important;
+    border-color: var(--text-color);
   }
 }
 
